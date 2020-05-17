@@ -9,6 +9,7 @@ function newUser($username, $password, $firstname, $lastname, $email)
         $stmt->bindValue(':firstname', $firstname);
         $stmt->bindValue(':lastname', $lastname);
         $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':password', $password);
         $stmt->execute();
         // last inserted = loginID
         $lastCustID = $conn->lastInsertId();
@@ -16,6 +17,7 @@ function newUser($username, $password, $firstname, $lastname, $email)
         VALUES (:username, :password, :role, :cID)");
         $stmt->bindValue(':username', $username);
         $stmt->bindValue(':password', $password);
+        $stmt->bindValue(':role', $role);
         $stmt->execute();
         $conn->commit(); // save to database
     }
