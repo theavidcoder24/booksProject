@@ -15,8 +15,8 @@ function newUser($username, $password,$role, $firstname, $lastname, $email)
         $lastCustID = $conn->lastInsertId();
         $stmt = $conn->prepare("INSERT INTO login(username, password, customerID)
         VALUES (:username, :password, :role, :cID)");
-        $stmt->bindValue(':username', $username);
-        $stmt->bindValue(':password', $password);
+        $stmt->bindValue(':uname', $username);
+        $stmt->bindValue(':upass', $password);
         $stmt->bindValue(':role', $role);
         $stmt->execute();
         $conn->commit(); // save to database

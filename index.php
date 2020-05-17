@@ -12,7 +12,7 @@
     <header>
         <div class="userForm">
             <a href="#">Login</a>
-            <a href="view/pages/register.html" alt="Registration Form">Sign Up</a>
+            <a href="view/pages/register.html" alt="Registration Form">Register</a>
         </div>
         <div id="adminTitle">
             <h1>Administration</h1>
