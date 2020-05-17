@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/books.css">
+    <title>Register</title>
+</head>
+
+<body>
+    <header>
+        <div class="userForm">
+            <a href="view/pages/login.html">Login</a>
+            <a href="view/pages/register.html">Sign Up</a>
+        </div>
+        <div id="adminTitle">
+            <h1>Administration</h1>
+        </div>
+    </header>
+    <fieldset>
+        <legend>Registration</legend>
+        <form <action="../../controller/regProcess.php" method="POST">
+            <label for="full-name">Full Name</label>
+            <input type="text">
+            <label for="email">Email</label>
+            <input type="email">
+            <label for="password">Password</label>
+            <input type="password">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password">
+            <button type="submit">Register</button>
+        </form>
+    </fieldset>
+</body>
+
+</html>

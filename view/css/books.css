@@ -1,0 +1,44 @@
+/* === Media Queries === */
+@media only screen and (min-width:) {}
+
+
+/* === Generic Styling === */
+* {}
+
+body {}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav>ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    padding: .8em;
+    border: 1px black solid;
+    text-decoration: none;
+    color: black;
+}
+
+li a.active,
+li a:hover {
+    background: lightgray;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* === ID/Class Specific === */
+#adminTitle {
+    text-align: center;
+}
+
+.userForm, a {
+    text-align: right;
+    padding: .8em;
+    color: black;
+}

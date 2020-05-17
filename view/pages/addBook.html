@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/books.css">
+    <title>Add Books</title>
+</head>
+
+<body>
+    <form action="../../controller/formProcess.php" method="POST">
+        <fieldset>
+            <legend>Add Book</legend>
+            <label for="bkTitle">Book Title</label>
+            <input type="text" name="bkTitle"><br>
+            <label for="ogTitle">Original Title</label>
+            <input type="text" name="ogTitle"><br>
+            <label for="yearOfPub">Year of Publication</label>
+            <input type="text" name="yearOfPub"><br>
+            <label for="genre">Genre</label>
+            <input type="text" name="genre"><br>
+            <label for="millSold">Millions Sold</label>
+            <input type="text" name="millSold"><br>
+            <label for="langWritten">Language Written</label>
+            <input type="text" name="langWritten"><br>
+            <label for="covimage">Cover Image</label>
+            <input type="file" name="covimage"><br>
+            <!-- https://m.media-amazon.com/images/I/415Vok2xosL._SY346_.jpg -->
+            <input type="submit" value="Submit"><br>
+        </fieldset>
+    </form>
+</body>
+
+</html>
