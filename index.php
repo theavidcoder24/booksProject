@@ -12,15 +12,15 @@
     <header>
         <div class="userForm">
             <a href="#">Login</a>
-            <a href="">Sign Up</a>
+            <a href="view/pages/register.html" alt="Registration Form">Sign Up</a>
         </div>
         <div id="adminTitle">
             <h1>Administration</h1>
         </div>
     </header>
     <fieldset>
-        <legend>Login</legend>
-        <form action="">
+        <legend>User Login</legend>
+        <form action="controller/loginProcess.php" method="POST">
             <label for="username">Username</label>
             <input type="text" name="username" id="username">
             <label for="password">Password</label>
