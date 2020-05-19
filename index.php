@@ -23,7 +23,7 @@
             <label for="uname">Username</label>
             <input type="text" name="uname" id="uname">
             <label for="upass">Password</label>
-            <input type="password" name="upass" id="upass">
+            <input type="text" name="upass" id="upass">
             <input type="submit" value="Login">
         </form>
     </fieldset>
