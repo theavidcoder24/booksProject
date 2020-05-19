@@ -6,11 +6,11 @@ require("inputFilter.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     $userID = inputFilter($_POST['userID']);
-    $password = inputFilter($_POST['pass']);
     $firstName = inputFilter($_POST['fname']);
     $lastName = inputFilter($_POST['lname']);
     $email = inputFilter($_POST['email']);
     $loginID = inputFilter($_POST['loginID']);
+    $password = inputFilter($_POST['pass']);
 
     // hashing the password with PASSWORD_HASH()
     $hpassword = password_hash($mypass, PASSWORD_DEFAULT);
