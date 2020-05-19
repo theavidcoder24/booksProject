@@ -10,11 +10,11 @@ if(!empty($_POST)) {
     $stmt->bindParam(':user', $username);
     $stmt->execute();
     $row = $stmt -> fetch();
-    if (password_verify($password, $row['Password'])) {
+    if (password_verify($password, $row['password'])) {
         // assign session variables
+        $_SESSION["LoginID"] = $row["loginID"];
         $_SESSION["adminUser"] = $username;
-        $_SESSION["loginID"] = $row["loginID"];
-        $_SESSION["accessRights"] = $row["accessRights"];
+        $_SESSION["AccessRights"] = $row["accessRights"];
         $_SESSION["login"] = 'yes';
         echo "You are now logged in";
     }
