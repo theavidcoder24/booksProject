@@ -13,7 +13,7 @@ if(!empty($_POST)) {
     if (password_verify($password, $row['Password'])) {
         // assign session variables
         $_SESSION["adminUser"] = $username;
-        $_SESSION["loginID"] = $row["LoginID"];
+        $_SESSION["loginID"] = $row["loginID"];
         $_SESSION["accessRights"] = $row["accessRights"];
         $_SESSION["login"] = 'yes';
         echo "You are now logged in";
@@ -22,3 +22,4 @@ if(!empty($_POST)) {
         header('../index.php');
     }
 }
+?>

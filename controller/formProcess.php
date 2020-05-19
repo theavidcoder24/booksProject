@@ -17,3 +17,4 @@ if (!empty([$_POST])) {
 } else {
     echo "Record couldn't be inserted";
 }
+?>

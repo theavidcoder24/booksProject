@@ -22,4 +22,4 @@ function addBooks($bookTitle, $originalTitle, $yearOfPublication, $genre, $milli
         throw $ex;
     }
 }
-
+?>

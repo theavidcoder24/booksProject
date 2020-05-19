@@ -25,3 +25,4 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
         throw $ex;
     }
 }
+?>
