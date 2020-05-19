@@ -23,13 +23,22 @@
         <form action="../../controller/regProcess.php" method="POST">
             <label for="firstname" name="firstname">First Name</label>
             <input type="text">
+            <label for="lastname">Last Name</label>
+            <input type="text" name="lastname">
             <label for="email">Email</label>
             <input type="email">
             <label for="password">Password</label>
             <input type="password">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password">
-            <button type="submit">Register</button>
+            <fieldset>
+                <legend>Login Details</legend>
+                <label for="uname">Username:</label>
+                <input type="text" name="username" id="uname" required>
+                <label for="upass">Password:</label>
+                <input type="text" name="pass" id="upass" required>
+                <label for="urole">Access Role:</label>
+                <input type="text" name="role" id="urole" required>
+                <input type="submit" value="Submit">
+            </fieldset>
         </form>
     </fieldset>
 </body>

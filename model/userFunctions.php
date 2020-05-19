@@ -1,5 +1,5 @@
 <?php
-function newUser($username, $password,$role, $firstname, $lastname, $email)
+function newUser($username, $password, $role, $firstname, $lastname, $email)
 {
     global $conn;
     try {

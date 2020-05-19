@@ -11,7 +11,6 @@
 <body>
     <header>
         <div class="userForm">
-            <a href="#">Login</a>
             <a href="view/pages/register.html" alt="Registration Form">Register</a>
         </div>
         <div id="adminTitle">
