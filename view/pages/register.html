@@ -21,22 +21,23 @@
     <fieldset>
         <legend>Registration</legend>
         <form action="../../controller/regProcess.php" method="POST">
-            <label for="firstname" name="firstname">First Name</label>
-            <input type="text">
-            <label for="lastname">Last Name</label>
-            <input type="text" name="lastname">
-            <label for="email">Email</label>
-            <input type="email">
-            <label for="password">Password</label>
-            <input type="password">
             <fieldset>
                 <legend>Login Details</legend>
                 <label for="uname">Username:</label>
                 <input type="text" name="username" id="uname" required>
                 <label for="upass">Password:</label>
                 <input type="text" name="pass" id="upass" required>
-                <label for="urole">Access Role:</label>
-                <input type="text" name="role" id="urole" required>
+                <label for="acRights">Access Role:</label>
+                <input type="text" name="acRights" id="acRights" required>
+            </fieldset>
+            <fieldset>
+                <legend>User Details</legend>
+                <label for="fname">First Name</label>
+                <input type="text" name="fname" id="fname">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lname" id="lname">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email">
                 <input type="submit" value="Submit">
             </fieldset>
         </form>

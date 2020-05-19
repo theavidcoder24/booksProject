@@ -2,14 +2,14 @@
 session_start();
 require("../model/connectionDB.php");
 require("../model/userFunctions.php");
-require("inputFilter.php");
+require("");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
-    $userID = inputFilter($_POST['userID']);
+    $username = inputFilter($_POST['uname']);
+    $password =
     $firstName = inputFilter($_POST['fname']);
     $lastName = inputFilter($_POST['lname']);
     $email = inputFilter($_POST['email']);
-    $loginID = inputFilter($_POST['loginID']);
     $password = inputFilter($_POST['pass']);
 
     // hashing the password with PASSWORD_HASH()
