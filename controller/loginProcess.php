@@ -1,12 +1,12 @@
 <?php
 require("../model/connectionDB.php.php");
-require("inputSanitation.php");
+require("filterInput.php");
 // input via POST method
 if(!empty($_POST)) {
     $username = inputFilter($_POST['uname']);
     $password = inputFilter($_POST['upass']);
 
-    $stmt = $conn->prepare("SELECT loginID, password, role FROM login WHERE username=:user");
+    $stmt = $conn->prepare("SELECT loginID, password, accessRights FROM login WHERE username=:user");
     $stmt->bindParam(':user', $username);
     $stmt->execute();
     $row = $stmt -> fetch();
@@ -14,12 +14,11 @@ if(!empty($_POST)) {
         // assign session variables
         $_SESSION["adminUser"] = $username;
         $_SESSION["loginID"] = $row["LoginID"];
-        $_SESSION["role"] = $row["Role"];
+        $_SESSION["accessRights"] = $row["accessRights"];
         $_SESSION["login"] = 'yes';
         echo "You are now logged in";
     }
     else {
-        header('../index.html');
+        header('../index.php');
     }
 }
-?>

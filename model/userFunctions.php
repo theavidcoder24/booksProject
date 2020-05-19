@@ -13,10 +13,10 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
         // last inserted = loginID
         $lastloginID = $conn->lastInsertId();
         $stmt = $conn->prepare("INSERT INTO login(username, password, accessRights, loginID)
-        VALUES (:username, :password, :acRights, :logId)");
-        $stmt->bindValue(':uname', $username);
-        $stmt->bindValue(':upass', $password);
-        $stmt->bindValue(':acRights', $accessrights);
+        VALUES (:username, :password, :accessrights, :logId)");
+        $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':password', $password);
+        $stmt->bindValue(':accessrights', $accessrights);
         $stmt->bindValue(':logId', $lastloginID);
         $stmt->execute();
         $conn->commit(); // Save to the database
