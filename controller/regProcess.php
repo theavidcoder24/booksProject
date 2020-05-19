@@ -17,7 +17,7 @@ if (!empty([$_POST])) {
     $query = $conn->prepare("SELECT username FROM login WHERE username = :user");
     $query->bindValue(":user", $username);
     $query->execute();
-    if ($query->rowCount() < 1) { // if user does not exist
+    if ($query->rowCount() < 1) { // If user does not exist
         newUser($username, $password, $accessrights, $firstname, $lastname, $email); // function call
         echo "User account has been created";
     } else {
