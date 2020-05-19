@@ -2,12 +2,12 @@
 session_start();
 require("../model/connectionDB.php");
 require("../model/userFunctions.php");
-require("");
+require("filterInput.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     $username = inputFilter($_POST['uname']);
     $password =
-    $firstName = inputFilter($_POST['fname']);
+        $firstName = inputFilter($_POST['fname']);
     $lastName = inputFilter($_POST['lname']);
     $email = inputFilter($_POST['email']);
     $password = inputFilter($_POST['pass']);
@@ -17,11 +17,10 @@ if (!empty([$_POST])) {
     $query = $conn->prepare("SELECT username FROM login WHERE username = :user");
     $query->bindValue(":user", $username);
     $query->execute();
-    if ($query->rowCount() < 1 ) { // if user does not exist
+    if ($query->rowCount() < 1) { // if user does not exist
         newUser($username, $password, $role, $firstname, $lastname, $email, $phone); // function call
         echo "User account has been created";
-    }
-    else {
+    } else {
         echo "Customer already exists";
     }
 }
