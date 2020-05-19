@@ -1,7 +1,7 @@
 <?php
 require("../model/connectionDB.php");
 require("../model/addBooks.php");
-require("../controller/inputFilter.php");
+require("../controller/inputSanitation.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     $bookTitle = inputFilter($_POST['bkTitle']);

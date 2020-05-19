@@ -1,6 +1,6 @@
 <?php
 require("../model/connectionDB.php.php");
-require("inputFilter.php");
+require("inputSanitation.php");
 // input via POST method
 if(!empty($_POST)) {
     $username = inputFilter($_POST['uname']);
