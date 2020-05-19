@@ -25,7 +25,7 @@
             <input type="text" name="username" id="username">
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
-            <input type="submit">Submit</button>
+            <input type="submit" value="Login">
         </form>
     </fieldset>
 </body>
