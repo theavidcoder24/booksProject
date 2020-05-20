@@ -1,7 +1,7 @@
 <?php
 require("../model/connectionDB.php");
 require("../model/addBooks.php");
-require("../controller/inputSanitation.php");
+require("inputSanitation.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     $bookTitle = inputFilter($_POST['bkTitle']);
@@ -12,7 +12,7 @@ if (!empty([$_POST])) {
     $languageWritten = inputFilter($_POST['langWritten']);
     $coverImage = inputFilter($_POST['covimage']);
     // funtion call
-    addBooks($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage);
+    addBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage);
     echo "New row inserted";
 } else {
     echo "Record couldn't be inserted";

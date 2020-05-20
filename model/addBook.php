@@ -1,6 +1,6 @@
 <?php
 // Add a new row to the table
-function addBooks($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage)
+function addBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage)
 {
     global $conn;
     try {
