@@ -8,13 +8,13 @@ if (!empty([$_POST])) {
     $username = testInput($_POST['username']);
     $password = testInput($_POST['pass']);
     $accessrights = testInput($_POST['acRights']);
-    $firstName = testInput($_POST['fname']);
-    $lastName = testInput($_POST['lname']);
+    $firstName = testInput($_POST['firstname']);
+    $lastName = testInput($_POST['lastname']);
     $email = testInput($_POST['email']);
 
     // hashing the password with PASSWORD_HASH()
     $hpassword = password_hash($password, PASSWORD_DEFAULT);
-    $query = $conn->prepare("SELECT username FROM login WHERE username = :user");
+    $query = $conn->prepare("SELECT username FROM login WHERE username = ':user'");
     $query->bindValue(":user", $username);
     $query->execute();
     if ($query->rowCount() < 1) { // If user does not exist

@@ -1,6 +1,5 @@
 <?php
 require("../controller/regProcess.php");
-require("../controller/regProcess2.php");
 require("../model/connectionDB.php.php");
 require("filterInput.php");
 // input via POST method
@@ -21,7 +20,7 @@ if(!empty($_POST)) {
         echo "You are now logged in";
     }
     else {
-        header('../index.php');
+        header('../homepage.html');
     }
 }
 ?>

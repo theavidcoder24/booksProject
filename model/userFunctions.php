@@ -9,7 +9,6 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
         $stmt->bindValue(':firstname', $firstname);
         $stmt->bindValue(':lastname', $lastname);
         $stmt->bindValue(':email', $email);
-        $stmt->execute();
         // last inserted = loginID
         $lastloginID = $conn->lastInsertId();
         $stmt = $conn->prepare("INSERT INTO login(username, password, accessRights, loginID)
