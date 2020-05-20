@@ -1,4 +1,6 @@
 <?php
+require("../controller/regProcess.php");
+require("../controller/regProcess2.php");
 require("../model/connectionDB.php.php");
 require("filterInput.php");
 // input via POST method

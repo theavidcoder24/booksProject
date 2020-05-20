@@ -9,7 +9,7 @@ if (!empty([$_POST])) {
     print_r($data); // displays array
     $uname = ($data);
     $uname = $data[0];
-    $query = $conn->prepare("SELECT username FROM users WHERE username = '$uname'");
+    $query = $conn->prepare("SELECT username FROM users WHERE username = $uname");
     $query->execute();
     if ($query->rowCount() < 1 ) { # If rows are not found
         insert($table, $data); // Fuction call
