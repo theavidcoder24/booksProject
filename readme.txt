@@ -2,8 +2,8 @@ Usernames & Passwords
 ======================
 
 Admin Profile
-Username: 
-Password: 
+Username: admin
+Password: password
 
 
 
