@@ -11,7 +11,21 @@
 <body>
     <form action="../../controller/bookFormProcess.php" method="POST">
         <fieldset>
-            <legend>Add Book</legend>
+            <legend>Author Details</legend>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name">
+            <label for="surname">Surname:</label>
+            <input type="text" name="surname" id="surname">
+            <label for="nation">Nationality</label>
+            <input type="text" name="nation" id="nation">
+            <label for="birthYear">Birth Year:</label>
+            <input type="date" name="birthYear" id="birthYear">
+            <label for="deathYear">Death Year</label>
+            <input type="date" name="deathYear" id="deathYear">
+        </fieldset>
+
+        <fieldset>
+            <legend>Book Details</legend>
             <label for="bkTitle">Book Title</label>
             <input type="text" name="bkTitle"><br>
             <label for="ogTitle">Original Title</label>
@@ -27,6 +41,14 @@
             <label for="covImage">Cover Image</label>
             <input type="text" name="covImage"><br>
             <!-- https://m.media-amazon.com/images/I/415Vok2xosL._SY346_.jpg -->
+        </fieldset>
+
+        <fieldset>
+            <legend>Book Plot</legend>
+            <label for="plot">Plot</label>
+            <textarea name="plot" id="plot" cols="30" rows="10"></textarea>
+            <label for="plotSource">Plot Source</label>
+            <input type="text" name="plotSource" id="plotSource">
             <input type="submit" value="Submit"><br>
         </fieldset>
     </form>
