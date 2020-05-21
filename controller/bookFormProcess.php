@@ -1,6 +1,6 @@
 <?php
 require("../model/connectionDB.php");
-require("../model/addBook.php");
+require("../model/addBookFunction.php");
 require("inputSanitation.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
