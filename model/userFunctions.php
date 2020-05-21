@@ -23,5 +23,6 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
         $conn->rollBack(); // Something went wrong rollback!
         throw $ex;
     }
+    $conn = null;
 }
 ?>
