@@ -1,5 +1,5 @@
 /* === Media Queries === */
-@media only screen and (min-width:) {}
+@media only screen and (min-width: 720px) {}
 
 
 /* === Generic Styling === */
@@ -30,6 +30,11 @@ li a:hover {
 
 a {
     text-decoration: none;
+}
+
+footer {
+    padding: 1em;
+    text-align: center;
 }
 
 /* === ID/Class Specific === */
