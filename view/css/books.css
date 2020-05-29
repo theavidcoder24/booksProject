@@ -1,53 +1,12 @@
 /* === Media Queries === */
 @media only screen and (min-width: 720px) {}
 
-
-/* 100% Styled Elements/Attributes */
-@media (max-width: 680px) {
-    nav>ul {
-        height: 100%;
-        width: 100%;
-        
-    }
-
-    body {
-        padding: 0;
-    }
-
-    main {
-        height: 100%;
-        width: 100%;
-    }
-
-    img {
-        height: 100%;
-        width: 100%;
-    }
-
-    form>label,
-    legend {
-        width: 100%;
-    }
-
-    .form-wrapper>fieldset>div>form {
-        width: 100%;
-    }
-
-    .asterisk {
-        width: 100%;
-    }
-
-    input[type=text],
-    input[type=date],
-    input[type=password] {
-        width: 100%;
-    }
-}
-
-
-
 /* === Generic Styling === */
 * {}
+html {
+    margin: 0;
+    padding: 0;
+}
 
 header {
     background-image: url("../images/realbooksedit.png");
@@ -113,3 +72,5 @@ a {
     text-align: center;
     width: 10em;
 }
+
+

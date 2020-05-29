@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="view/css/books.css">
+    <link rel="icon" href="view/images/books-1673578_1280.png" type="image/gif" sizes="16x16">
     <title>Login</title>
 </head>
 
