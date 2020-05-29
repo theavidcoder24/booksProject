@@ -1,7 +1,7 @@
 <?php
 require("../model/connectionDB.php");
 require("../model/addBookFunction.php");
-require("inputSanitation.php");
+require("filterInput.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     // Author Table 

@@ -13,8 +13,9 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':nation', $nationality);
         $stmt->bindValue(':birthYr', $birthYear);
         $stmt->bindValue(':deathYr', $deathYear);
-        $authorID = 'AuthorID';
+        $authorID = 'authID';
         // Execute the insert statement
+        $stmt->execute();
 
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath)
@@ -28,6 +29,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':langWritten', $languageWritten);
         $stmt->bindValue(':covImage', $coverImage);
         $stmt->bindValue(':authID', $authorID);
+        $stmt->execute();
 
         $lastBookID = $conn->lastInsertId();
         // prepares statement with named placeholders
