@@ -47,6 +47,9 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':BookID', $lastBookID);
         // execute the insert statement
         $stmt->execute();
+        
+        // Commit changes here //
+        $conn->commit();
     } catch (PDOException $ex) {
         throw $ex;
     }
