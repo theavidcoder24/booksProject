@@ -36,11 +36,15 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->execute();
 
         // prepares statement with named placeholders
-        $stmt = $conn->prepare("INSERT INTO bookplot(Plot, PlotSource)
-        VALUES (:bkPlot, :bkPlotSrc)");
+        // Last inserted BookID
+        $lastBookID = $conn->lastInsertId();
+
+        $stmt = $conn->prepare("INSERT INTO bookplot(Plot, PlotSource, BookID)
+        VALUES (:bkPlot, :bkPlotSrc, :BookID)");
         // bind values
         $stmt->bindValue(':bkPlot', $bookPlot);
         $stmt->bindValue(':bkPlotSrc', $bookPlotSrc);
+        $stmt->bindValue(':BookID', $lastBookID);
         // execute the insert statement
         $stmt->execute();
     } catch (PDOException $ex) {
