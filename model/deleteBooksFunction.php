@@ -4,12 +4,11 @@ function deleteBook($BookID) {
     try {
         $stmt = $conn->prepare("DELETE FROM book WHERE BookID=:id");
         $stmt->bindValue('id', $BookID);
+        // Execute the delete statement
         $stmt->execute();
         if( ! $stmt->rowCount() ) echo "Deletion failed";
     }
-    catch (PD0Exception $ex){
+    catch (PDOException $ex){
         throw $ex;
     }
 }
-
-?>

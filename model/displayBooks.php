@@ -8,6 +8,8 @@ function selectAllBook() {
         $stmt = $conn->prepare('SELECT * FROM bookplot');
         $stmt->execute();
         $result = $stmt-> fetchAll();
+        foreach ($result AS $row)
+        echo
         $numRows = $stmt ->rowCount();
         echo "Total number of rows is: ".$numRows. "<br>";
         if ($numRows < 1) {
