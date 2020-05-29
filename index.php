@@ -10,9 +10,6 @@
 
 <body>
     <header>
-        <div class="userForm">
-            <a href="view/pages/register.html" alt="Registration Form">Register</a>
-        </div>
         <div id="adminTitle">
             <h1>Administration</h1>
         </div>
@@ -27,6 +24,7 @@
             <input type="submit" value="Login">
         </form>
     </fieldset>
+    
 </body>
 
 </html>

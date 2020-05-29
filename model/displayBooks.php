@@ -2,7 +2,9 @@
 function selectAllBook() {
     global $conn;
     try {
+        $stmt = $conn->prepare('SELECT * FROM author');
         $stmt = $conn->prepare('SELECT * FROM book');
+        $stmt = $conn->prepare('SELECT * FROM bookplot');
         $stmt->execute();
         $result = $stmt-> fetchAll();
         $numRows = $stmt ->rowCount();

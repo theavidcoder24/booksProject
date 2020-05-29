@@ -20,11 +20,11 @@ if(!empty($_POST)) {
         // echo "You are now logged in";
 
         // this will be the page the user gets sent to when they login
-        header('Location: ../homepage.html');
+        header('Location: ../homepage.php');
     }
     else {
         // this will be the page the user gets sent to when they fail to login
-        header('Location: ../homepage.html');
+        header('Location: ../homepage.php');
     }
 }
 ?>

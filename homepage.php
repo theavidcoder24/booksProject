@@ -30,7 +30,7 @@
     </nav>
     <main>
         <div id="displayDatabase">
-
+            <?php include('model/displayBooks.php'); ?>
         </div>
     </main>
     <footer>
@@ -40,7 +40,6 @@
                 </script>
         </div>
     </footer>
-
 </body>
 
 </html>
