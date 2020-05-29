@@ -4,6 +4,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
 {
     global $conn;
     try {
+        $conn->beginTransaction();
         // Prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO author(Name, Surname, Nationality, BirthYear, DeathYear)
         VALUES (:name, :surname, :nation, :birthYr, :deathYr)");
@@ -13,9 +14,11 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':nation', $nationality);
         $stmt->bindValue(':birthYr', $birthYear);
         $stmt->bindValue(':deathYr', $deathYear);
-        $authorID = 'authID';
         // Execute the insert statement
         $stmt->execute();
+
+        // Last inserted BookID
+        $lastAuthorID = $conn->lastInsertId();
 
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath)
@@ -28,10 +31,9 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':millSold', $millionsSold);
         $stmt->bindValue(':langWritten', $languageWritten);
         $stmt->bindValue(':covImage', $coverImage);
-        $stmt->bindValue(':authID', $authorID);
+        $stmt->bindValue(':authID', $lastAuthorID);
         $stmt->execute();
 
-        $lastBookID = $conn->lastInsertId();
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO bookplot(Plot, PlotSource)
         VALUES (:bkPlot, :bkPlotSrc)");
