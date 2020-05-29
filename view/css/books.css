@@ -6,10 +6,14 @@
 * {}
 
 header {
-    background-image: url("../images/coverPhoto.png");
+    background-image: url("../images/realbooksedit.png");
+    background-size: cover;
 }
 
-body {}
+body {
+    margin: 0;
+    padding: 0;
+}
 
 nav ul {
     list-style: none;
