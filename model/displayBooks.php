@@ -1,5 +1,6 @@
 <?php
 require("connectionDB.php");
+require("homepage.php");
 function selectAllBook() {
     global $conn;
     try {
