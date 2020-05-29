@@ -4,7 +4,9 @@ function selectAllBook() {
     global $conn;
     try {
         $stmt = $conn->prepare('SELECT * FROM author');
+        $stmt->execute();
         $stmt = $conn->prepare('SELECT * FROM book');
+        $stmt->execute();
         $stmt = $conn->prepare('SELECT * FROM bookplot');
         $stmt->execute();
         $result = $stmt-> fetchAll();
@@ -25,7 +27,3 @@ function selectAllBook() {
         throw $ex;
     }
 }
-
-
-
-?>

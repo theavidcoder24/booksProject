@@ -1,14 +1,21 @@
 <?php 
+require("connectionDB.php");
 function deleteBook($BookID) {
     global $conn;
     try {
-        $stmt = $conn->prepare("DELETE FROM book WHERE BookID=:id");
-        $stmt->bindValue('id', $BookID);
-        // Execute the delete statement
-        $stmt->execute();
-        if( ! $stmt->rowCount() ) echo "Deletion failed";
-    }
-    catch (PDOException $ex){
-        throw $ex;
-    }
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // sql to delete a record
+  $sql = "DELETE FROM book WHERE BookID=:id";
+
+  // use exec() because no results are returned
+  $conn->exec($sql);
+  echo "Record deleted successfully";
+} catch(PDOException $e) {
+  echo $sql . "<br>" . $e->getMessage();
 }
+
+$conn = null;
+}
+?>

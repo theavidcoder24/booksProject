@@ -14,17 +14,19 @@
             <h1>Administration</h1>
         </div>
     </header>
-    <fieldset>
-        <legend>User Login</legend>
-        <form action="controller/loginProcess.php" method="POST">
-            <label for="uname">Username</label>
-            <input type="text" name="uname" id="uname">
-            <label for="upass">Password</label>
-            <input type="password" name="upass" id="upass">
-            <input type="submit" value="Login">
-        </form>
-    </fieldset>
-    
+    <div class="loginForm">
+        <fieldset>
+            <legend>User Login</legend>
+            <form action="controller/loginProcess.php" method="POST">
+                <label for="uname">Username</label>
+                <input type="text" name="uname" id="uname">
+                <label for="upass">Password</label>
+                <input type="password" name="upass" id="upass">
+                <input type="submit" value="Login">
+            </form>
+        </fieldset>
+    </div>
+
 </body>
 
 </html>
