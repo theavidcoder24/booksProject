@@ -25,7 +25,7 @@ nav ul li a {
 
 li a.active,
 li a:hover {
-    background: lightgray;
+    background: rgb(231, 231, 231);
 }
 
 a {

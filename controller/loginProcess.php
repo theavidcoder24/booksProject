@@ -1,7 +1,7 @@
 <?php
-require("../controller/regProcess.php");
-require("../model/connectionDB.php.php");
+require("../model/connectionDB.php");
 require("filterInput.php");
+
 // input via POST method
 if(!empty($_POST)) {
     $username = inputFilter($_POST['uname']);
@@ -17,10 +17,14 @@ if(!empty($_POST)) {
         $_SESSION["adminUser"] = $username;
         $_SESSION["AccessRights"] = $row["accessRights"];
         $_SESSION["login"] = 'yes';
-        echo "You are now logged in";
+        // echo "You are now logged in";
+
+        // this will be the page the user gets sent to when they login
+        header('Location: ../homepage.html');
     }
     else {
-        header('../homepage.html');
+        // this will be the page the user gets sent to when they fail to login
+        header('Location: ../homepage.html');
     }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 // Sanitise Data sent via POST and SEND
-function testInput($data) {
+function inputFilter($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
