@@ -21,8 +21,8 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $lastAuthorID = $conn->lastInsertId();
 
         // prepares statement with named placeholders
-        $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath)
-        VALUES (:bkTitle, :ogTitle, :yearOfPub, :genre, :millSold, :langWritten, :covImage)");
+        $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath, AuthorID)
+        VALUES (:bkTitle, :ogTitle, :yearOfPub, :genre, :millSold, :langWritten, :covImage, :AuthorID)");
         // bind values
         $stmt->bindValue(':bkTitle', $bookTitle);
         $stmt->bindValue(':ogTitle', $originalTitle);
@@ -31,7 +31,8 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':millSold', $millionsSold);
         $stmt->bindValue(':langWritten', $languageWritten);
         $stmt->bindValue(':covImage', $coverImage);
-        $stmt->bindValue(':authID', $lastAuthorID);
+        $stmt->bindValue(':AuthorID', $lastAuthorID);
+        // execute the insert statement
         $stmt->execute();
 
         // prepares statement with named placeholders
@@ -40,7 +41,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // bind values
         $stmt->bindValue(':bkPlot', $bookPlot);
         $stmt->bindValue(':bkPlotSrc', $bookPlotSrc);
-        // execute insert statement
+        // execute the insert statement
         $stmt->execute();
     } catch (PDOException $ex) {
         throw $ex;
