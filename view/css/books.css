@@ -5,6 +5,10 @@
 /* === Generic Styling === */
 * {}
 
+header {
+    background-image: url("../images/coverPhoto.png");
+}
+
 body {}
 
 nav ul {
@@ -42,7 +46,8 @@ footer {
     text-align: center;
 }
 
-.userForm, a {
+.userForm,
+a {
     text-align: right;
     padding: .8em;
     color: black;
