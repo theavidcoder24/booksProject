@@ -73,4 +73,9 @@ a {
     width: 10em;
 }
 
+/* Defult IMG Book Cover Styling */
+#defultImg {
+    height: 8em;
+    width: 8em;
+}
 

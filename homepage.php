@@ -47,7 +47,7 @@
                 echo '<h4>Language: </h4>' . $data['LanguageWritten'];
 
                 if ($data['coverImagePath'] == null) {
-                    echo '<img src="view/images/defaultImage.png">';
+                    echo '<br><img id="defultImg" src="view/images/defaultImage.png">';
                 }
                 /*else {
                     echo '<img src="view/images/' . $data['coverImagePath'] . '">';
