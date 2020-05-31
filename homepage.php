@@ -14,6 +14,7 @@
          <div class="userForm">
              <a href="model/logout.php">Logout</a>
              <!-- Welcome user) -->
+             
          </div>
          <div id="adminTitle">
              <h1>Administration</h1>

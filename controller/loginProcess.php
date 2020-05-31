@@ -21,16 +21,7 @@ if (!empty($_POST)) {
 
         // this will be the page the user gets sent to when they login
         header('Location: ../homepage.php');
-    }
-    //display a user message if action is successful
-    elseif (isset($_SESSION['success'])) {
-        echo '<div class="success">';
-        echo '<p>' . $_SESSION['success'] . '</p>';
-        echo '</div>';
-        //unset the session named 'success' else it will show each time you visit the page
-        unset($_SESSION['success']);
-    } 
-    else {
+    } else {
         // this will be the page the user gets sent to when they fail to login
         header('Location: ../homepage.php');
     }
