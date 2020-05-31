@@ -17,7 +17,7 @@ if (!empty($_POST)) {
         $_SESSION["adminUser"] = $username["username"];
         $_SESSION["AccessRights"] = $row["accessRights"];
         $_SESSION["login"] = 'yes';
-        echo "You are now logged in";
+        echo "You are now logged in . $username";
 
         // this will be the page the user gets sent to when they login
         header('Location: ../homepage.php');

@@ -26,9 +26,6 @@
              <li><a href="view/pages/editBooks.html">Edit Books</a></li>
              <li><a href="view/pages/deleteBooks.html">Delete Books</a></li>
          </ul>
-         <div class="success">
-
-         </div>
      </nav>
      <main>
          <div id="displayDatabase">
