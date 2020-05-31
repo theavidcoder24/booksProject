@@ -1,0 +1,20 @@
+function update_product($productID, $productName, $productDescription, $productPrice, $categoryID)
+{
+  global $conn;
+  $sql = "UPDATE product SET productName = :productName, productDescription = :productDescription, productPrice = :productPrice, categoryID = :categoryID WHERE productID = :productID";
+  $statement = $conn->prepare($sql);
+  $statement->bindValue(':productName', $productName);
+  $statement->bindValue(':productDescription', $productDescription);
+  $statement->bindValue(':productPrice', $productPrice);
+  $statement->bindValue(':categoryID', $categoryID);
+  $statement->bindValue(':productID', $productID);
+  $result = $statement->execute();
+  $statement->closeCursor();
+  return $result;
+}
+//execute the query
+$data = $pdo->exec($query);
+
+
+  // bind values
+        $stmt->bindValue(':name', $authName);
