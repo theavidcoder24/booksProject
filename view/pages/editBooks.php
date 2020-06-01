@@ -23,10 +23,15 @@
             <li><a href="../../homepage.php">Display Books</a></li>
             <li><a href="addBookForm.html">Add Book</a></li>
             <li><a href="#">Edit Books</a></li>
-            <li><a href="deleteBooks.html">Delete Books</a></li>
+            <li><a href="deleteBooks.php">Delete Books</a></li>
         </ul>
     </nav>
     <main>
+        <?php
+        require("model/connectionDB.php");
+        $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
+        $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
+        ?>
         <form action="" method="POST">
             <fieldset class="bookFieldset">
                 <legend>Edit Author Details</legend>

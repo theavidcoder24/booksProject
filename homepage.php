@@ -26,7 +26,7 @@
            <ul>
                <li><a href="#" class="active">Display Books</a></li>
                <li><a href="view/pages/addBookForm.html">Add Book</a></li>
-               <li><a href="view/pages/editBooks.html">Edit Books</a></li>
+               <li><a href="view/pages/editBooks.php">Edit Books</a></li>
                <li><a href="view/pages/deleteBooks.php">Delete Books</a></li>
            </ul>
        </nav>

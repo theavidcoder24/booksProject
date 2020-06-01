@@ -1,5 +1,4 @@
 <?php
-require("connectionDB.php");
 // Add a new row to the table
 function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc)
 {
@@ -8,7 +7,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $conn->beginTransaction();
         // Prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO author(Name, Surname, Nationality, BirthYear, DeathYear)
-        VALUES (:name, :surname, :nation, :birthYr, :deathYr");
+        VALUES (:name, :surname, :nation, :birthYr, :deathYr)");
         // bind values
         $stmt->bindValue(':name', $authName);
         $stmt->bindValue(':surname', $authSur);
@@ -23,7 +22,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
 
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath, AuthorID)
-        VALUES (:bkTitle, :ogTitle, :yearOfPub, :genre, :millSold, :langWritten, :covImage, :AuthorID");
+        VALUES (:bkTitle, :ogTitle, :yearOfPub, :genre, :millSold, :langWritten, :covImage, :AuthorID)");
         // bind values
         $stmt->bindValue(':bkTitle', $bookTitle);
         $stmt->bindValue(':ogTitle', $originalTitle);

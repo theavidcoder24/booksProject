@@ -1,11 +1,9 @@
 <?php
-/*
 function editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $AuthorID, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID)
 {
     global $conn;
+    $stmt = $conn->prepare("UPDATE author SET Name = :name, Surname = :surname, Nationality = :nation, BirthYear = :birthYr, DeathYear = :deathYear WHERE $AuthorID = :AuthorID");
     try {
-        $sql = "UPDATE author SET Name = :name, Surname = :surname, Nationality = :nation, BirthYear = :birthYr, DeathYear = :deathYear WHERE $AuthorID = :AuthorID";
-        $stmt = $conn->prepare($sql);
         $stmt->bindValue(':name', $authName);
         $stmt->bindValue(':surname', $authSur);
         $stmt->bindValue(':nation', $nationality);
@@ -15,8 +13,8 @@ function editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $Au
         // Execute the update statement
         $stmt->execute([$authName, $authSur, $nationality, $birthYear, $deathYear, $AuthorID]);
 
-        $sql = "UPDATE book SET BookTitle = :bkTitle, OriginalTitle = :ogTitle, YearofPublication = :yearOfPub, Genre = :genre, MillionsSold = :millSold, LanguageWritten = :langWritten, coverImagePath = :covImage WHERE $BookID = :BookID";
-        $stmt = $conn->prepare($sql);
+        $stmt = "UPDATE book SET BookTitle = :bkTitle, OriginalTitle = :ogTitle, YearofPublication = :yearOfPub, Genre = :genre, MillionsSold = :millSold, LanguageWritten = :langWritten, coverImagePath = :covImage WHERE $BookID = :BookID";
+        $stmt = $conn->prepare($stmt);
         // bind values
         $stmt->bindValue(':bkTitle', $bookTitle);
         $stmt->bindValue(':ogTitle', $originalTitle);
@@ -34,4 +32,3 @@ function editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $Au
     } catch (PDOException $ex) {
     }
 }
-*/
