@@ -35,7 +35,6 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // execute the insert statement
         $stmt->execute();
 
-        
         // Last inserted BookID
         $lastBookID = $conn->lastInsertId();
 
