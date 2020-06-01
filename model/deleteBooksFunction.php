@@ -1,5 +1,6 @@
 <?php
 require("connectionDB.php");
+$pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
 function deleteBook()
 {
   global $conn;
@@ -8,8 +9,9 @@ function deleteBook()
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // sql to delete a record
-    $sql = "DELETE FROM book WHERE BookID=:id";
-
+    $sql = "DELETE FROM book WHERE BookID=:BookID";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':BookID', $BookID);
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "Record deleted successfully";

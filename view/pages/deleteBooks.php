@@ -28,7 +28,9 @@
     </nav>
     <main>
         <form action="../../model/deleteBooksFunction.php" method="POST">
-
+        <?php
+        echo $_GET['BookID'];
+        ?>
         </form>
     </main>
     <footer>

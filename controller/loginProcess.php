@@ -14,7 +14,7 @@ if (!empty($_POST)) {
     if (password_verify($password, $row['password'])) {
         // assign session variables
         $_SESSION["LoginID"] = $row["loginID"];
-        $_SESSION["adminUser"] = $username["username"];
+        $_SESSION["user"] = $username["username"];
         $_SESSION["AccessRights"] = $row["accessRights"];
         $_SESSION["login"] = 'yes';
         echo "You are now logged in . $username";
