@@ -32,7 +32,7 @@
         $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
         $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
         ?>
-        <form action="" method="POST">
+        <form action="../../model/editBookFunction.php" method="POST">
             <fieldset class="bookFieldset">
                 <legend>Edit Author Details</legend>
                 <label for="name">Name</label>

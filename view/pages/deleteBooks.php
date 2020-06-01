@@ -22,15 +22,13 @@
         <ul>
             <li><a href="../../homepage.php">Display Books</a></li>
             <li><a href="addBookForm.html">Add Book</a></li>
-            <li><a href="editBooks.html">Edit Books</a></li>
+            <li><a href="editBooks.php">Edit Books</a></li>
             <li><a href="#">Delete Books</a></li>
         </ul>
     </nav>
     <main>
         <form action="../../model/deleteBooksFunction.php" method="POST">
-        <?php
-        echo $_GET['BookID'];
-        ?>
+
         </form>
     </main>
     <footer>
