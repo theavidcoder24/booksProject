@@ -1,6 +1,6 @@
 <?php
 require("connectionDB.php");
-function deleteBook($BookID)
+function deleteBook()
 {
   global $conn;
   try {
