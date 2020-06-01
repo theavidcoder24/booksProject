@@ -1,4 +1,5 @@
 <?php
+require("connectionDB.php");
 // Add a new row to the table
 function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc)
 {

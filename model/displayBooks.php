@@ -1,4 +1,5 @@
 <?php
+/*
 require("connectionDB.php");
 function selectAllBook() {
     global $conn;
@@ -27,3 +28,4 @@ function selectAllBook() {
         throw $ex;
     }
 }
+*/

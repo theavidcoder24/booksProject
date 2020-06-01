@@ -1,4 +1,5 @@
 <?php
+/*
 require("connectionDB.php");
 $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
 function deleteBook()
@@ -24,7 +25,7 @@ function deleteBook()
 
   $conn = null;
 }
-
+*/
 /* 
 //create a function to delete an existing product
 function delete_product($productID)

@@ -1,4 +1,5 @@
 <?php
+/*
 function editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $AuthorID, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID)
 {
     global $conn;
@@ -33,3 +34,4 @@ function editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $Au
     } catch (PDOException $ex) {
     }
 }
+*/
