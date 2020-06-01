@@ -2,8 +2,8 @@
 function editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $AuthorID, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID)
 {
     global $conn;
-    $stmt = $conn->prepare("UPDATE author SET Name = :name, Surname = :surname, Nationality = :nation, BirthYear = :birthYr, DeathYear = :deathYear WHERE $AuthorID = :AuthorID");
     try {
+        $stmt = $conn->prepare("UPDATE author SET Name = :name, Surname = :surname, Nationality = :nation, BirthYear = :birthYr, DeathYear = :deathYear WHERE $AuthorID = :AuthorID");
         $stmt->bindValue(':name', $authName);
         $stmt->bindValue(':surname', $authSur);
         $stmt->bindValue(':nation', $nationality);

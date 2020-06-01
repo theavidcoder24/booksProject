@@ -54,3 +54,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         throw $ex;
     }
 }
+
+/* 
+mysql> SELECT EXISTS(SELECT * from ExistsRowDemo WHERE ExistId=104);
+*/

@@ -23,7 +23,7 @@
             <li><a href="../../homepage.php">Display Books</a></li>
             <li><a href="addBookForm.html">Add Book</a></li>
             <li><a href="editBooks.php">Edit Books</a></li>
-            <li><a href="#">Delete Books</a></li>
+            <li><a href="#" class="active">Delete Books</a></li>
         </ul>
     </nav>
     <main>
