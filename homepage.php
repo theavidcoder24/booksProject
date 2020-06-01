@@ -15,7 +15,7 @@
                <a href="model/logout.php">Logout</a>
                <!-- Welcome user) -->
                <?php
-               
+
                 ?>
            </div>
            <div id="adminTitle">
