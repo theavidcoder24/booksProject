@@ -28,13 +28,12 @@
     </nav>
     <main>
         <?php
-        require("model/connectionDB.php");
-        $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
         $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
         ?>
-        <form action="../../model/editBookFunction.php" method="POST">
+        <form action="./booksProject/controller/bookFormProcess.php" method="POST">
             <fieldset class="bookFieldset">
                 <legend>Edit Author Details</legend>
+                <input type="hidden" name="AuthorID" id="aID" value="<?php echo $AuthorID["AuthorID"]; ?>"><br>
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name"><br>
                 <label for="surname">Surname</label>
@@ -45,12 +44,11 @@
                 <input type="number" name="birthYr" id="birthYr"><br>
                 <label for="deathYr">Death Year</label>
                 <input type="number" name="deathYr" id="deathYr"><br>
-                <label for="AuthorID">Author ID</label>
-                <input type="text" name="AuthorID" id="AuthorID"><br>
             </fieldset>
 
             <fieldset class="bookFieldset">
                 <legend>Edit Book Details</legend>
+                <input type="hidden" name="BookID" id="bID" value="<?php echo $BookID["BookID"]; ?>"><br>
                 <label for="bkTitle">Book Title</label>
                 <input type="text" name="bkTitle"><br>
                 <label for="ogTitle">Original Title</label>
@@ -67,6 +65,7 @@
                 <input type="text" name="covImage"><br>
                 <!-- https://m.media-amazon.com/images/I/415Vok2xosL._SY346_.jpg -->
             </fieldset>
+            <input type="submit" value="Update Book">
         </form>
     </main>
     <footer>
