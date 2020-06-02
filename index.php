@@ -27,9 +27,9 @@ session_start();
             <legend>User Login</legend>
             <form action="controller/loginProcess.php" method="POST">
                 <label for="uname">Username</label>
-                <input type="text" name="uname" id="uname">
+                <input type="text" name="username" id="uname">
                 <label for="upass">Password</label>
-                <input type="password" name="upass" id="upass">
+                <input type="password" name="password" id="upass">
                 <input type="submit" value="login">
             </form>
         </fieldset>

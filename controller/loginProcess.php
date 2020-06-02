@@ -6,8 +6,8 @@ $dbpassword = "";
 $conn = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
 // input via POST method
 if (!empty($_POST)) {
-    $username = inputFilter($_POST['uname']);
-    $password = inputFilter($_POST['upass']);
+    $username = inputFilter($_POST['username']);
+    $password = inputFilter($_POST['password']);
 
     $stmt = $conn->prepare("SELECT * FROM login INNER JOIN users ON login.loginID = users.loginID WHERE username=:user");
     $stmt->bindParam(':user', $username);
