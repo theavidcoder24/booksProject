@@ -1,31 +1,23 @@
 <?php
-/*
-require("connectionDB.php");
-function selectAllBook() {
-    global $conn;
-    try {
-        $stmt = $conn->prepare('SELECT * FROM author');
-        $stmt->execute();
-        $stmt = $conn->prepare('SELECT * FROM book');
-        $stmt->execute();
-        $stmt = $conn->prepare('SELECT * FROM bookplot');
-        $stmt->execute();
-        $result = $stmt-> fetchAll();
-        foreach ($result AS $row)
-        echo
-        $numRows = $stmt ->rowCount();
-        echo "Total number of rows is: ".$numRows. "<br>";
-        if ($numRows < 1) {
-            echo "Table is basically empty";
-        }
-        else {
-            foreach ($result as $row) {
-                echo $row['BookTitle']." - ".$row['YearOfPublication']. "<br>";
-            }
-        }
-    }
-    catch (PDOException $ex) {
-        throw $ex;
+require("model/connectionDB.php");
+$pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
+$query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
+
+$d = $pdo->query($query);
+// fetch data one by one using query() method
+
+foreach ($d as $data) { // here d is a pdo query and append data inside $data variable
+    echo '<h4>Author: </h4>' . $data['Name'] . $data['Surname'];
+    echo '<h4>Book Title: </h4>' . $data['BookTitle'];
+    echo '<h4>Original Title: </h4>' . $data['OriginalTitle'];
+    echo '<h4>Year Published: </h4>' . $data['YearofPublication'];
+    echo '<h4>Genre: </h4>' . $data['Genre'];
+    echo '<h4>Copies Sold: </h4>' . $data['MillionsSold'];
+    echo '<h4>Language: </h4>' . $data['LanguageWritten'];
+
+    if ($data['coverImagePath'] == null) {
+        echo '<br><img id="defultImg" src="view/images/defaultImage.png">';
+    } else {
+        echo '<img src="view/images/' . $data['coverImagePath'] . '">';
     }
 }
-*/

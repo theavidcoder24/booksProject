@@ -15,13 +15,6 @@
             <h1>Administration</h1>
         </div>
     </header>
-    <?php
-    // Start the session
-    session_start();
-
-    // Assign the session variables
-    $_SESSION["username"] = $username;
-    ?>
     <div class="loginForm">
         <fieldset>
             <legend>User Login</legend>
