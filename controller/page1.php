@@ -20,7 +20,7 @@
     } else {
         foreach ($result as $row) {
             echo $row['BookTitle']; ?><br>
-            <a href="?link=edit&BookID=<?php echo $row['BookID']; ?>  ">Edit Book</a><br>
+            <a href="?link=edit&BookID=<?php echo $row['BookID']; ?>">Edit Book</a><br>
             <a href="?link=delete&BookID=<?php echo $row['BookID']; ?>">Delete Book</a>
     <?php
         }

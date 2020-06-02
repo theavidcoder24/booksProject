@@ -15,7 +15,7 @@
             <a href="../../model/logout.php">Logout</a>
         </div>
         <div id="adminTitle">
-            <h1>Administration</h1>
+            <h1>Administration - Edit Books</h1>
         </div>
     </header>
     <nav>
