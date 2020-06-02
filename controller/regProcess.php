@@ -6,7 +6,7 @@ require("filterInput.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     $username = !empty($_POST['username']) ? inputFilter(($_POST['username'])) : null;
-    $password = !empty($_POST['pass']) ? inputFilter(($_POST['pass'])) : null;
+    $password = !empty($_POST['password']) ? inputFilter(($_POST['password'])) : null;
     $accessrights = !empty($_POST['acRights']) ? inputFilter(($_POST['acRights'])) : null;
     $firstname = !empty($_POST['firstname']) ? inputFilter(($_POST['firstname'])) : null;
     $lastname = !empty($_POST['lastname']) ? inputFilter(($_POST['lastname'])) : null;

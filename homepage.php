@@ -32,7 +32,7 @@ session_start();
     </nav>
     <main>
         <!-- Welcome user) -->
-        <p>Welcome <br><?php echo $_SESSION['uname'] ?></br>You have successfully logged in</p>
+        <p>Welcome <br><?php echo $_SESSION['login'] ?></br>You have successfully logged in</p>
         <?php
         echo "Favorite color is " . $_SESSION["favcolor"] . ".<br>";
         ?>

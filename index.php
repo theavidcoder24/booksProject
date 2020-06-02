@@ -19,7 +19,7 @@ session_start();
         </div>
     </header>
     <?php 
-    $_SESSION["uname"] = ":user";
+    $_SESSION["login"] = "$username";
     $_SESSION["favcolor"] = "green";
     ?>
     <div class="loginForm">
