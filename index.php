@@ -18,8 +18,8 @@ session_start();
             <h1>Administration</h1>
         </div>
     </header>
-    <?php 
-    $_SESSION["login"] = "$username";
+    <?php
+    $_SESSION["login"] = $username;
     $_SESSION["favcolor"] = "green";
     ?>
     <div class="loginForm">
