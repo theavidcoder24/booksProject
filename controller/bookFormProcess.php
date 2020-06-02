@@ -25,10 +25,10 @@ if (!empty([$_POST])) {
     $bookPlot = inputFilter($_POST['bkPlot']);
     $bookPlotSrc = inputFilter($_POST['bkPlotSrc']);
     // funtion call
-    addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
+    addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID);
     echo "New row inserted";
-     // this will be the page the user enters record successfully
-     header('Location: ../homepage.php');
+    // this will be the page the user enters record successfully
+    header('Location: ../homepage.php');
 } else {
     echo "Record couldn't be inserted";
     $error_message = $e->getMessage();

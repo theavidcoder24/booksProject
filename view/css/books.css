@@ -80,5 +80,11 @@ a {
 }
 
 /* Edit + Delete Button Links */
+#editLink {
+    background-color: rgb(70, 70, 251);
+}
 
+#delLink {
+    background-color: rgb(245, 44, 44);
+}
 

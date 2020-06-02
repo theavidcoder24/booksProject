@@ -1,8 +1,3 @@
-<?php
-ob_start();
-session_start();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,34 +29,53 @@ session_start();
     </nav>
     <main>
         <!-- Welcome user) -->
+        <!--
         <p>Welcome <br><?php echo $_SESSION['login'] ?></br>You have successfully logged in</p>
         <?php
         echo "Favorite color is " . $_SESSION["favcolor"] . ".<br>";
         ?>
+        -->
         <div id="displayDatabase">
             <?php
             include("model/connectionDB.php");
             $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
-            $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
+            $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";
 
-            $data = $pdo->query($query);
-            // fetch data one by one using query() method
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
 
-            foreach ($data as $row) {?>
-            <div class="container">
-                <div class="data">
-                    <figure>
-                        ig
-                    </figure>
+            if ($stmt->rowCount() < 1) {
+                echo "There are no books!";
+            } else {
+                foreach ($data as $row) {
+                    if ($row['coverImagePath'] == null) {
+                        echo '<br><img id="defultImg" src="view/images/defaultImage.png">';
+                    } else {
+                        echo '<img src="view/images/' . $row['coverImagePath'] . '">';
+                    }
+            ?>
+                    <div class="container">
+                        <div class="dataSection">
+                            <figure>
+                                <img src="<?php echo $row['coverImagePath']; ?>">
+                            </figure>
+                            <figcaption>
+                                <p class="data">Author: <?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
+                                <p class="data">Book Title: <?php echo $row['BookTitle']; ?></p>
+                                <p class="data">Year of Publication: <?php echo $row['YearofPublication']; ?></p>
+                                <p class="data">Copies Sold: <?php echo $row['MillionsSold']; ?></p>
 
-                </div>
+                            </figcaption>
 
-            </div>
+                        </div>
+
+                    </div>
         </div>
-    <?php
+<?php
+                }
             }
-
-    ?>
+?>
     </main>
     <footer>
         <div class="copyright">
