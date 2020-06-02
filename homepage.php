@@ -1,3 +1,6 @@
+<?php 
+include('controller/loginProcess.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,12 +32,8 @@
     </nav>
     <main>
         <!-- Welcome user) -->
-        <!--
-        <p>Welcome <br><?php echo $_SESSION['login'] ?></br>You have successfully logged in</p>
-        <?php
-        echo "Favorite color is " . $_SESSION["favcolor"] . ".<br>";
-        ?>
-        -->
+        <p>Welcome <br><?php echo $_SESSION['AdminUser'] ?></br>You have successfully logged in</p>
+
         <div id="displayDatabase">
             <?php
             include("model/connectionDB.php");

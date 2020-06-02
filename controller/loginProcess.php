@@ -4,6 +4,7 @@ $servername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
 $conn = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
+session_start();
 // input via POST method
 if (!empty($_POST)) {
     $username = inputFilter($_POST['username']);
@@ -15,12 +16,12 @@ if (!empty($_POST)) {
     $row = $stmt->fetch();
     if (password_verify($password, $row['password'])) {
         // assign session variables
-        $_SESSION['login'] = true;
-        $_SESSION['username'] = $row['username'];
+        $_SESSION['AdminUser'] = $username;
         $_SESSION['LoginID'] = $row['LoginID'];
         $_SESSION["accessrights"] = $row["accessRights"];
-        $_SESSION['userID'] = $row['userID'];
-        $_SESSION['time_startt_login'] = time('H:i:s');
+        $_SESSION['login'] = 'yes';
+
+        echo "Welcome " . $_SESSION['AdminUser'];
 
         /*
         $_SESSION["login"] = 'yes';

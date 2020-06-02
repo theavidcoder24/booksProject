@@ -12,18 +12,18 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
         $stmt->bindValue(':accessrights', $accessrights);
         $stmt->execute();
 
-        // last inserted = loginID
-        $lastloginID = $conn->lastInsertId();
-
         // last inserted = userID
         $lastuserID = $conn->lastInsertId();
 
+        // last inserted = loginID
+        $lastloginID = $conn->lastInsertId();
+
         $stmt = $conn->prepare("INSERT INTO users(firstName, lastName, email, loginID)
         VALUES (:firstname, :lastname, :email, :loginID)");
+        $stmt->bindValue(':userID', $lastuserID);
         $stmt->bindValue(':firstname', $firstname);
         $stmt->bindValue(':lastname', $lastname);
         $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':userID', $lastuserID);
         $stmt->bindValue(':loginID', $lastloginID);
         $stmt->execute();
 

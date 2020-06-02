@@ -53,12 +53,12 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
 
         /* === Changelog Table === */
         // prepares statement with named placeholders
-        $stmt = $conn->prepare("INSERT INTO changelog(BookID, userID)
+        $changelog = $conn->prepare("INSERT INTO changelog(BookID, userID)
         VALUES (:BookID, :userid)");
         $stmt->bindValue(':BookID', $BookID);
         $stmt->bindValue(':userid', $userID);
         // execute the insert statement
-        $stmt->execute();
+        $stmt->execute($changelog);
 
         // Commit changes here //
         $conn->commit();
