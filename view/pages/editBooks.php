@@ -15,15 +15,15 @@
             <a href="../../model/logout.php">Logout</a>
         </div>
         <div id="adminTitle">
-            <h1>Administration - Edit Books</h1>
+            <h1>Administration - Edit Book</h1>
         </div>
     </header>
     <nav>
         <ul>
             <li><a href="../../homepage.php">Display Books</a></li>
             <li><a href="addBookForm.html">Add Book</a></li>
-            <li><a href="#" class="active">Edit Books</a></li>
-            <li><a href="deleteBooks.php">Delete Books</a></li>
+            <li><a href="#" class="active">Edit Book</a></li>
+            <li><a href="deleteBooks.php">Delete Book</a></li>
         </ul>
     </nav>
     <main>

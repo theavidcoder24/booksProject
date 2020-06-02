@@ -4,7 +4,7 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
     global $conn;
     try {
         $conn->beginTransaction();
-        
+
         $stmt = $conn->prepare("INSERT INTO login(username, password, accessRights)
         VALUES (:username, :password, :accessrights)");
         $stmt->bindValue(':username', $username);
@@ -15,11 +15,15 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
         // last inserted = loginID
         $lastloginID = $conn->lastInsertId();
 
+        // last inserted = userID
+        $lastuserID = $conn->lastInsertId();
+
         $stmt = $conn->prepare("INSERT INTO users(firstName, lastName, email, loginID)
         VALUES (:firstname, :lastname, :email, :loginID)");
         $stmt->bindValue(':firstname', $firstname);
         $stmt->bindValue(':lastname', $lastname);
         $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':userID', $lastuserID);
         $stmt->bindValue(':loginID', $lastloginID);
         $stmt->execute();
 
@@ -57,4 +61,3 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
 //     }
 //     $conn = null;
 // }
-?>

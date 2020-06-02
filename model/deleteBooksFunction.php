@@ -1,7 +1,8 @@
 <?php
 require("connectionDB.php");
+require("");
 $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
-function deleteBook()
+function deleteBook($BookID)
 {
   global $conn;
   try {
@@ -18,11 +19,11 @@ function deleteBook()
 
     // Commit changes
     $conn->commit();
-  } catch (PDOException $e) {
+  } catch (PDOException $ex) {
     echo $sql . "<br>" . $e->getMessage();
+    echo "Failed";
+    throw $ex;
   }
-
-  $conn = null;
 }
 
 /* 

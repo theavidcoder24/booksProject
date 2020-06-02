@@ -1,10 +1,11 @@
 <?php
 // Add a new row to the table
-function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc)
+function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID)
 {
     global $conn;
     try {
         $conn->beginTransaction();
+        /* === Author Table === */
         // Prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO author(Name, Surname, Nationality, BirthYear, DeathYear)
         VALUES (:name, :surname, :nation, :birthYr, :deathYr)");
@@ -20,6 +21,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Last inserted BookID
         $lastAuthorID = $conn->lastInsertId();
 
+        /* === Book Table === */
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath, AuthorID)
         VALUES (:bkTitle, :ogTitle, :yearOfPub, :genre, :millSold, :langWritten, :covImage, :AuthorID)");
@@ -38,6 +40,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Last inserted BookID
         $lastBookID = $conn->lastInsertId();
 
+        /* === Book Plot Table === */
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO bookplot(Plot, PlotSource, BookID)
         VALUES (:bkPlot, :bkPlotSrc, :BookID)");
@@ -45,6 +48,15 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':bkPlot', $bookPlot);
         $stmt->bindValue(':bkPlotSrc', $bookPlotSrc);
         $stmt->bindValue(':BookID', $lastBookID);
+        // execute the insert statement
+        $stmt->execute();
+
+        /* === Changelog Table === */
+        // prepares statement with named placeholders
+        $stmt = $conn->prepare("INSERT INTO changelog(BookID, userID)
+        VALUES (:BookID, :userid)");
+        $stmt->bindValue(':BookID', $BookID);
+        $stmt->bindValue(':userid', $userID);
         // execute the insert statement
         $stmt->execute();
 

@@ -28,8 +28,8 @@ session_start();
         <ul>
             <li><a href="#" class="active">Display Books</a></li>
             <li><a href="view/pages/addBookForm.html">Add Book</a></li>
-            <li><a href="view/pages/editBooks.php">Edit Books</a></li>
-            <li><a href="view/pages/deleteBooks.php">Delete Books</a></li>
+            <li><a href="view/pages/editBooks.php">Edit Book</a></li>
+            <li><a href="view/pages/deleteBooks.php">Delete Book</a></li>
         </ul>
     </nav>
     <main>
@@ -40,9 +40,28 @@ session_start();
         ?>
         <div id="displayDatabase">
             <?php
-            require("model/displayBooks.php");
-            ?>
+            include("model/connectionDB.php");
+            $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
+            $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
+
+            $data = $pdo->query($query);
+            // fetch data one by one using query() method
+
+            foreach ($data as $row) {?>
+            <div class="container">
+                <div class="data">
+                    <figure>
+                        ig
+                    </figure>
+
+                </div>
+
+            </div>
         </div>
+    <?php
+            }
+
+    ?>
     </main>
     <footer>
         <div class="copyright">
