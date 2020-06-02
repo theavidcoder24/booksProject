@@ -12,10 +12,11 @@
    <body>
        <header>
            <div class="userForm">
+               <a href="view/pages/register.html">Create New User</a>
                <a href="model/logout.php">Logout</a>
                <!-- Welcome user) -->
                <?php
-                if(!empty($_GET['message'])) {
+                if (!empty($_GET['message'])) {
                     $theMessage = $_GET['message'];
                     echo $theMessage;
                 }
@@ -35,9 +36,9 @@
        </nav>
        <main>
            <div id="displayDatabase">
-              <?php
-              require("model/displayBooks.php");
-              ?>
+               <?php
+                require("model/displayBooks.php");
+                ?>
            </div>
        </main>
        <footer>
