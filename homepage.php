@@ -1,14 +1,5 @@
 <?php
-ob_start();
 session_start();
-
-$_SESSION['time_start_login'] = time();
-require("model/connectionDB.php");
-require("model/userFunctions.php");
-
-if (isset($_SESSION['login']) == true) {
-    include("header.php");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +17,6 @@ if (isset($_SESSION['login']) == true) {
         <div class="userForm">
             <a href="view/pages/register.html">Create New User</a>
             <a href="model/logout.php">Logout</a>
-            <!-- Welcome user) -->
-            <p>Welcome <br><?php echo $_SESSION['login'] ?></br>You have successfully logged in.
         </div>
         <div id="adminTitle">
             <h1>Administration</h1>
@@ -42,6 +31,11 @@ if (isset($_SESSION['login']) == true) {
         </ul>
     </nav>
     <main>
+        <!-- Welcome user) -->
+        <p>Welcome <br><?php echo $_SESSION['uname'] ?></br>You have successfully logged in</p>
+        <?php
+        echo "Favorite color is " . $_SESSION["favcolor"] . ".<br>";
+        ?>
         <div id="displayDatabase">
             <?php
             require("model/displayBooks.php");

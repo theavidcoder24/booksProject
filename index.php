@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +18,10 @@
             <h1>Administration</h1>
         </div>
     </header>
+    <?php 
+    $_SESSION["uname"] = ":user";
+    $_SESSION["favcolor"] = "green";
+    ?>
     <div class="loginForm">
         <fieldset>
             <legend>User Login</legend>
@@ -27,7 +34,9 @@
             </form>
         </fieldset>
     </div>
+    <footer>
 
+    </footer>
 </body>
 
 </html>

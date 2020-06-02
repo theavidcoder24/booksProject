@@ -15,7 +15,7 @@ if (!empty($_POST)) {
     $row = $stmt->fetch();
     if (password_verify($password, $row['password'])) {
         // assign session variables
-        $_SESSION['login'] = $row[':user'];
+        $_SESSION['login'] = $row['username'];
         $_SESSION['LoginID'] = $row['LoginID'];
         $_SESSION["accessrights"] = $row["accessRights"];
         $_SESSION['userID'] = $row['userID'];
