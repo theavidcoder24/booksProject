@@ -28,17 +28,24 @@ if (!empty([$_POST])) {
     $bookPlotSrc = !empty($_POST['bkPlotSrc']) ? inputFilter($_POST['bkPlotSrc']) : null;
 
     $actiontype = !empty($_POST['actType']) ? inputFilter($_POST['actType']) : null;
-    
+
     // Record the account who added this book
     $userID = $_SESSION['userID'];
     print_r($_POST);
 
     // Changelog Table
 
-    // funtion call
-    editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID);
-    echo "New row inserted";
+    if ($_REQUEST['action_type'] == 'update') {
+        try {
+            // funtion call
+            editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID);
+            header('');
+        } catch (PDOException $ex) {
+            echo "Problem updating Book" . $ex->getMessage();
+            exit();
+        }
+    }
 } else {
-    echo "Record couldn't be inserted";
+    $_SESSION['message'] = "Failed to update";
     $error_message = $e->getMessage();
 }

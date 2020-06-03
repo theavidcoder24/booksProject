@@ -33,26 +33,39 @@ include('../../model/connectionDB.php');
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
+        <div class="message">
+            <?php
+            if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+            }
+            ?>
+        </div>
         <?php
-        $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
+        $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetch();
+        if ($stmt->rowCount() >= 1) {
         ?>
-        <form action="./booksProject/controller/bookFormProcess.php" method="POST">
-            <fieldset class="bookFieldset">
-                <legend>Edit Author Details: </legend>
-                <input type="hidden" name="AuthorID" id="aID" value="<?php echo ["AuthorID"]; ?>"><br>
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name"><br>
-                <label for="surname">Surname</label>
-                <input type="text" name="surname" id="surname"><br>
-                <!-- Rest of form goes where? -->
-            </fieldset>
+            <div class="editForm">
+                <form action="" method="POST">
+                    <fieldset class="bookFieldset">
+                        <legend>Edit Author Details: </legend>
+                        <input type="hidden" name="AuthorID" id="aID" value="<?php echo ["AuthorID"]; ?>"><br>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name"><br>
+                        <label for="surname">Surname</label>
+                        <input type="text" name="surname" id="surname"><br>
+                        <!-- Rest of form goes where? -->
+                    </fieldset>
 
-            <fieldset class="bookFieldset">
-                <legend>Edit Book Details</legend>
-                <input type="hidden" name="BookID" id="bID" value="<?php echo $row["BookID"]; ?>"><br>
-                <label for="bkTitle">Book Title</label>
-                <input type="text" name="bkTitle"><br>
-                <!-- Rest of form goes where? 
+                    <fieldset class="bookFieldset">
+                        <legend>Edit Book Details</legend>
+                        <input type="hidden" name="BookID" id="bID" value="<?php echo $row["BookID"]; ?>"><br>
+                        <label for="bkTitle">Book Title</label>
+                        <input type="text" name="bkTitle"><br>
+                        <!-- Rest of form goes where? 
                 <label for="ogTitle">Original Title</label>
                 <input type="text" name="ogTitle"><br>
                 <label for="yearOfPub">Year of Publication</label>
@@ -64,14 +77,18 @@ include('../../model/connectionDB.php');
                 <label for="langWritten">Language Written</label>
                 <input type="text" name="langWritten"><br>
                 <label for="covImage">Cover Image</label>
-                <input type="text" name="covImage"><br>
-                <!-- https://m.media-amazon.com/images/I/415Vok2xosL._SY346_.jpg -->
-                -->
-            </fieldset>
-            <input type="hidden" name="action_type" value="update">
-            <input type="submit" value="Save">
-        </form>
+                <input type="text" name="covImage"><br> -->
 
+                    </fieldset>
+                    <input type="hidden" name="action_type" value="update">
+                    <input type="submit" value="Save">
+                </form>
+            </div>
+        <?php
+        } else {
+            echo "Table is empty";
+        }
+        ?>
     </main>
     <footer>
         <div class="copyright">

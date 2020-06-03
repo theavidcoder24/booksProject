@@ -40,7 +40,14 @@ include('model/connectionDB.php');
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
-
+        <div class="message">
+            <?php
+            if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+            }
+            ?>
+        </div>
         <div id="displayDatabase">
             <?php
             $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";
@@ -65,15 +72,16 @@ include('model/connectionDB.php');
                                 <img src="<?php echo $row['coverImagePath']; ?>">
                             </figure>
                             <figcaption>
-                                <p class="data">Author: <?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
-                                <p class="data">Book Title: <?php echo $row['BookTitle']; ?></p>
-                                <p class="data">Year of Publication: <?php echo $row['YearofPublication']; ?></p>
-                                <p class="data">Copies Sold: <?php echo $row['MillionsSold']; ?></p>
-
+                                <p class="data"><b>Author: </b><?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
+                                <p class="data"><b>Book Title: </b><?php echo $row['BookTitle']; ?></p>
+                                <p class="data"><b>Year of Publication: </b><?php echo $row['YearofPublication']; ?></p>
+                                <p class="data"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p><br>
+                                <?php
+                                echo $row['BookTitle']; ?><br>
+                                <a href="?link=edit&BookID=<?php echo $row['BookID']; ?>"><b>Edit Book</b></a>
+                                <a href="?link=delete&BookID=<?php echo $row['BookID']; ?>"><b>Delete Book</b></a>
                             </figcaption>
-
                         </div>
-
                     </div>
         </div>
 <?php
