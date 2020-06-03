@@ -1,4 +1,5 @@
 <?php
+/* ------------------- New User ------------------- */
 function newUser($username, $password, $accessrights, $firstname, $lastname, $email)
 {
     global $conn;

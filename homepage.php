@@ -9,6 +9,8 @@ include('model/connectionDB.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="view/css/books.css">
+    <!-- Font Awesome Style -->
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
     <link rel="icon" href="view/images/books-1673578_1280.png" type="image/gif" sizes="16x16">
     <title>Books System</title>
 </head>
@@ -31,6 +33,7 @@ include('model/connectionDB.php');
     </header>
     <nav>
         <ul>
+            <li><a href="" id="home"><i class="fas fa-home"></i></a></li>
             <li><a href="#" class="active">Display Books</a></li>
             <li><a href="view/pages/addBookForm.php">Add Book</a></li>
             <li><a href="view/pages/editBooks.php">Edit Book</a></li>
@@ -48,6 +51,30 @@ include('model/connectionDB.php');
             }
             ?>
         </div>
+        <?php
+        /*
+        if (isset($_GET['link'])) {
+            $link = $_GET['link'];
+            switch ($link) {
+                /*
+                case "allBooks":
+                    require("model/displayBooks.php");
+                    break;
+                case "newBook":
+                    require_once("addBookFunction.php");
+                    break;
+                case "edit":
+                    require_once("editBookFunction.php");
+                    break;
+                case "delete":
+                    require("deleteBooksFunction.php");
+                    break;
+            }
+        } else {
+            require("../model/displayBooks.php");
+        }
+        */
+        ?>
         <div id="displayDatabase">
             <?php
             $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";

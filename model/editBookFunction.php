@@ -1,4 +1,5 @@
 <?php
+/* ------------------- Edit record from the table ------------------- */
 function editBook($AuthorID, $authName, $authSur, $nationality, $birthYear, $deathYear, $BookID, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage)
 {
     global $conn;

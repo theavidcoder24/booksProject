@@ -1,6 +1,7 @@
 <?php
-include('../../controller/loginProcess.php');
 include('../../model/connectionDB.php');
+include('../../controller/editFormProcess.php');
+include('../../model/editBookFunction.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +32,8 @@ include('../../model/connectionDB.php');
         </ul>
     </nav>
     <!-- Welcome user-->
-    <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
+    <p>Welcome <b><?php include('../../controller/loginProcess.php');
+                    echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
         <div class="message">
             <?php
@@ -45,14 +47,15 @@ include('../../model/connectionDB.php');
         $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";
         $stmt = $conn->prepare($query);
         $stmt->execute();
-        $data = $stmt->fetch();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($stmt->rowCount() >= 1) {
         ?>
             <div class="editForm">
-                <form action="" method="POST">
+                <h2>Edit Book: <?php echo $data['BookTitle'] ?></h2>
+                <form action="../../controller/editFormProcess.php" method="POST">
                     <fieldset class="bookFieldset">
                         <legend>Edit Author Details: </legend>
-                        <input type="hidden" name="AuthorID" id="aID" value="<?php echo ["AuthorID"]; ?>"><br>
+                        <input type="hidden" name="AuthorID" value="<?php echo $data["AuthorID"]; ?>"><br>
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name"><br>
                         <label for="surname">Surname</label>
@@ -62,7 +65,7 @@ include('../../model/connectionDB.php');
 
                     <fieldset class="bookFieldset">
                         <legend>Edit Book Details</legend>
-                        <input type="hidden" name="BookID" id="bID" value="<?php echo $row["BookID"]; ?>"><br>
+                        <input type="hidden" name="BookID" value="<?php echo $data["BookID"]; ?>"><br>
                         <label for="bkTitle">Book Title</label>
                         <input type="text" name="bkTitle"><br>
                         <!-- Rest of form goes where? 
@@ -82,11 +85,12 @@ include('../../model/connectionDB.php');
                     </fieldset>
                     <input type="hidden" name="action_type" value="update">
                     <input type="submit" value="Save">
+                    <input type="button" onclick="location.href='?linkhomepage';" value="Cancel">
                 </form>
             </div>
         <?php
         } else {
-            echo "Table is empty";
+            echo "Nope";
         }
         ?>
     </main>

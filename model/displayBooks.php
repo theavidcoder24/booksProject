@@ -1,4 +1,7 @@
 <?php
+
+/* ------------------- Display all rows from the table ------------------- */
+function displayBooks() {
 require("connectionDB.php");
 $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
 $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
@@ -22,4 +25,5 @@ foreach ($data as $row) { // d is a pdo query and append data inside $data varia
     echo '<a style="background-color:rgb(70, 70, 251)"; href="view/pages/editBooks.php" id="editLink">EDIT</a>';
     echo '<a style="background-color:rgb(245, 44, 44)"; href="view/pages/deleteBooks.php" id="delLink">DELETE</a>';
     echo '<br>';
+}
 }

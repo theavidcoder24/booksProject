@@ -27,13 +27,12 @@ if (!empty([$_POST])) {
     $bookPlot = !empty($_POST['bkPlot']) ? inputFilter($_POST['bkPlot']) : null;
     $bookPlotSrc = !empty($_POST['bkPlotSrc']) ? inputFilter($_POST['bkPlotSrc']) : null;
 
-    $actiontype = !empty($_POST['actType']) ? inputFilter($_POST['actType']) : null;
+    $action_type = !empty($_POST['actType']) ? inputFilter($_POST['actType']) : null;
 
     // Record the account who added this book
     $userID = $_SESSION['userID'];
-    print_r($_POST);
 
-    // Changelog Table
+    // Changelog Table?
 
     if ($_REQUEST['action_type'] == 'update') {
         try {

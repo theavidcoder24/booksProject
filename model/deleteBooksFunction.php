@@ -1,7 +1,5 @@
 <?php
-require("connectionDB.php");
-require("");
-$pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
+/* ------------------- Delete a row from the table ------------------- */
 function deleteBook($BookID)
 {
   global $conn;
