@@ -71,6 +71,12 @@ include('../../model/dbFunctions.php');
                         <label for="surname">Surname</label>
                         <input type="text" name="surname" id="surname"><br>
                         <!-- Rest of form goes where? -->
+                        <label for="nation">Nationality</label>
+                        <input type="text" name="nation" id="nation">
+                        <label for="birthYr">Birth Year</label>
+                        <input type="number" name="birthYr" id="birthYr">
+                        <label for="deathYr">Death Year</label>
+                        <input type="number" name="deathYr" id="deathYr">
                     </fieldset>
 
                     <fieldset class="bookFieldset">
