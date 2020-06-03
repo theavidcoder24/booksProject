@@ -1,5 +1,6 @@
 <?php
 include('controller/loginProcess.php');
+include('model/connectionDB.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,14 +37,12 @@ include('controller/loginProcess.php');
             <li><a href="view/pages/deleteBooks.php">Delete Book</a></li>
         </ul>
     </nav>
+    <!-- Welcome user-->
+    <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
-        <!-- Welcome user) -->
-        <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
 
         <div id="displayDatabase">
             <?php
-            include("model/connectionDB.php");
-            $pdo = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
             $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";
 
             $stmt = $conn->prepare($query);

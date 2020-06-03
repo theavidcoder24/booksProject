@@ -23,14 +23,10 @@ if (!empty($_POST)) {
 
         echo "Welcome " . $_SESSION['AdminUser'];
 
-        /*
-        $_SESSION["login"] = 'yes';
-        echo "You are now logged in . $username";
-*/
-        // this will be the page the user gets sent to when they login
+        // This is the page the user gets sent to when they login
         header('Location: ../homepage.php');
     } else {
-        // this will be the page the user gets sent to when they fail to login
+        // This is the page the user gets sent to when they fail to login
         echo "Login credentials are incorrect";
         echo "<br><a href='../index.php'></a>";
     }
