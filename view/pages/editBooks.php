@@ -33,7 +33,7 @@
         <form action="./booksProject/controller/bookFormProcess.php" method="POST">
             <fieldset class="bookFieldset">
                 <legend>Edit Author Details: </legend>
-                <input type="hidden" name="AuthorID" id="aID" value="<?php echo $row["AuthorID"]; ?>"><br>
+                <input type="hidden" name="AuthorID" id="aID" value="<?php echo ["AuthorID"]; ?>"><br>
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name"><br>
                 <label for="surname">Surname</label>
