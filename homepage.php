@@ -1,6 +1,7 @@
 <?php
 include('controller/loginProcess.php');
 include('model/connectionDB.php');
+include('model/dbFunctions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +9,7 @@ include('model/connectionDB.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Books Style -->
     <link rel="stylesheet" href="view/css/books.css">
     <!-- Font Awesome Style -->
     <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
@@ -33,8 +35,8 @@ include('model/connectionDB.php');
     </header>
     <nav>
         <ul>
-            <li><a href="" id="home"><i class="fas fa-home"></i></a></li>
-            <li><a href="#" class="active">Display Books</a></li>
+            <li><a href="#" id="home" class="active"><i class="fas fa-home"></i></a></li>
+            <li><a href="view/pages/displayBooks.php">Display Books</a></li>
             <li><a href="view/pages/addBookForm.php">Add Book</a></li>
             <li><a href="view/pages/editBooks.php">Edit Book</a></li>
             <li><a href="view/pages/deleteBooks.php">Delete Book</a></li>
@@ -75,10 +77,10 @@ include('model/connectionDB.php');
         }
         */
         ?>
+        <!-- Display Data -->
         <div id="displayDatabase">
             <?php
-            $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";
-
+            $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.AuthorID";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $data = $stmt->fetchAll();
@@ -99,14 +101,14 @@ include('model/connectionDB.php');
                                 <img src="<?php echo $row['coverImagePath']; ?>">
                             </figure>
                             <figcaption>
+                                <p class="data"><b>Book ID: </b><?php echo $row['BookID'] ?></p>
+                                <p class="data"><b>Author ID: </b><?php echo $row['AuthorID'] ?></p>
                                 <p class="data"><b>Author: </b><?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
                                 <p class="data"><b>Book Title: </b><?php echo $row['BookTitle']; ?></p>
                                 <p class="data"><b>Year of Publication: </b><?php echo $row['YearofPublication']; ?></p>
-                                <p class="data"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p><br>
-                                <?php
-                                echo $row['BookTitle']; ?><br>
-                                <a href="?link=edit&BookID=<?php echo $row['BookID']; ?>"><b>Edit Book</b></a>
-                                <a href="?link=delete&BookID=<?php echo $row['BookID']; ?>"><b>Delete Book</b></a>
+                                <p class="data"><b>Genre: </b><?php echo $row['Genre']; ?></p>
+                                <p class="data"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p>
+                                <p class="data"><b>Language Written: </b><?php echo $row['LanguageWritten']; ?></p><br>
                             </figcaption>
                         </div>
                     </div>

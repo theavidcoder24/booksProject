@@ -1,11 +1,10 @@
 <?php
-require("../model/connectionDB.php");
-require("../model/addBookFunction.php");
+include("../model/connectionDB.php");
+include("../model/dbFunctions.php");
 require("filterInput.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     // Author Table 
-    $AuthorID = inputFilter($_POST['aID']);
     $authName = inputFilter($_POST['name']);
     $authName = inputFilter($_POST['name']);
     $authSur = inputFilter($_POST['surname']);

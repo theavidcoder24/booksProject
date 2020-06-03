@@ -1,7 +1,7 @@
 <?php
+include('../../controller/loginProcess.php');
 include('../../model/connectionDB.php');
-include('../../controller/editFormProcess.php');
-include('../../model/editBookFunction.php');
+include('../../model/dbFunctions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,10 @@ include('../../model/editBookFunction.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Books Style -->
     <link rel="stylesheet" href="../css/books.css">
+    <!-- Font Awesome Style -->
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
     <link rel="icon" href="../images/books-1673578_1280.png" type="image/gif" sizes="16x16">
     <title>Edit Book</title>
 </head>
@@ -17,6 +20,13 @@ include('../../model/editBookFunction.php');
 <body>
     <header>
         <div class="userForm">
+            <?php
+            if (isset($_SESSION['accessrights'])) {
+                if ($_SESSION['accessrights'] == 'Admin') {
+                    echo '<a href="register.html">Create New User</a>';
+                }
+            }
+            ?>
             <a href="../../model/logout.php">Logout</a>
         </div>
         <div id="adminTitle">
@@ -25,15 +35,15 @@ include('../../model/editBookFunction.php');
     </header>
     <nav>
         <ul>
-            <li><a href="../../homepage.php">Display Books</a></li>
+            <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
+            <li><a href="displayBooks.php">Display Books</a></li>
             <li><a href="addBookForm.php">Add Book</a></li>
-            <li><a href="#" class="active">Edit Book</a></li>
+            <li><a href="editBooks.php">Edit Book</a></li>
             <li><a href="deleteBooks.php">Delete Book</a></li>
         </ul>
     </nav>
     <!-- Welcome user-->
-    <p>Welcome <b><?php include('../../controller/loginProcess.php');
-                    echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
+    <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
         <div class="message">
             <?php

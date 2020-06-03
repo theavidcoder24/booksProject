@@ -1,6 +1,7 @@
 <?php
 include('../../controller/loginProcess.php');
 include('../../model/connectionDB.php');
+include('../../model/dbFunctions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,10 @@ include('../../model/connectionDB.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Books Style -->
     <link rel="stylesheet" href="../css/books.css">
+    <!-- Font Awesome Style -->
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
     <link rel="icon" href="../images/books-1673578_1280.png" type="image/gif" sizes="16x16">
     <title>Delete Books</title>
 </head>
@@ -24,7 +28,8 @@ include('../../model/connectionDB.php');
     </header>
     <nav>
         <ul>
-            <li><a href="../../homepage.php">Display Books</a></li>
+            <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
+            <li><a href="displayBooks.php">Display Books</a></li>
             <li><a href="addBookForm.php">Add Book</a></li>
             <li><a href="editBooks.php">Edit Book</a></li>
             <li><a href="#" class="active">Delete Book</a></li>
@@ -33,8 +38,48 @@ include('../../model/connectionDB.php');
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
-        <form action="../../model/deleteBooksFunction.php" method="POST">
+        <h2>Delete Book: <?php echo $data['BookTitle'] ?></h2>
+        <form action="../../controller/deleteFormProcess.php" method="POST">
+            <fieldset class="bookFieldset">
+                <legend>Author Details</legend>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
+                <label for="surname">Surname</label>
+                <input type="text" name="surname" id="surname" required>
+                <label for="nation">Nationality</label>
+                <input type="text" name="nation" id="nation" required>
+                <label for="birthYr">Birth Year</label>
+                <input type="number" name="birthYr" id="birthYr" required>
+                <label for="deathYr">Death Year</label>
+                <input type="number" name="deathYr" id="deathYr" required>
+            </fieldset>
 
+            <fieldset class="bookFieldset">
+                <legend>Book Details</legend>
+                <label for="bkTitle">Book Title</label>
+                <input type="text" name="bkTitle" required><br>
+                <label for="ogTitle">Original Title</label>
+                <input type="text" name="ogTitle"><br>
+                <label for="yearOfPub">Year of Publication</label>
+                <input type="text" name="yearOfPub" required><br>
+                <label for="genre">Genre</label>
+                <input type="text" name="genre" required><br>
+                <label for="millSold">Millions Sold</label>
+                <input type="text" name="millSold" required><br>
+                <label for="langWritten">Language Written</label>
+                <input type="text" name="langWritten"><br>
+                <label for="covImage">Cover Image</label>
+                <input type="text" name="covImage"><br>
+            </fieldset>
+
+            <fieldset class="bookFieldset">
+                <legend>Book Plot</legend>
+                <label for="bkPlot">Plot</label>
+                <textarea name="bkPlot" id="bkPlot" cols="30" rows="10" required></textarea>
+                <label for="bkPlotSrc">Plot Source</label>
+                <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
+                <input type="submit" value="Submit"><br>
+            </fieldset>
         </form>
     </main>
     <footer>
