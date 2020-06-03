@@ -15,7 +15,13 @@ include('controller/loginProcess.php');
 <body>
     <header>
         <div class="userForm">
-            <a href="view/pages/register.html">Create New User</a>
+            <?php
+            if (isset($_SESSION['accessrights'])) {
+                if ($_SESSION['accessrights'] == 'Admin') {
+                    echo '<a href="view/pages/register.html">Create New User</a>';
+                }
+            }
+            ?>
             <a href="model/logout.php">Logout</a>
         </div>
         <div id="adminTitle">
@@ -32,7 +38,7 @@ include('controller/loginProcess.php');
     </nav>
     <main>
         <!-- Welcome user) -->
-        <p>Welcome <br><?php echo $_SESSION['AdminUser'] ?></br>You have successfully logged in</p>
+        <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
 
         <div id="displayDatabase">
             <?php
