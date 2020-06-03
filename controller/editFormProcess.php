@@ -1,13 +1,15 @@
 <?php
-require("../model/connectionDB.php");
-require("../model/editBookFunction.php");
-require("filterInput.php");
 session_start();
+require("../model/connectionDB.php");
+require("../model/dbFunctions.php");
+require("filterInput.php");
+date_default_timezone_set('Australia/Brisbane');
+
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     // Author Table 
-    $AuthorID = !empty($_POST['aID']) ? inputFilter($_POST['aID']) : null;
-    $authName = !empty($_POST['bID']) ?  inputFilter($_POST['bID']) : null;
+    $AuthorID = !empty($_POST['AuthorID']) ? inputFilter($_POST['AuthorID']) : null;
+    $BookID = !empty($_POST['BookID']) ?  inputFilter($_POST['BookID']) : null;
     $authName = !empty($_POST['name']) ? inputFilter($_POST['name']) : null;
     $authSur = !empty($_POST['surname']) ? inputFilter($_POST['surname']) : null;
     $nationality = !empty($_POST['nation']) ? inputFilter($_POST['nation']) : null;
@@ -37,7 +39,7 @@ if (!empty([$_POST])) {
     if ($_REQUEST['action_type'] == 'update') {
         try {
             // funtion call
-            editBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID);
+            editBook($AuthorID,$authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID);
             header('');
         } catch (PDOException $ex) {
             echo "Problem updating Book" . $ex->getMessage();

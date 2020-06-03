@@ -4,7 +4,7 @@ include('model/connectionDB.php');
 include('model/dbFunctions.php');
 if (!isset($_SESSION['AdminUser'])) {
     echo "<script type='text/javascript'> alert('You must be a logged in member to access the page.'); </script>";
-    echo '<a href="index.php">Login</a>';
+    echo '<h2><a style=text-decoration:none; href="index.php">Login</a></h2>';
     exit();
 }
 ?>
