@@ -32,7 +32,7 @@ include('model/connectionDB.php');
     <nav>
         <ul>
             <li><a href="#" class="active">Display Books</a></li>
-            <li><a href="view/pages/addBookForm.html">Add Book</a></li>
+            <li><a href="view/pages/addBookForm.php">Add Book</a></li>
             <li><a href="view/pages/editBooks.php">Edit Book</a></li>
             <li><a href="view/pages/deleteBooks.php">Delete Book</a></li>
         </ul>

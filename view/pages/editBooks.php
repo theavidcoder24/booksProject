@@ -1,3 +1,7 @@
+<?php
+include('../../controller/loginProcess.php');
+include('../../model/connectionDB.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,11 +25,13 @@
     <nav>
         <ul>
             <li><a href="../../homepage.php">Display Books</a></li>
-            <li><a href="addBookForm.html">Add Book</a></li>
+            <li><a href="addBookForm.php">Add Book</a></li>
             <li><a href="#" class="active">Edit Book</a></li>
             <li><a href="deleteBooks.php">Delete Book</a></li>
         </ul>
     </nav>
+    <!-- Welcome user-->
+    <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
         <?php
         $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.BookID";
@@ -38,7 +44,7 @@
                 <input type="text" name="name" id="name"><br>
                 <label for="surname">Surname</label>
                 <input type="text" name="surname" id="surname"><br>
-              <!-- Rest of form goes where? -->
+                <!-- Rest of form goes where? -->
             </fieldset>
 
             <fieldset class="bookFieldset">
@@ -62,8 +68,8 @@
                 <!-- https://m.media-amazon.com/images/I/415Vok2xosL._SY346_.jpg -->
                 -->
             </fieldset>
-           <input type="hidden" name="action_type" value="update">
-           <input type="submit" value="Save">
+            <input type="hidden" name="action_type" value="update">
+            <input type="submit" value="Save">
         </form>
 
     </main>

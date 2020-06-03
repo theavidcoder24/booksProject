@@ -1,3 +1,7 @@
+<?php
+include('../../controller/loginProcess.php');
+include('../../model/connectionDB.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +30,8 @@
             <li><a href="deleteBooks.php">Delete Books</a></li>
         </ul>
     </nav>
+    <!-- Welcome user-->
+    <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
         <form action="../../controller/addFormProcess.php" method="POST">
             <fieldset class="bookFieldset">

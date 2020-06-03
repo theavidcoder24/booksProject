@@ -1,3 +1,7 @@
+<?php
+include('../../controller/loginProcess.php');
+include('../../model/connectionDB.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,11 +25,13 @@
     <nav>
         <ul>
             <li><a href="../../homepage.php">Display Books</a></li>
-            <li><a href="addBookForm.html">Add Book</a></li>
+            <li><a href="addBookForm.php">Add Book</a></li>
             <li><a href="editBooks.php">Edit Book</a></li>
             <li><a href="#" class="active">Delete Book</a></li>
         </ul>
     </nav>
+    <!-- Welcome user-->
+    <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
         <form action="../../model/deleteBooksFunction.php" method="POST">
 
