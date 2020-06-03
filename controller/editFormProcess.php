@@ -1,8 +1,8 @@
 <?php
-session_start();
 require("../model/connectionDB.php");
 require("../model/editBookFunction.php");
 require("filterInput.php");
+session_start();
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     // Author Table 

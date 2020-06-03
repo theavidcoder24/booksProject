@@ -2,6 +2,11 @@
 include('controller/loginProcess.php');
 include('model/connectionDB.php');
 include('model/dbFunctions.php');
+if (!isset($_SESSION['AdminUser'])) {
+    echo "<script type='text/javascript'> alert('You must be a logged in member to access the page.'); </script>";
+    echo '<a href="index.php">Login</a>';
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
