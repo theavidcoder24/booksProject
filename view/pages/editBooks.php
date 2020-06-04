@@ -1,7 +1,6 @@
 <?php
 include('../../controller/loginProcess.php');
 include('../../model/connectionDB.php');
-include('../../model/dbFunctions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,23 +53,23 @@ include('../../model/dbFunctions.php');
             ?>
         </div>
         <?php
-        $query = "SELECT * FROM book INNER JOIN author ON book.BookID = author.AuthorID";
+        $query = 'SELECT * FROM author INNER JOIN book ON author.AuthorID = book.AuthorID';
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($stmt->rowCount() >= 1) {
         ?>
-            <div class="editForm">
-                <h2>Edit Book: <?php echo $data['BookTitle'] ?></h2>
-                <form action="../../controller/editFormProcess.php" method="POST">
+        <div class="editForm">
+            <h2>Edit Book: </h2>
+            <form action="../../controller/editFormProcess.php" method="POST">
+                <!--
                     <fieldset class="bookFieldset">
                         <legend>Edit Author Details: </legend>
-                        <input type="hidden" name="AuthorID" value="<?php echo $data["AuthorID"]; ?>"><br>
+                        <input type="hidden" name="AuthorID" value=""><br>
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name"><br>
                         <label for="surname">Surname</label>
                         <input type="text" name="surname" id="surname"><br>
-                        <!-- Rest of form goes where? -->
+                        // Rest of form goes where? 
                         <label for="nation">Nationality</label>
                         <input type="text" name="nation" id="nation">
                         <label for="birthYr">Birth Year</label>
@@ -78,37 +77,33 @@ include('../../model/dbFunctions.php');
                         <label for="deathYr">Death Year</label>
                         <input type="number" name="deathYr" id="deathYr">
                     </fieldset>
-
-                    <fieldset class="bookFieldset">
-                        <legend>Edit Book Details</legend>
-                        <input type="hidden" name="BookID" value="<?php echo $data["BookID"]; ?>"><br>
-                        <label for="bkTitle">Book Title</label>
-                        <input type="text" name="bkTitle"><br>
-                        <!-- Rest of form goes where? 
-                <label for="ogTitle">Original Title</label>
-                <input type="text" name="ogTitle"><br>
-                <label for="yearOfPub">Year of Publication</label>
-                <input type="text" name="yearOfPub"><br>
-                <label for="genre">Genre</label>
-                <input type="text" name="genre"><br>
-                <label for="millSold">Millions Sold</label>
-                <input type="text" name="millSold"><br>
-                <label for="langWritten">Language Written</label>
-                <input type="text" name="langWritten"><br>
-                <label for="covImage">Cover Image</label>
-                <input type="text" name="covImage"><br> -->
-
-                    </fieldset>
-                    <input type="hidden" name="action_type" value="update">
-                    <input type="submit" value="Save">
-                    <input type="button" onclick="location.href='?linkhomepage';" value="Cancel">
-                </form>
-            </div>
-        <?php
-        } else {
-            echo "Nope";
-        }
-        ?>
+        -->
+                <fieldset class="bookFieldset">
+                    <legend>Edit Book Details</legend>
+                    <!-- Book ID + Hidden Input -->
+                    <input type="hidden" id="bID" name="BookID" value="<?php echo $data["BookID"]; ?>"><br>
+                    <label for="BookID">BookID:</label>
+                    <input type="number" name="BookID" value="<?php if (isset($_POST['BookID'])) echo $_POST['BookID']; ?>" />
+                    <label for="bkTitle">Book Title</label>
+                    <input type="text" name="bkTitle" value="<?php if (isset($_POST['bkTitle'])) echo $_POST['bkTitle']; ?>" /><br>
+                    <label for="ogTitle">Original Title</label>
+                    <input type="text" name="ogTitle"><br>
+                    <label for="yearOfPub">Year of Publication</label>
+                    <input type="text" name="yearOfPub"><br>
+                    <label for="genre">Genre</label>
+                    <input type="text" name="genre"><br>
+                    <label for="millSold">Millions Sold</label>
+                    <input type="text" name="millSold"><br>
+                    <label for="langWritten">Language Written</label>
+                    <input type="text" name="langWritten"><br>
+                    <label for="covImage">Cover Image</label>
+                    <input type="text" name="covImage"><br>
+                </fieldset>
+                <input type="hidden" name="action_type" value="update">
+                <input type="submit" value="Save">
+                <input type="button" onclick="location.href='?linkhomepage';" value="Cancel">
+            </form>
+        </div>
     </main>
     <footer>
         <div class="copyright">

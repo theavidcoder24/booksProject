@@ -8,8 +8,6 @@ date_default_timezone_set('Australia/Brisbane');
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     // Author Table 
-    $AuthorID = !empty($_POST['AuthorID']) ? inputFilter($_POST['AuthorID']) : null;
-    $BookID = !empty($_POST['BookID']) ?  inputFilter($_POST['BookID']) : null;
     $authName = !empty($_POST['name']) ? inputFilter($_POST['name']) : null;
     $authSur = !empty($_POST['surname']) ? inputFilter($_POST['surname']) : null;
     $nationality = !empty($_POST['nation']) ? inputFilter($_POST['nation']) : null;
@@ -32,17 +30,17 @@ if (!empty([$_POST])) {
     $action_type = !empty($_POST['actType']) ? inputFilter($_POST['actType']) : null;
 
     // Record the account who added this book
-    $userID = $_SESSION['userID'];
+    //$userID = $_SESSION['userid'];
 
     // Changelog Table?
 
     if ($_REQUEST['action_type'] == 'update') {
+
         try {
             // funtion call
-            editBook($AuthorID,$authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID);
-            header('');
+            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, );
         } catch (PDOException $ex) {
-            echo "Problem updating Book" . $ex->getMessage();
+            echo "Problem updating Book " . $ex->getMessage();
             exit();
         }
     }

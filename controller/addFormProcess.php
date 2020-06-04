@@ -1,11 +1,11 @@
 <?php
-include("../model/connectionDB.php");
-include("../model/dbFunctions.php");
+session_start();
+require("../model/connectionDB.php");
+require("../model/dbFunctions.php");
 require("filterInput.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     // Author Table 
-    $authName = inputFilter($_POST['name']);
     $authName = inputFilter($_POST['name']);
     $authSur = inputFilter($_POST['surname']);
     $nationality = inputFilter($_POST['nation']);
@@ -24,9 +24,13 @@ if (!empty([$_POST])) {
     // Book Plot Table
     $bookPlot = inputFilter($_POST['bkPlot']);
     $bookPlotSrc = inputFilter($_POST['bkPlotSrc']);
+
+    // Record the account who added this book
+    $userID = $_SESSION['userid'];
+
     // funtion call
-    addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID);
-    echo "New row inserted";
+    addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $userID);
+    echo "New Record Inserted";
     // this will be the page the user enters record successfully
     header('Location: ../homepage.php');
 } else {

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../../controller/loginProcess.php');
 include('../../model/connectionDB.php');
 include('../../model/dbFunctions.php');

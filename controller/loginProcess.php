@@ -20,6 +20,7 @@ if (!empty($_POST)) {
         $_SESSION['LoginID'] = $row['LoginID'];
         $_SESSION["accessrights"] = $row["accessRights"];
         $_SESSION['login'] = 'yes';
+        $_SESSION['userID'] = $row['userID'];
 
         echo "Welcome " . $_SESSION['AdminUser'];
 

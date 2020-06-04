@@ -1,70 +1,6 @@
 <?php
-/* ------------------- New User ------------------- */
-function newUser($username, $password, $accessrights, $firstname, $lastname, $email)
-{
-    global $conn;
-    try {
-        $conn->beginTransaction();
-
-        $stmt = $conn->prepare("INSERT INTO login(username, password, accessRights)
-        VALUES (:username, :password, :accessrights)");
-        $stmt->bindValue(':username', $username);
-        $stmt->bindValue(':password', $password);
-        $stmt->bindValue(':accessrights', $accessrights);
-        $stmt->execute();
-
-        // last inserted = userID
-        $lastuserID = $conn->lastInsertId();
-
-        // last inserted = loginID
-        $lastloginID = $conn->lastInsertId();
-
-        $stmt = $conn->prepare("INSERT INTO users(firstName, lastName, email, loginID)
-        VALUES (:firstname, :lastname, :email, :loginID)");
-        $stmt->bindValue(':userID', $lastuserID);
-        $stmt->bindValue(':firstname', $firstname);
-        $stmt->bindValue(':lastname', $lastname);
-        $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':loginID', $lastloginID);
-        $stmt->execute();
-
-        $conn->commit(); // Save to the database
-    } catch (PDOException $ex) {
-        $conn->rollBack(); // Something went wrong rollback!
-        throw $ex;
-    }
-    $conn = null;
-}
-// function newUser($username, $password, $accessrights, $firstname, $lastname, $email)
-// {
-//     global $conn;
-//     try {
-//         $conn->beginTransaction();
-//         $stmt = $conn->prepare("INSERT INTO users(firstName, lastName, email)
-//         VALUES (:firstname, :lastname, :email)");
-//         $stmt->bindValue(':firstname', $firstname);
-//         $stmt->bindValue(':lastname', $lastname);
-//         $stmt->bindValue(':email', $email);
-//         $stmt->execute();
-//         // last inserted = loginID
-//         $lastloginID = $conn->lastInsertId();
-//         $stmt = $conn->prepare("INSERT INTO login(username, password, accessRights, loginID)
-//         VALUES (:username, :password, :accessrights, :logId)");
-//         $stmt->bindValue(':username', $username);
-//         $stmt->bindValue(':password', $password);
-//         $stmt->bindValue(':accessrights', $accessrights);
-//         $stmt->bindValue(':logId', $lastloginID);
-//         $stmt->execute();
-//         $conn->commit(); // Save to the database
-//     } catch (PDOException $ex) {
-//         $conn->rollBack(); // Something went wrong rollback!
-//         throw $ex;
-//     }
-//     $conn = null;
-// }
-
 /* ------------------- Add a new row to the table ------------------- */
-function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $BookID, $userID)
+function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $userID)
 {
     global $conn;
     try {
@@ -115,16 +51,18 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // execute the insert statement
         $stmt->execute();
 
+        // Last inserted BookID & userID
+        $lastBookID = $conn->lastInsertId();
+
         /* === Changelog Table === */
-        /*
         // prepares statement with named placeholders
-        $changelog = $conn->prepare("INSERT INTO changelog(dateCreated, dateChanged, BookID, userID)
-        VALUES (:now(), :now():BookID, :userid)");
-        $stmt->bindValue(':BookID', $BookID);
+        $changelog = ("INSERT INTO changelog(BookID, userID)
+        VALUES (:BookID, :userid)");
+        $conn->prepare($changelog);
+        $stmt->bindValue(':BookID', $lastBookID);
         $stmt->bindValue(':userid', $userID);
         // execute the insert statement
-        $stmt->execute($changelog);
-        */
+        $stmt->execute();
 
         // Commit changes here //
         $conn->commit();
@@ -132,7 +70,6 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         throw $ex;
     }
 }
-
 /* 
 mysql> SELECT EXISTS(SELECT * from ExistsRowDemo WHERE ExistId=104);
 */
@@ -162,11 +99,10 @@ function displayBooks()
     }
 }
 /* ------------------- Edit record from the table ------------------- */
-function editBook($AuthorID, $authName, $authSur, $nationality, $birthYear, $deathYear, $BookID, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage)
+function editBook(/*$AuthorID, $authName, $authSur, $nationality, $birthYear, $deathYear*/$bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID)
 {
     global $conn;
-    try {
-        $conn->beginTransaction();
+    /*
         $stmt = $conn->prepare("UPDATE author SET Name = :name, Surname = :surname, Nationality = :nation, BirthYear = :birthYr, DeathYear = :deathYear WHERE $AuthorID = :aID");
         $stmt->bindValue(':name', $authName);
         $stmt->bindValue(':surname', $authSur);
@@ -176,9 +112,10 @@ function editBook($AuthorID, $authName, $authSur, $nationality, $birthYear, $dea
         $stmt->bindValue('aID', $AuthorID);
         // Execute the update statement
         $stmt->execute([$authName, $authSur, $nationality, $birthYear, $deathYear, $AuthorID]);
+        */
+    $stmt = $conn->prepare("UPDATE book SET BookTitle=:bkTitle, OriginalTitle=:ogTitle, YearofPublication=:yearOfPub, Genre=:genre, MillionsSold=:millSold, LanguageWritten=:langWritten, coverImagePath=:covImage WHERE BookID=$BookID");
 
-        $stmt = "UPDATE book SET BookTitle = :bkTitle, OriginalTitle = :ogTitle, YearofPublication = :yearOfPub, Genre = :genre, MillionsSold = :millSold, LanguageWritten = :langWritten, coverImagePath = :covImage WHERE $BookID = :bID";
-        $stmt = $conn->prepare($stmt);
+    try {
         // bind values
         $stmt->bindValue(':bkTitle', $bookTitle);
         $stmt->bindValue(':ogTitle', $originalTitle);
@@ -187,12 +124,13 @@ function editBook($AuthorID, $authName, $authSur, $nationality, $birthYear, $dea
         $stmt->bindValue(':millSold', $millionsSold);
         $stmt->bindValue(':langWritten', $languageWritten);
         $stmt->bindValue(':covImage', $coverImage);
-        $stmt->bindValue(':bID', $BookID);
+        // $stmt->bindValue(':bID', $BookID);
+        //  $stmt->bindValue(':userID', $lastuserID);
         // Execute the update statement
-        $stmt->execute([$bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID]);
+        $stmt->execute();
 
         // Commit changes here //
-        $conn->commit();
+        // $conn->commit();
     } catch (PDOException $ex) {
         throw $ex;
     }
@@ -239,3 +177,40 @@ function delete_product($productID)
     return $result;		
 }
 */
+
+/* =============================================== New User =============================================== */
+function newUser($username, $password, $accessrights, $firstname, $lastname, $email)
+{
+    global $conn;
+    try {
+        $conn->beginTransaction();
+
+        $stmt = $conn->prepare("INSERT INTO login(username, password, accessRights)
+        VALUES (:username, :password, :accessrights)");
+        $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':password', $password);
+        $stmt->bindValue(':accessrights', $accessrights);
+        $stmt->execute();
+
+        // last inserted = userID
+        $lastuserID = $conn->lastInsertId();
+
+        // last inserted = loginID
+        $lastloginID = $conn->lastInsertId();
+
+        $stmt = $conn->prepare("INSERT INTO users(firstName, lastName, email, loginID)
+        VALUES (:firstname, :lastname, :email, :loginID)");
+        $stmt->bindValue(':userID', $lastuserID);
+        $stmt->bindValue(':firstname', $firstname);
+        $stmt->bindValue(':lastname', $lastname);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':loginID', $lastloginID);
+        $stmt->execute();
+
+        $conn->commit(); // Save to the database
+    } catch (PDOException $ex) {
+        $conn->rollBack(); // Something went wrong rollback!
+        throw $ex;
+    }
+    $conn = null;
+}
