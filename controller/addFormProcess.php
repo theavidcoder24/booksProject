@@ -27,6 +27,7 @@ if (!empty([$_POST])) {
 
     // Record the account who added this book
     $userID = $_SESSION['userid'];
+    echo $userID;
 
     // funtion call
     addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $userID);

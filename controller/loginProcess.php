@@ -1,10 +1,11 @@
 <?php
+session_start();
 require("filterInput.php");
 $servername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
 $conn = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
-session_start();
+
 // input via POST method
 if (!empty($_POST)) {
     $username = inputFilter($_POST['username']);
@@ -20,7 +21,7 @@ if (!empty($_POST)) {
         $_SESSION['LoginID'] = $row['LoginID'];
         $_SESSION["accessrights"] = $row["accessRights"];
         $_SESSION['login'] = 'yes';
-        $_SESSION['userID'] = $row['userID'];
+        $_SESSION['userid'] = $row['userID'];
 
         echo "Welcome " . $_SESSION['AdminUser'];
 

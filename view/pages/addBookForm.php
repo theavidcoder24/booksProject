@@ -1,8 +1,8 @@
 <?php
 session_start();
-include('../../controller/loginProcess.php');
-include('../../model/connectionDB.php');
-include('../../model/dbFunctions.php');
+// include('../../controller/loginProcess.php');
+require('../../model/connectionDB.php');
+require('../../model/dbFunctions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,12 +39,17 @@ include('../../model/dbFunctions.php');
             <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
             <li><a href="displayBooks.php">Display Books</a></li>
             <li><a href="#" class="active">Add Book</a></li>
-            <li><a href="editBooks.php">Edit Books</a></li>
-            <li><a href="deleteBooks.php">Delete Books</a></li>
+            <li><a href="editBooks.php">Edit Book</a></li>
+            <li><a href="deleteBooks.php">Delete Book</a></li>
         </ul>
     </nav>
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
+    <!-- Get userID -->
+    <?php
+    $query = 'SELECT userID FROM users WHERE userID = :userid';
+    $stmt = $conn->prepare($query);
+    ?>
     <main>
         <form action="../../controller/addFormProcess.php" method="POST">
             <fieldset class="bookFieldset">
