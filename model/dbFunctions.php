@@ -1,11 +1,11 @@
 <?php
-/* ------------------- Add a new row to the table ------------------- */
-function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $userID)
+/* ====================================== Add a new row to the table ====================================== */
+function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID)
 {
     global $conn;
     try {
         $conn->beginTransaction();
-        /* === Author Table === */
+        /* --- Author Table --- */
         // Prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO author(Name, Surname, Nationality, BirthYear, DeathYear)
         VALUES (:name, :surname, :nation, :birthYr, :deathYr)");
@@ -21,7 +21,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Last inserted BookID
         $lastAuthorID = $conn->lastInsertId();
 
-        /* === Book Table === */
+        /* --- Book Table --- */
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath, AuthorID)
         VALUES (:bkTitle, :ogTitle, :yearOfPub, :genre, :millSold, :langWritten, :covImage, :AuthorID)");
@@ -40,7 +40,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Last inserted BookID
         $lastBookID = $conn->lastInsertId();
 
-        /* === Book Plot Table === */
+        /* --- Book Plot Table --- */
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO bookplot(Plot, PlotSource, BookID)
         VALUES (:bkPlot, :bkPlotSrc, :BookID)");
@@ -54,11 +54,12 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Last inserted BookID & userID
         $lastBookID = $conn->lastInsertId();
 
-        /* === Changelog Table === */
+        /* --- Changelog Table --- */
         // prepares statement with named placeholders
-        $changelog = ("INSERT INTO changelog(BookID, userID)
-        VALUES (:BookID, :userid)");
-        $conn->prepare($changelog);
+        $changelog = ("INSERT INTO changelog(dateCreated, BookID, userID)
+        VALUES (:date, :BookID, :userid)");
+        $stmt = $conn->prepare($changelog);
+        $stmt->bindValue(':date', $date);
         $stmt->bindValue(':BookID', $lastBookID);
         $stmt->bindValue(':userid', $userID);
         // execute the insert statement
@@ -74,7 +75,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
 mysql> SELECT EXISTS(SELECT * from ExistsRowDemo WHERE ExistId=104);
 */
 
-/* ------------------- Display all rows from the table ------------------- */
+/* ====================================== Display all rows from the table ====================================== */
 function displayBooks()
 {
     require("connectionDB.php");
@@ -98,11 +99,14 @@ function displayBooks()
         throw $ex;
     }
 }
-/* ------------------- Edit record from the table ------------------- */
-function editBook(/*$AuthorID, $authName, $authSur, $nationality, $birthYear, $deathYear*/$bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID)
+/* ====================================== Edit record from the table ====================================== */
+function editBook(/*$AuthorID, $authName, $authSur, $nationality, $birthYear, $deathYear*/$bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $date, $BookID, userID)
 {
     global $conn;
-    /*
+    try {
+        $conn->beginTransaction();
+        /* --- Author Table --- */
+        /*  
         $stmt = $conn->prepare("UPDATE author SET Name = :name, Surname = :surname, Nationality = :nation, BirthYear = :birthYr, DeathYear = :deathYear WHERE $AuthorID = :aID");
         $stmt->bindValue(':name', $authName);
         $stmt->bindValue(':surname', $authSur);
@@ -111,11 +115,10 @@ function editBook(/*$AuthorID, $authName, $authSur, $nationality, $birthYear, $d
         $stmt->bindValue(':deathYr', $deathYear);
         $stmt->bindValue('aID', $AuthorID);
         // Execute the update statement
-        $stmt->execute([$authName, $authSur, $nationality, $birthYear, $deathYear, $AuthorID]);
+        $stmt->execute();
         */
-    $stmt = $conn->prepare("UPDATE book SET BookTitle=:bkTitle, OriginalTitle=:ogTitle, YearofPublication=:yearOfPub, Genre=:genre, MillionsSold=:millSold, LanguageWritten=:langWritten, coverImagePath=:covImage WHERE BookID=$BookID");
+        $stmt = $conn->prepare("UPDATE book SET BookTitle=:bkTitle, OriginalTitle=:ogTitle, YearofPublication=:yearOfPub, Genre=:genre, MillionsSold=:millSold, LanguageWritten=:langWritten, coverImagePath=:covImage WHERE BookID=$BookID");
 
-    try {
         // bind values
         $stmt->bindValue(':bkTitle', $bookTitle);
         $stmt->bindValue(':ogTitle', $originalTitle);
@@ -124,19 +127,28 @@ function editBook(/*$AuthorID, $authName, $authSur, $nationality, $birthYear, $d
         $stmt->bindValue(':millSold', $millionsSold);
         $stmt->bindValue(':langWritten', $languageWritten);
         $stmt->bindValue(':covImage', $coverImage);
-        // $stmt->bindValue(':bID', $BookID);
-        //  $stmt->bindValue(':userID', $lastuserID);
+        // $stmt->bindValue(':BookID', $BookID);
+        //  $stmt->bindValue(':userid', $lastuserID);
         // Execute the update statement
         $stmt->execute();
 
+        $stmt = $conn->prepare("UPDATE changelog SET changeLogID = :changelgID, dateCreated = :date, userID = :userid, ");
+        // Bind values
+        $stmt->bindValue(':date', $date);
+        $stmt->bindValue(':BookID', $BookID);
+        $stmt->bindValue(':userid', $userID);
+        $stmt->bindValue('chngeID', $changelogid);
+        $stmt->execute();
+        
+
         // Commit changes here //
-        // $conn->commit();
+        $conn->commit();
     } catch (PDOException $ex) {
         throw $ex;
     }
 }
 
-/* ------------------- Delete a row from the table ------------------- */
+/* ====================================== Delete a row from the table ====================================== */
 function deleteBook($BookID)
 {
     global $conn;
