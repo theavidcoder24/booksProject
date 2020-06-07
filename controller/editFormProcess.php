@@ -30,7 +30,11 @@ if (!empty([$_POST])) {
     $action_type = !empty($_POST['actType']) ? inputFilter($_POST['actType']) : null;
 
     // Record the account who added this book
-    //$userID = $_SESSION['userid'];
+    $userID = $_SESSION['userid'];
+    echo $userID;
+
+    // Record the current date and time
+    $date = date('Y-m-d H:i:s');
 
     // Changelog Table?
 
@@ -38,7 +42,7 @@ if (!empty([$_POST])) {
 
         try {
             // funtion call
-            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, );
+            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc,);
         } catch (PDOException $ex) {
             echo "Problem updating Book " . $ex->getMessage();
             exit();
