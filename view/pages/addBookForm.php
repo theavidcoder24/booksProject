@@ -90,6 +90,7 @@ require('../../model/dbFunctions.php');
                 <textarea name="bkPlot" id="bkPlot" cols="30" rows="10" required></textarea>
                 <label for="bkPlotSrc">Plot Source</label>
                 <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
+                <input type="hidden" name="action_type" value="add">
                 <input type="submit" value="Submit"><br>
             </fieldset>
         </form>
