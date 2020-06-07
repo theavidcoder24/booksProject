@@ -6,34 +6,45 @@ require("filterInput.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
     // Author Table 
-    $authName = inputFilter($_POST['name']);
-    $authSur = inputFilter($_POST['surname']);
-    $nationality = inputFilter($_POST['nation']);
-    $birthYear = inputFilter($_POST['birthYr']);
-    $deathYear = inputFilter($_POST['deathYr']);
+    $authName = !empty($_POST['name']) ? inputFilter($_POST['name']) : null;
+    $authSur = !empty($_POST['surname']) ? inputFilter($_POST['surname']) : null;
+    $nationality = !empty($_POST['nation']) ? inputFilter($_POST['nation']) : null;
+    $birthYear = !empty($_POST['birthYr']) ? inputFilter($_POST['birthYr']) : null;
+    $deathYear = !empty($_POST['deathYr']) ? inputFilter($_POST['deathYr']) : null;
 
     // Book Table
-    $bookTitle = inputFilter($_POST['bkTitle']);
-    $originalTitle = inputFilter($_POST['ogTitle']);
-    $yearOfPublication = inputFilter($_POST['yearOfPub']);
-    $genre = inputFilter($_POST['genre']);
-    $millionsSold = inputFilter($_POST['millSold']);
-    $languageWritten = inputFilter($_POST['langWritten']);
-    $coverImage = inputFilter($_POST['covImage']);
+    $bookTitle = !empty($_POST['bkTitle']) ? inputFilter($_POST['bkTitle']) : null;
+    $originalTitle = !empty($_POST['ogTitle']) ? inputFilter($_POST['ogTitle']) : null;
+    $yearOfPublication = !empty($_POST['yearOfPub']) ? inputFilter($_POST['yearOfPub']) : null;
+    $genre = !empty($_POST['genre']) ? inputFilter($_POST['genre']) : null;
+    $millionsSold = !empty($_POST['millSold']) ? inputFilter($_POST['millSold']) : null;
+    $languageWritten = !empty($_POST['langWritten']) ? inputFilter($_POST['langWritten']) : null;
+    $coverImage = !empty($_POST['covImage']) ? inputFilter($_POST['covImage']) : null;
 
     // Book Plot Table
-    $bookPlot = inputFilter($_POST['bkPlot']);
-    $bookPlotSrc = inputFilter($_POST['bkPlotSrc']);
+    $bookPlot = !empty($_POST['bkPlot']) ? inputFilter($_POST['bkPlot']) : null;
+    $bookPlotSrc = !empty($_POST['bkPlotSrc']) ? inputFilter($_POST['bkPlotSrc']) : null;
 
     // Record the account who added this book
     $userID = $_SESSION['userid'];
     echo $userID;
 
-    // funtion call
-    addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $userID);
-    echo "New Record Inserted";
-    // this will be the page the user enters record successfully
-    header('Location: ../homepage.php');
+    // Record the current date and time
+    $date = date('Y-m-d H:i:s');
+
+    if ($_POST['action_type'] == 'add') {
+        try {
+            $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = ");
+            // funtion call
+            addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID);
+            echo "New Record Inserted";
+            // this will be the page the user enters record successfully
+            header('Location: ../homepage.php');
+        } catch (PDOException $ex) {
+            echo "Problem updating Book " . $ex->getMessage();
+            exit();
+        }
+    }
 } else {
     echo "Record couldn't be inserted";
     $error_message = $e->getMessage();
