@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Books Style -->
     <link rel="stylesheet" href="../css/books.css">
+    <!-- Font Awesome Style -->
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
     <link rel="icon" href="../images/books-1673578_1280.png" type="image/gif" sizes="16x16">
     <title>Create New User</title>
 </head>
@@ -18,15 +21,24 @@
             <h1>Administration - Register</h1>
         </div>
     </header>
+    <nav>
+        <ul>
+            <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
+            <li><a href="displayBooks.php">Display Books</a></li>
+            <li><a href="addBookForm.php" class="active">Add Book</a></li>
+            <li><a href="editBooks.php">Edit Book</a></li>
+            <li><a href="deleteBooks.php">Delete Book</a></li>
+        </ul>
+    </nav>
     <fieldset>
         <legend>Registration</legend>
         <form action="../../controller/regProcess.php" method="POST">
             <fieldset>
                 <legend>Login Details</legend>
-                <label for="uname">Username:</label>
-                <input type="text" name="username" id="uname" required>
-                <label for="upass">Password:</label>
-                <input type="password" name="pass" id="upass" required>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
                 <label for="acRights">Access Role:</label>
                 <input type="text" name="acRights" id="acRights" required>
             </fieldset>

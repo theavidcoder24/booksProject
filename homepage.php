@@ -1,5 +1,5 @@
 <?php
-include('controller/loginProcess.php');
+session_start();
 include('model/connectionDB.php');
 include('model/dbFunctions.php');
 if (!isset($_SESSION['AdminUser'])) {
@@ -42,9 +42,9 @@ if (!isset($_SESSION['AdminUser'])) {
         <ul>
             <li><a href="#" id="home" class="active"><i class="fas fa-home"></i></a></li>
             <li><a href="view/pages/displayBooks.php">Display Books</a></li>
-            <li><a href="view/pages/addBookForm.php">Add Book</a></li>
-            <li><a href="view/pages/editBooks.php">Edit Book</a></li>
-            <li><a href="view/pages/deleteBooks.php">Delete Book</a></li>
+            <li><a href="view/pages/addBook.php">Add Book</a></li>
+            <li><a href="view/pages/editBook.php">Edit Book</a></li>
+            <li><a href="view/pages/deleteBook.php">Delete Book</a></li>
         </ul>
     </nav>
     <!-- Welcome user-->
@@ -58,29 +58,32 @@ if (!isset($_SESSION['AdminUser'])) {
             }
             ?>
         </div>
+        <!-- Get link? -->
         <?php
-        /*
         if (isset($_GET['link'])) {
             $link = $_GET['link'];
             switch ($link) {
-                /*
-                case "allBooks":
-                    require("model/displayBooks.php");
+                case "displayBooks":
+                    require("view/pages/displayBooks.php");
                     break;
-                case "newBook":
-                    require_once("addBookFunction.php");
+
+                case "addBook":
+                    require("view/pages/addBook.php");
                     break;
+
                 case "edit":
-                    require_once("editBookFunction.php");
+                    require("view/pages/editBook.php");
                     break;
+
                 case "delete":
-                    require("deleteBooksFunction.php");
+                    require("view/pages/deleteBook.php");
+                    break;
+
+                case "login":
+                    require("index.php");
                     break;
             }
-        } else {
-            require("../model/displayBooks.php");
         }
-        */
         ?>
         <!-- Display Data -->
         <div id="displayDatabase">
@@ -88,12 +91,12 @@ if (!isset($_SESSION['AdminUser'])) {
             $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.AuthorID";
             $stmt = $conn->prepare($query);
             $stmt->execute();
-            $data = $stmt->fetchAll();
+            $result = $stmt->fetchAll();
 
             if ($stmt->rowCount() < 1) {
                 echo "There are no books!";
             } else {
-                foreach ($data as $row) {
+                foreach ($result as $row) {
                     if ($row['coverImagePath'] == null) {
                         echo '<br><img id="defultImg" src="view/images/defaultImage.png">';
                     } else {

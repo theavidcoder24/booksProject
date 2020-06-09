@@ -1,7 +1,12 @@
 <?php
-include('../../controller/loginProcess.php');
-include('../../model/connectionDB.php');
-include('../../model/dbFunctions.php');
+require('../../controller/loginProcess.php');
+require('../../model/connectionDB.php');
+require('../../model/dbFunctions.php');
+if (!isset($_SESSION['AdminUser'])) {
+    echo "<script type='text/javascript'> alert('You must be a logged in member to access the page.'); </script>";
+    echo '<h2><a style=text-decoration:none; href="index.php">Login</a></h2>';
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,28 +35,41 @@ include('../../model/dbFunctions.php');
         <ul>
             <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
             <li><a href="displayBooks.php">Display Books</a></li>
-            <li><a href="addBookForm.php">Add Book</a></li>
-            <li><a href="editBooks.php">Edit Book</a></li>
+            <li><a href="addBook.php">Add Book</a></li>
+            <li><a href="editBook.php">Edit Book</a></li>
             <li><a href="#" class="active">Delete Book</a></li>
         </ul>
     </nav>
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
+    <!-- Get table data -->
+    <?php
+    $data = "SELECT author.AuthorID, book.BookID, bookplot.BookID, changelog.BookID FROM (((author
+        INNER JOIN book ON author.AuthorID = book.AuthorID)
+        INNER JOIN bookplot ON book.BookID = bookplot.BookID)
+        INNER JOIN changelog ON bookplot.BookID = changelog.BookID)
+        WHERE book.BookID = '{$_GET['BookID']}'";
+
+    $stmt = $conn->prepare($data);
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    ?>
     <main>
         <h2>Delete Book: <?php echo $data['BookTitle'] ?></h2>
         <form action="../../controller/deleteFormProcess.php" method="POST">
             <fieldset class="bookFieldset">
                 <legend>Author Details</legend>
+                <input type="hidden" name="AuthorID" value="<?php echo $data['AuthorID'] ?>"><br>
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" required>
+                <input type="text" name="name" id="name" value="<?php echo $data['Name'] ?>"><br>
                 <label for="surname">Surname</label>
-                <input type="text" name="surname" id="surname" required>
+                <input type="text" name="surname" id="surname" value="<?php echo $data['Surname'] ?>"><br>
                 <label for="nation">Nationality</label>
-                <input type="text" name="nation" id="nation" required>
+                <input type="text" name="nation" id="nation" value="<?php echo $data['Nationality'] ?>"><br>
                 <label for="birthYr">Birth Year</label>
-                <input type="number" name="birthYr" id="birthYr" required>
+                <input type="text" name="birthYr" id="birthYr" value="<?php echo $data['BirthYear'] ?>"><br>
                 <label for="deathYr">Death Year</label>
-                <input type="number" name="deathYr" id="deathYr" required>
+                <input type="text" name="deathYr" id="deathYr" value="<?php echo $data['DeathYear'] ?>"><br>
             </fieldset>
 
             <fieldset class="bookFieldset">
@@ -74,12 +92,14 @@ include('../../model/dbFunctions.php');
 
             <fieldset class="bookFieldset">
                 <legend>Book Plot</legend>
-                <label for="bkPlot">Plot</label>
-                <textarea name="bkPlot" id="bkPlot" cols="30" rows="10" required></textarea>
+                <label for="bkPlot">Plot</label><br>
+                <textarea name="bkPlot" id="bkPlot" cols="30" rows="10" required></textarea><br>
                 <label for="bkPlotSrc">Plot Source</label>
-                <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
-                <input type="submit" value="Submit"><br>
+                <input type="text" name="bkPlotSrc" id="bkPlotSrc" required><br>
             </fieldset>
+            <input type="hidden" name="action_type" value="delete">
+            <input type="submit" value="Save">
+            <input type="button" onclick="location.href='?linkhomepage';" value="Cancel">
         </form>
     </main>
     <footer>

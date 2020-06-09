@@ -7,9 +7,9 @@ Password: password
 Access Role: Admin
 
 Profile
-Username: 
-Password: 
-Access Role: admin
+Username: mallorie
+Password: password
+Access Role: Admin
 
 
 

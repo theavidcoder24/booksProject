@@ -57,7 +57,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         /* --- Changelog Table --- */
         // prepares statement with named placeholders
         $changelog = ("INSERT INTO changelog(dateCreated, BookID, userID)
-        VALUES (:date, :BookID, :userid)");
+        VALUES (':date', :BookID, :userid)");
         $stmt = $conn->prepare($changelog);
         $stmt->bindValue(':date', $date);
         $stmt->bindValue(':BookID', $lastBookID);
@@ -100,24 +100,14 @@ function displayBooks()
     }
 }
 /* ====================================== Edit record from the table ====================================== */
-function editBook(/*$AuthorID, $authName, $authSur, $nationality, $birthYear, $deathYear*/$bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $date, $BookID, userID)
+function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, /*$date,*/ $BookID) //*$userID, $changelogid*/)
 {
     global $conn;
     try {
         $conn->beginTransaction();
-        /* --- Author Table --- */
-        /*  
-        $stmt = $conn->prepare("UPDATE author SET Name = :name, Surname = :surname, Nationality = :nation, BirthYear = :birthYr, DeathYear = :deathYear WHERE $AuthorID = :aID");
-        $stmt->bindValue(':name', $authName);
-        $stmt->bindValue(':surname', $authSur);
-        $stmt->bindValue(':nation', $nationality);
-        $stmt->bindValue(':birthYr', $birthYear);
-        $stmt->bindValue(':deathYr', $deathYear);
-        $stmt->bindValue('aID', $AuthorID);
-        // Execute the update statement
-        $stmt->execute();
-        */
-        $stmt = $conn->prepare("UPDATE book SET BookTitle=:bkTitle, OriginalTitle=:ogTitle, YearofPublication=:yearOfPub, Genre=:genre, MillionsSold=:millSold, LanguageWritten=:langWritten, coverImagePath=:covImage WHERE BookID=$BookID");
+
+        /* --- Book Table --- */
+        $stmt = $conn->prepare("UPDATE book SET BookTitle=:bkTitle, OriginalTitle=:ogTitle, YearofPublication=:yearOfPub, Genre=:genre, MillionsSold=:millSold, LanguageWritten=:langWritten, coverImagePath=:covImage WHERE BookID=:BookID");
 
         // bind values
         $stmt->bindValue(':bkTitle', $bookTitle);
@@ -127,19 +117,20 @@ function editBook(/*$AuthorID, $authName, $authSur, $nationality, $birthYear, $d
         $stmt->bindValue(':millSold', $millionsSold);
         $stmt->bindValue(':langWritten', $languageWritten);
         $stmt->bindValue(':covImage', $coverImage);
-        // $stmt->bindValue(':BookID', $BookID);
+        $stmt->bindValue(':BookID', $BookID);
         //  $stmt->bindValue(':userid', $lastuserID);
         // Execute the update statement
         $stmt->execute();
 
+        /* --- Changelog Table --- 
         $stmt = $conn->prepare("UPDATE changelog SET changeLogID = :changelgID, dateCreated = :date, userID = :userid, ");
         // Bind values
         $stmt->bindValue(':date', $date);
         $stmt->bindValue(':BookID', $BookID);
         $stmt->bindValue(':userid', $userID);
-        $stmt->bindValue('chngeID', $changelogid);
-        $stmt->execute();
-        
+        $stmt->bindValue('changeID', $changelogid);
+        $stmt->execute();*/
+
 
         // Commit changes here //
         $conn->commit();
@@ -160,7 +151,7 @@ function deleteBook($BookID)
         $sql = "DELETE FROM book WHERE BookID=:BookID";
         $stmt = $conn->prepare($sql);
         // Bind values
-        $stmt->bindValue(':bID', $BookID);
+        $stmt->bindValue(':BookID', $BookID);
 
 
         // use exec() because no results are returned
@@ -197,6 +188,10 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
     try {
         $conn->beginTransaction();
 
+        // last inserted = loginID
+        $lastloginID = $conn->lastInsertId();
+
+        /* --- Login Table --- */
         $stmt = $conn->prepare("INSERT INTO login(username, password, accessRights)
         VALUES (:username, :password, :accessrights)");
         $stmt->bindValue(':username', $username);
@@ -204,15 +199,12 @@ function newUser($username, $password, $accessrights, $firstname, $lastname, $em
         $stmt->bindValue(':accessrights', $accessrights);
         $stmt->execute();
 
-        // last inserted = userID
-        $lastuserID = $conn->lastInsertId();
-
         // last inserted = loginID
         $lastloginID = $conn->lastInsertId();
 
+        /* --- Users Table --- */
         $stmt = $conn->prepare("INSERT INTO users(firstName, lastName, email, loginID)
         VALUES (:firstname, :lastname, :email, :loginID)");
-        $stmt->bindValue(':userID', $lastuserID);
         $stmt->bindValue(':firstname', $firstname);
         $stmt->bindValue(':lastname', $lastname);
         $stmt->bindValue(':email', $email);

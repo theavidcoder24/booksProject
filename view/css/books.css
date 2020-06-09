@@ -1,8 +1,41 @@
 /* === Media Queries === */
-@media only screen and (min-width: 720px) {}
+/* 100% Styled Elements/Attributes */
+@media (max-width: 680px) {
+    body {
+        padding: 0;
+    }
+
+    main {
+        height: 100%;
+        width: 100%;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+
+    form>label,
+    legend {
+        width: 100%;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    input[type=text],
+    input[type=date],
+    input[type=password] {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
 
 /* === Generic Styling === */
-* {}
 
 html {
     margin: 0;
@@ -45,6 +78,41 @@ a {
     text-decoration: none;
 }
 
+/* Form Styling */
+legend {
+    padding-top: 1.8em;
+    font-size: 18px;
+}
+
+input[type=text],
+[type=number] {
+    padding: 4px 8px;
+    margin: 4px 0;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 150px;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+}
+
+input[type=button],
+input[type=submit],
+input[type=reset] {
+    background-color: rgb(76, 119, 175);
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
 footer {
     padding: 1em;
     text-align: center;
@@ -55,6 +123,15 @@ footer {
     text-align: center;
 }
 
+/* Form Styling */
+.containerWrapper {
+    display: grid;
+}
+
+.formBody {
+    margin: auto;
+}
+
 .userForm,
 a {
     text-align: right;
@@ -62,13 +139,20 @@ a {
     color: black;
 }
 
-
 .loginForm {
     font-size: 20px;
     margin: auto;
     padding-top: 2em;
     text-align: center;
     width: 10em;
+}
+
+.bookFieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.12em;
+    padding: 0.8em 1em;
+    box-sizing: border-box;
 }
 
 /* Default IMG Book Cover Styling */

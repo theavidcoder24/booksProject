@@ -1,16 +1,16 @@
 <?php
 session_start();
 require("../model/connectionDB.php");
-require("../model/userFunctions.php");
+require("../model/dbFunctions.php");
 require("filterInput.php");
 if (!empty([$_POST])) {
     // input sanitation via testInput function
-    $username = !empty($_POST['username']) ? inputFilter(($_POST['username'])) : null;
-    $password = !empty($_POST['password']) ? inputFilter(($_POST['password'])) : null;
-    $accessrights = !empty($_POST['acRights']) ? inputFilter(($_POST['acRights'])) : null;
-    $firstname = !empty($_POST['firstname']) ? inputFilter(($_POST['firstname'])) : null;
-    $lastname = !empty($_POST['lastname']) ? inputFilter(($_POST['lastname'])) : null;
-    $email = !empty($_POST['email']) ? inputFilter(($_POST['email'])) : null;
+    $username = inputFilter(($_POST['username']));
+    $password = inputFilter(($_POST['password']));
+    $accessrights = inputFilter(($_POST['acRights']));
+    $firstname = inputFilter(($_POST['firstname']));
+    $lastname = inputFilter(($_POST['lastname']));
+    $email = inputFilter(($_POST['email']));
 
     // hashing the password with PASSWORD_HASH()
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -20,8 +20,11 @@ if (!empty([$_POST])) {
     if ($query->rowCount() < 1) { // If user does not exist
         newUser($username, $password, $accessrights, $firstname, $lastname, $email); // function call
         echo "User account has been created";
+        echo '<h2><a style=text-decoration:none; href="../index.php">Login</a></h2>';
     } else {
         echo "Customer already exists";
+        echo '<h2><a style=text-decoration:none; href="../index.php">Login</a></h2>';
+        $error_message = $e->getMessage();
     }
 }
 ?>

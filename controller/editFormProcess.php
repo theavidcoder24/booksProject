@@ -1,54 +1,48 @@
 <?php
-session_start();
+//session_start();
 require("../model/connectionDB.php");
 require("../model/dbFunctions.php");
+require("../model/switchFunction.php");
 require("filterInput.php");
 date_default_timezone_set('Australia/Brisbane');
 
 if (!empty([$_POST])) {
-    // input sanitation via testInput function
-    // Author Table 
-    $authName = !empty($_POST['name']) ? inputFilter($_POST['name']) : null;
-    $authSur = !empty($_POST['surname']) ? inputFilter($_POST['surname']) : null;
-    $nationality = !empty($_POST['nation']) ? inputFilter($_POST['nation']) : null;
-    $birthYear = !empty($_POST['birthYr']) ? inputFilter($_POST['birthYr']) : null;
-    $deathYear = !empty($_POST['deathYr']) ? inputFilter($_POST['deathYr']) : null;
+    // Input sanitation 
 
     // Book Table
-    $bookTitle = !empty($_POST['bkTitle']) ? inputFilter($_POST['bkTitle']) : null;
-    $originalTitle = !empty($_POST['ogTitle']) ? inputFilter($_POST['ogTitle']) : null;
-    $yearOfPublication = !empty($_POST['yearOfPub']) ? inputFilter($_POST['yearOfPub']) : null;
-    $genre = !empty($_POST['genre']) ? inputFilter($_POST['genre']) : null;
-    $millionsSold = !empty($_POST['millSold']) ? inputFilter($_POST['millSold']) : null;
-    $languageWritten = !empty($_POST['langWritten']) ? inputFilter($_POST['langWritten']) : null;
-    $coverImage = !empty($_POST['covImage']) ? inputFilter($_POST['covImage']) : null;
+    $BookID = inputFilter($_POST['BookID']);
+    $bookTitle = inputFilter($_POST['bkTitle']);
+    $originalTitle = inputFilter($_POST['ogTitle']);
+    $yearOfPublication = inputFilter($_POST['yearOfPub']);
+    $genre = inputFilter($_POST['genre']);
+    $millionsSold = !inputFilter($_POST['millSold']);
+    $languageWritten = inputFilter($_POST['langWritten']);
+    $coverImage = inputFilter($_POST['covImage']);
 
-    // Book Plot Table
-    $bookPlot = !empty($_POST['bkPlot']) ? inputFilter($_POST['bkPlot']) : null;
-    $bookPlotSrc = !empty($_POST['bkPlotSrc']) ? inputFilter($_POST['bkPlotSrc']) : null;
+    $action_type = inputFilter(($_POST['actiontype']));
 
-    $action_type = !empty($_POST['actType']) ? inputFilter($_POST['actType']) : null;
 
     // Record the account who added this book
     $userID = $_SESSION['userid'];
-    echo $userID;
 
     // Record the current date and time
     $date = date('Y-m-d H:i:s');
 
-    // Changelog Table?
+    // Changelog Table
 
-    if ($_REQUEST['action_type'] == 'update') {
+    if ($_REQUEST['actiontype'] == 'edit') {
 
         try {
             // funtion call
-            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc,);
+            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, /*$date,*/ $BookID/*, $userID, $changelogid*/);
+            $_SESSION['message'] = "Edit Successful!!";
+            header('location:../homepage.php');
         } catch (PDOException $ex) {
             echo "Problem updating Book " . $ex->getMessage();
             exit();
         }
     }
 } else {
-    $_SESSION['message'] = "Failed to update";
+    $_SESSION['message'] = "Failed to Edit ";
     $error_message = $e->getMessage();
 }

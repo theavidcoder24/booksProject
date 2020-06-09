@@ -19,7 +19,7 @@ if (!empty([$_POST])) {
     $genre = !empty($_POST['genre']) ? inputFilter($_POST['genre']) : null;
     $millionsSold = !empty($_POST['millSold']) ? inputFilter($_POST['millSold']) : null;
     $languageWritten = !empty($_POST['langWritten']) ? inputFilter($_POST['langWritten']) : null;
-    $coverImage = !empty($_POST['covImage']) ? inputFilter($_POST['covImage']) : null;
+    $coverImage = inputFilter($_POST['covImage']);
 
     // Book Plot Table
     $bookPlot = !empty($_POST['bkPlot']) ? inputFilter($_POST['bkPlot']) : null;
@@ -34,14 +34,15 @@ if (!empty([$_POST])) {
 
     if ($_POST['action_type'] == 'add') {
         try {
-            $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = ");
+           /* $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = :surname AND Nationality = :nation AND BirthYear = :birthYr AND DeathYear = :deathYr"); */
+           /* $query = $conn->prepare("SELECT * FROM book WHERE BookTitle = :bkTitle AND OriginalTitle = :ogTitle AND YearofPublication = :yearOfPub AND Genre = :genre AND MillionsSold = :millSold AND LanguageWritten = :langWritten AND coverImagePath = :covImage"); */
             // funtion call
             addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID);
             echo "New Record Inserted";
             // this will be the page the user enters record successfully
             header('Location: ../homepage.php');
         } catch (PDOException $ex) {
-            echo "Problem updating Book " . $ex->getMessage();
+            echo "Problem adding Book " . $ex->getMessage();
             exit();
         }
     }

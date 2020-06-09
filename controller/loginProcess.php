@@ -1,6 +1,6 @@
 <?php
-session_start();
 require("filterInput.php");
+session_start();
 $servername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
@@ -22,6 +22,7 @@ if (!empty($_POST)) {
         $_SESSION["accessrights"] = $row["accessRights"];
         $_SESSION['login'] = 'yes';
         $_SESSION['userid'] = $row['userID'];
+        $_SESSION['time_start_login'] = time('H:i:s');
 
         echo "Welcome " . $_SESSION['AdminUser'];
 
