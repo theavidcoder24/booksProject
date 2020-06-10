@@ -50,15 +50,7 @@ if (!isset($_SESSION['AdminUser'])) {
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
-        <div class="message">
-            <?php
-            if (isset($_SESSION['message'])) {
-                echo $_SESSION['message'];
-                unset($_SESSION['message']);
-            }
-            ?>
-        </div>
-        <!-- Get link? -->
+        <!-- Get link -->
         <?php
         if (isset($_GET['link'])) {
             $link = $_GET['link'];
@@ -77,10 +69,6 @@ if (!isset($_SESSION['AdminUser'])) {
 
                 case "delete":
                     require("view/pages/deleteBook.php");
-                    break;
-
-                case "login":
-                    require("index.php");
                     break;
             }
         }
@@ -109,14 +97,14 @@ if (!isset($_SESSION['AdminUser'])) {
                                 <img src="<?php echo $row['coverImagePath']; ?>">
                             </figure>
                             <figcaption>
-                                <p class="data"><b>Book ID: </b><?php echo $row['BookID'] ?></p>
-                                <p class="data"><b>Author ID: </b><?php echo $row['AuthorID'] ?></p>
-                                <p class="data"><b>Author: </b><?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
-                                <p class="data"><b>Book Title: </b><?php echo $row['BookTitle']; ?></p>
-                                <p class="data"><b>Year of Publication: </b><?php echo $row['YearofPublication']; ?></p>
-                                <p class="data"><b>Genre: </b><?php echo $row['Genre']; ?></p>
-                                <p class="data"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p>
-                                <p class="data"><b>Language Written: </b><?php echo $row['LanguageWritten']; ?></p><br>
+                                <p class="input"><b>Book ID: </b><?php echo $row['BookID'] ?></p>
+                                <p class="input"><b>Author ID: </b><?php echo $row['AuthorID'] ?></p>
+                                <p class="input"><b>Author: </b><?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
+                                <p class="input"><b>Book Title: </b><?php echo $row['BookTitle']; ?></p>
+                                <p class="input"><b>Year of Publication: </b><?php echo $row['YearofPublication']; ?></p>
+                                <p class="input"><b>Genre: </b><?php echo $row['Genre']; ?></p>
+                                <p class="input"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p>
+                                <p class="input"><b>Language Written: </b><?php echo $row['LanguageWritten']; ?></p><br>
                             </figcaption>
                         </div>
                     </div>

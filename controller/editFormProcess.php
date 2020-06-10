@@ -1,8 +1,8 @@
 <?php
 //session_start();
-require("../model/connectionDB.php");
-require("../model/dbFunctions.php");
 require("../model/switchFunction.php");
+//require("../../model/connectionDB.php");
+//require("../../model/dbFunctions.php");
 require("filterInput.php");
 date_default_timezone_set('Australia/Brisbane');
 
@@ -10,31 +10,32 @@ if (!empty([$_POST])) {
     // Input sanitation 
 
     // Book Table
-    $BookID = inputFilter($_POST['BookID']);
+    $BookID = !empty($_POST['BookID']) ? inputFilter($_POST['BookID']) : null;
     $bookTitle = inputFilter($_POST['bkTitle']);
     $originalTitle = inputFilter($_POST['ogTitle']);
     $yearOfPublication = inputFilter($_POST['yearOfPub']);
     $genre = inputFilter($_POST['genre']);
-    $millionsSold = !inputFilter($_POST['millSold']);
+    $millionsSold = inputFilter($_POST['millSold']);
     $languageWritten = inputFilter($_POST['langWritten']);
     $coverImage = inputFilter($_POST['covImage']);
 
-    $action_type = inputFilter(($_POST['actiontype']));
+    $action_type = inputFilter(($_POST['action_type']));
 
 
     // Record the account who added this book
-    $userID = $_SESSION['userid'];
+    //  $userID = $_SESSION['userid'];
 
     // Record the current date and time
-    $date = date('Y-m-d H:i:s');
+    //  $date = date('Y-m-d H:i:s');
 
     // Changelog Table
 
-    if ($_REQUEST['actiontype'] == 'edit') {
+    if ($_POST['action_type'] == 'edit') {
 
         try {
             // funtion call
             editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, /*$date,*/ $BookID/*, $userID, $changelogid*/);
+            execute();
             $_SESSION['message'] = "Edit Successful!!";
             header('location:../homepage.php');
         } catch (PDOException $ex) {

@@ -5,7 +5,7 @@ require('../../model/dbFunctions.php');
 
 if (!isset($_SESSION['AdminUser'])) {
     echo "<script type='text/javascript'> alert('You must be a logged in member to access the page.'); </script>";
-    echo '<h2><a style=text-decoration:none; href="index.php">Login</a></h2>';
+    echo '<h2><a style=text-decoration:none; href="../../index.php">Login</a></h2>';
     exit();
 }
 
@@ -55,7 +55,7 @@ if (!isset($_SESSION['AdminUser'])) {
         <!-- Get table data -->
         <?php
         $BookID = $_GET['BookID'];
-        $sql = "SELECT * FROM book WHERE BookID = '$BookID'";
+        $sql = "SELECT * FROM book WHERE BookID = '$BookID'"; //{$_GET[$BookID]}
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -68,7 +68,8 @@ if (!isset($_SESSION['AdminUser'])) {
                 <fieldset class="bookFieldset">
                     <legend>Book Details</legend>
                     <!-- Book ID + Hidden Input -->
-                    <input type="hidden" name="BookID" value="<?php echo $result["BookID"]; ?>"><br>
+                    <label for="BookID">Book ID: <?php echo $result['BookID']; ?></label><br>
+                    <input type="hidden" name="BookID" value="<?php echo $result['BookID']; ?>"><br>
 
                     <label for="bkTitle">Book Title</label>
                     <input type="text" name="bkTitle" value="<?php echo $result['BookTitle']; ?>" /><br>
@@ -91,9 +92,9 @@ if (!isset($_SESSION['AdminUser'])) {
                     <label for="covImage">Cover Image</label>
                     <input type="text" name="covImage" value="<?php echo $result['coverImagePath']; ?>"><br>
                 </fieldset>
-                <input type="hidden" name="actiontype" value="edit" />
+                <input type="hidden" name="action_type" value="edit">
                 <input type="submit" value="Submit">
-                <!-- <input type="button" onclick="location.href='?link=displayBooks';" value="Cancel" /> -->
+                <input type="button" onclick="location.href='?link=displayBooks';" value="Cancel" />
             </form>
         </div>
     </main>

@@ -17,21 +17,20 @@ if(isset($_GET['link'])) {
     }
 }
 */
+//$action_type = ':actiontype';
+//require("connectionDB.php");
 if (isset($_GET['link'])) {
-    $action_type = $_GET['link'];
-    switch ($action_type) {
-            /* case ($action_type == 'add');
-            include("../controller/addFormProcess.php");
-            break; */
+    $link = $_GET['link'];
+    switch ($link) {
         case ($action_type == "edit"):
-            include("../controller/editFormProcess.php");
+            include("../../controller/editFormProcess.php");
             break;
 
         case ($action_type == "delete"):
             include("../controller/deleteFormProcess.php");
             break;
         default:
-            echo "No information available for that day.";
+            echo "Nope";
             break;
     }
 }

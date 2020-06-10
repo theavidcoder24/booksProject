@@ -4,7 +4,7 @@ require('../../model/connectionDB.php');
 require('../../model/dbFunctions.php');
 if (!isset($_SESSION['AdminUser'])) {
     echo "<script type='text/javascript'> alert('You must be a logged in member to access the page.'); </script>";
-    echo '<h2><a style=text-decoration:none; href="index.php">Login</a></h2>';
+    echo '<h2><a style=text-decoration:none; href="../../index.php">Login</a></h2>';
     exit();
 }
 ?>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['AdminUser'])) {
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <!-- Get table data -->
     <?php
-    $data = "SELECT author.AuthorID, book.BookID, bookplot.BookID, changelog.BookID FROM (((author
+    /*$data = "SELECT author.AuthorID, book.BookID, bookplot.BookID, changelog.BookID FROM (((author
         INNER JOIN book ON author.AuthorID = book.AuthorID)
         INNER JOIN bookplot ON book.BookID = bookplot.BookID)
         INNER JOIN changelog ON bookplot.BookID = changelog.BookID)";
@@ -59,6 +59,7 @@ if (!isset($_SESSION['AdminUser'])) {
     $stmt = $conn->prepare($data);
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    */
     ?>
     <main>
         <div class="containerWrapper">
@@ -104,7 +105,7 @@ if (!isset($_SESSION['AdminUser'])) {
                         <label for="bkPlotSrc">Plot Source</label>
                         <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
                     </fieldset>
-                    <input type="hidden" name="action_type" value="add">
+                  <!--  <input type="hidden" name="action_type" value="add"> -->
                     <input type="submit" value="Submit"><br>
                 </form>
             </div>
