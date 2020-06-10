@@ -49,27 +49,16 @@ if (!isset($_SESSION['AdminUser'])) {
     </nav>
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
-    <!-- Get table data -->
-    <?php
-    /*$data = "SELECT author.AuthorID, book.BookID, bookplot.BookID, changelog.BookID FROM (((author
-        INNER JOIN book ON author.AuthorID = book.AuthorID)
-        INNER JOIN bookplot ON book.BookID = bookplot.BookID)
-        INNER JOIN changelog ON bookplot.BookID = changelog.BookID)";
-
-    $stmt = $conn->prepare($data);
-    $stmt->execute();
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    */
-    ?>
     <main>
         <div class="containerWrapper">
             <div class="formBody">
                 <h2>Add Book:</h2>
                 <form action="../../controller/addFormProcess.php" method="POST">
                     <fieldset class="bookFieldset">
+                        <!-- Author Table -->
                         <legend>Author Details</legend>
                         <label for="name">Name</label>
-                        <input type="text" name="name" id="name" required><br>
+                        <input type="text" name="name" id="name" maxlength="20" required><br>
                         <label for="surname">Surname</label>
                         <input type="text" name="surname" id="surname" required><br>
                         <label for="nation">Nationality</label>
@@ -80,6 +69,7 @@ if (!isset($_SESSION['AdminUser'])) {
                         <input type="text" name="deathYr" id="deathYr" required><br>
                     </fieldset>
 
+                    <!-- Book Table -->
                     <fieldset class="bookFieldset">
                         <legend>Book Details</legend>
                         <label for="bkTitle">Book Title</label>
@@ -98,6 +88,7 @@ if (!isset($_SESSION['AdminUser'])) {
                         <input type="text" name="covImage"><br>
                     </fieldset>
 
+                    <!-- Bookplot Table -->
                     <fieldset class="bookFieldset">
                         <legend>Book Plot</legend>
                         <label for="bkPlot">Plot</label><br>
@@ -105,8 +96,9 @@ if (!isset($_SESSION['AdminUser'])) {
                         <label for="bkPlotSrc">Plot Source</label>
                         <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
                     </fieldset>
-                  <!--  <input type="hidden" name="action_type" value="add"> -->
+                    <input type="hidden" name="action_type" value="add">
                     <input type="submit" value="Submit"><br>
+                    <input type="button" onclick="location.href='?link=displayBooks';" value="Cancel" />
                 </form>
             </div>
         </div>

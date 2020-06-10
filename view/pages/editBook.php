@@ -54,6 +54,12 @@ if (!isset($_SESSION['AdminUser'])) {
     <main>
         <!-- Get table data -->
         <?php
+        $sql = "SELECT * FROM ((book INNER JOIN bookplot ON book.BookID = bookplot.BookID)) INNER JOIN changelog ON book.BookID = changelog.BookID WHERE book.BookID = '{$_GET['BookID']}'";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $sql = $stmt->fetch(PDO::FETCH_ASSOC);
+
         $BookID = $_GET['BookID'];
         $sql = "SELECT * FROM book WHERE BookID = '$BookID'"; //{$_GET[$BookID]}
         $stmt = $conn->prepare($sql);
@@ -91,6 +97,9 @@ if (!isset($_SESSION['AdminUser'])) {
 
                     <label for="covImage">Cover Image</label>
                     <input type="text" name="covImage" value="<?php echo $result['coverImagePath']; ?>"><br>
+
+                    <!-- Changelog Info -->
+                    <input type="hidden" name="changelogid" value="<?php echo $result['changeLogID']; ?>">
                 </fieldset>
                 <input type="hidden" name="action_type" value="edit">
                 <input type="submit" value="Submit">

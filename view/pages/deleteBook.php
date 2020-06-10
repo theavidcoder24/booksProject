@@ -27,7 +27,7 @@ if (!isset($_SESSION['AdminUser'])) {
     $BookID = $_GET['BookID'];
     $stmt = $conn->prepare("DELETE FROM book WHERE BookID = '$BookID'");
     $stmt->execute();
-    echo "Book Deleted";
+    echo "Record deleted successfully";
     ?>
     <header>
         <div class="userForm">

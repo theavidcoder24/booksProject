@@ -19,24 +19,26 @@ if (!empty([$_POST])) {
     $languageWritten = inputFilter($_POST['langWritten']);
     $coverImage = inputFilter($_POST['covImage']);
 
-    $action_type = inputFilter(($_POST['action_type']));
+    // Changelog Table
+    $changelogid = !empty($_POST['action_type']) ? inputFilter($_POST['action_type']) : null;
+    $dcreated = !empty($_POST['dcreated']) ? inputFilter($_POST['dcreated']) : null;
+
+    // Hidden action
+    $action_type = !empty($_POST['action_type']) ? inputFilter($_POST['action_type']) : null;
 
 
     // Record the account who added this book
-    //  $userID = $_SESSION['userid'];
+    $userID = $_SESSION['userid'];
 
     // Record the current date and time
-    //  $date = date('Y-m-d H:i:s');
+    $date = date('Y-m-d H:i:s');
 
-    // Changelog Table
 
     if ($_POST['action_type'] == 'edit') {
-
         try {
             // funtion call
-            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, /*$date,*/ $BookID/*, $userID, $changelogid*/);
-            execute();
-            $_SESSION['message'] = "Edit Successful!!";
+            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID, $userID, $changelogid, $dcreated, $date);
+            echo "Edit Successful!!";
             header('location:../homepage.php');
         } catch (PDOException $ex) {
             echo "Problem updating Book " . $ex->getMessage();

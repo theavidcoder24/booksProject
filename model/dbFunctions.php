@@ -100,7 +100,7 @@ function displayBooks()
     }
 }
 /* ====================================== Edit record from the table ====================================== */
-function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, /*$date,*/ $BookID) //*$userID, $changelogid*/)
+function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID, $userID, $changelogid, $dcreated, $date)
 {
     global $conn;
     try {
@@ -122,14 +122,15 @@ function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $milli
         // Execute the update statement
         $stmt->execute();
 
-        /* --- Changelog Table --- 
+        /* --- Changelog Table --- */
         $stmt = $conn->prepare("UPDATE changelog SET changeLogID = :changelgID, dateCreated = :date, userID = :userid, ");
         // Bind values
         $stmt->bindValue(':date', $date);
+        $stmt->bindValue(':dcreated', $dcreated);
         $stmt->bindValue(':BookID', $BookID);
         $stmt->bindValue(':userid', $userID);
-        $stmt->bindValue('changeID', $changelogid);
-        $stmt->execute();*/
+        $stmt->bindValue('changelgID', $changelogid);
+        $stmt->execute();
 
 
         // Commit changes here //
