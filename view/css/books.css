@@ -78,6 +78,11 @@ a {
     text-decoration: none;
 }
 
+img {
+    height: 100%;
+    width: 100%;
+}
+
 /* Form Styling */
 legend {
     padding-top: 1.8em;
