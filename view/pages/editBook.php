@@ -54,11 +54,12 @@ if (!isset($_SESSION['AdminUser'])) {
     <main>
         <!-- Get table data -->
         <?php
-        $sql = "SELECT * FROM ((book INNER JOIN bookplot ON book.BookID = bookplot.BookID)) INNER JOIN changelog ON book.BookID = changelog.BookID WHERE book.BookID = '{$_GET['BookID']}'";
+        /*    $sql = "SELECT * FROM ((book INNER JOIN bookplot ON book.BookID = bookplot.BookID) INNER JOIN changelog ON book.BookID = changelog.BookID) WHERE book.BookID = '{$_GET['BookID']}'";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $sql = $stmt->fetch(PDO::FETCH_ASSOC);
+        */
 
         $BookID = $_GET['BookID'];
         $sql = "SELECT * FROM book WHERE BookID = '$BookID'"; //{$_GET[$BookID]}
@@ -100,6 +101,14 @@ if (!isset($_SESSION['AdminUser'])) {
 
                     <!-- Changelog Info -->
                     <input type="hidden" name="changelogid" value="<?php echo $result['changeLogID']; ?>">
+
+                    <input type="hidden" name="dcreated" value="<?php echo $result['dateCreated']; ?>">
+
+                    <input type="hidden" name="dchanged" value="<?php echo $result['dateChanged']; ?>">
+
+                    <input type="hidden" name="BookID" value="<?php echo $result['BookID']; ?>">
+
+                    <input type="hidden" name="userid" value="<?php echo $result['userID']; ?>">
                 </fieldset>
                 <input type="hidden" name="action_type" value="edit">
                 <input type="submit" value="Submit">

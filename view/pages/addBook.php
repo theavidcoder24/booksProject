@@ -96,6 +96,9 @@ if (!isset($_SESSION['AdminUser'])) {
                         <label for="bkPlotSrc">Plot Source</label>
                         <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
                     </fieldset>
+
+                    <input type="hidden" name="userid" value="<?php echo $result['userID']; ?>">
+
                     <input type="hidden" name="action_type" value="add">
                     <input type="submit" value="Submit"><br>
                     <input type="button" onclick="location.href='?link=displayBooks';" value="Cancel" />

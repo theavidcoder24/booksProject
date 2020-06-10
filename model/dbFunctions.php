@@ -55,6 +55,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $lastBookID = $conn->lastInsertId();
 
         /* --- Changelog Table --- */
+        /*
         // prepares statement with named placeholders
         $changelog = ("INSERT INTO changelog(dateCreated, BookID, userID)
         VALUES (':date', :BookID, :userid)");
@@ -64,6 +65,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':userid', $userID);
         // execute the insert statement
         $stmt->execute();
+        */
 
         // Commit changes here //
         $conn->commit();
@@ -123,13 +125,13 @@ function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $milli
         $stmt->execute();
 
         /* --- Changelog Table --- */
-        $stmt = $conn->prepare("UPDATE changelog SET changeLogID = :changelgID, dateCreated = :date, userID = :userid, ");
+        $stmt = $conn->prepare("UPDATE changelog SET changeLogID = :changelogid, dateCreated = :date, userID = :userid, ");
         // Bind values
         $stmt->bindValue(':date', $date);
         $stmt->bindValue(':dcreated', $dcreated);
         $stmt->bindValue(':BookID', $BookID);
         $stmt->bindValue(':userid', $userID);
-        $stmt->bindValue('changelgID', $changelogid);
+        //$stmt->bindValue('changelogid', $changelogid);
         $stmt->execute();
 
 

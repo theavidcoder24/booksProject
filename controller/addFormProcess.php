@@ -30,7 +30,7 @@ if (!empty([$_POST])) {
 
     // Record the current date and time
     $date = date('Y-m-d H:i:s');
-
+    /*
     if ($_POST['action_type'] == 'add') {
         try {
             $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = :surname AND Nationality = :nation AND BirthYear = :birthYr AND DeathYear = :deathYr");
@@ -45,6 +45,10 @@ if (!empty([$_POST])) {
             exit();
         }
     }
+    */
+    // call the function
+    addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID);
+    echo "New Record Inserted";
 } else {
     echo "Record couldn't be inserted";
     $error_message = $e->getMessage();

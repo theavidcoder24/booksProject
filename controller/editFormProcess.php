@@ -20,7 +20,7 @@ if (!empty([$_POST])) {
     $coverImage = inputFilter($_POST['covImage']);
 
     // Changelog Table
-    $changelogid = !empty($_POST['action_type']) ? inputFilter($_POST['action_type']) : null;
+    $changelogid = !empty($_POST['changelogid']) ? inputFilter($_POST['changelogid']) : null;
     $dcreated = !empty($_POST['dcreated']) ? inputFilter($_POST['dcreated']) : null;
 
     // Hidden action

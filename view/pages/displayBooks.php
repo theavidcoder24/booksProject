@@ -79,8 +79,8 @@ if (!isset($_SESSION['AdminUser'])) {
                                 <p class="data"><b>Book Title: </b><?php echo $row['BookTitle']; ?></p>
                                 <p class="data"><b>Year of Publication: </b><?php echo $row['YearofPublication']; ?></p>
                                 <p class="data"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p><br>
-                                <a href="editBook.php?BookID=<?php echo $row["BookID"]; ?>">Edit</a>
-                                <a onclick="return confirm('Are you sure you want to delete this entry?')" href="deleteBook.php?BookID=<?php echo $row["BookID"]; ?>">Delete</a>
+                                <a id="editLink" href="editBook.php?BookID=<?php echo $row["BookID"]; ?>">Edit</a>
+                                <a id="delLink" onclick="return confirm('Are you sure you want to delete this entry?')" href="deleteBook.php?BookID=<?php echo $row["BookID"]; ?>">Delete</a>
                             </figcaption>
                         </div>
                     </div>
