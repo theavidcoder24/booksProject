@@ -49,7 +49,7 @@ if (!isset($_SESSION['AdminUser'])) {
     </nav>
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
-    <main>
+    <main></main>
         <div class="containerWrapper">
             <div class="formBody">
                 <h2>Add Book:</h2>

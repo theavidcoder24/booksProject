@@ -30,7 +30,7 @@ if (!empty($_POST)) {
         echo "Welcome " . $_SESSION['AdminUser'];
 
         // This is the page the user gets sent to when they login
-        // header('Location: ../homepage.php');
+        header('Location: ../homepage.php');
     } else {
         // This is the page the user gets sent to when they fail to login
         echo "Login credentials are incorrect";
