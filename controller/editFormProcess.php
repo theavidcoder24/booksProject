@@ -10,7 +10,7 @@ if (!empty([$_POST])) {
     // Input sanitation 
 
     // Book Table
-    $BookID = !empty($_POST['BookID']) ? inputFilter($_POST['BookID']) : null;
+    $BookID = /*!empty($_POST['BookID']) ?*/ inputFilter($_POST['BookID']) /* : null*/;
     $bookTitle = inputFilter($_POST['bkTitle']);
     $originalTitle = inputFilter($_POST['ogTitle']);
     $yearOfPublication = inputFilter($_POST['yearOfPub']);
@@ -28,7 +28,7 @@ if (!empty([$_POST])) {
 
 
     // Record the account who added this book
-    $userID = $_SESSION['userid'];
+    $userID = $_SESSION['userID'];
 
     // Record the current date and time
     $date = date('Y-m-d H:i:s');
@@ -39,7 +39,7 @@ if (!empty([$_POST])) {
             // funtion call
             editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID, $userID, $changelogid, $dcreated, $date);
             echo "Edit Successful!!";
-            header('location:../homepage.php');
+           // header('location:../homepage.php');
         } catch (PDOException $ex) {
             echo "Problem updating Book " . $ex->getMessage();
             exit();

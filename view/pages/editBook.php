@@ -99,16 +99,17 @@ if (!isset($_SESSION['AdminUser'])) {
                     <label for="covImage">Cover Image</label>
                     <input type="text" name="covImage" value="<?php echo $result['coverImagePath']; ?>"><br>
 
-                    <!-- Changelog Info -->
-                    <input type="hidden" name="changelogid" value="<?php echo $result['changeLogID']; ?>">
+                    <!-- Changelog Info 
+                    <input type="hidden" name="changelogid" value="<?php //echo $result['changeLogID']; ?>">
 
-                    <input type="hidden" name="dcreated" value="<?php echo $result['dateCreated']; ?>">
+                    <input type="hidden" name="dcreated" value="<?php // echo $result['dateCreated']; ?>">
 
-                    <input type="hidden" name="dchanged" value="<?php echo $result['dateChanged']; ?>">
+                    <input type="hidden" name="dchanged" value="<?php //echo $result['dateChanged']; ?>">
 
-                    <input type="hidden" name="BookID" value="<?php echo $result['BookID']; ?>">
+                    <input type="hidden" name="BookID" value="<?php //echo $result['BookID']; ?>">
 
-                    <input type="hidden" name="userid" value="<?php echo $result['userID']; ?>">
+                    <input type="hidden" name="userID" value="<?php //echo $result['userID']; ?>">
+                    -->
                 </fieldset>
                 <input type="hidden" name="action_type" value="edit">
                 <input type="submit" value="Submit">

@@ -97,7 +97,7 @@ if (!isset($_SESSION['AdminUser'])) {
                         <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
                     </fieldset>
 
-                    <input type="hidden" name="userid" value="<?php echo $result['userID']; ?>">
+                  <!--  <input type="hidden" name="userID" value="<?php //echo $_SESSION['userID']; ?>"> -->
 
                     <input type="hidden" name="action_type" value="add">
                     <input type="submit" value="Submit"><br>

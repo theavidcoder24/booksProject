@@ -1,6 +1,6 @@
 <?php
 /* ====================================== Add a new row to the table ====================================== */
-function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID)
+function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc)
 {
     global $conn;
     try {
@@ -54,18 +54,8 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Last inserted BookID & userID
         $lastBookID = $conn->lastInsertId();
 
-        /* --- Changelog Table --- */
-        /*
-        // prepares statement with named placeholders
-        $changelog = ("INSERT INTO changelog(dateCreated, BookID, userID)
-        VALUES (':date', :BookID, :userid)");
-        $stmt = $conn->prepare($changelog);
-        $stmt->bindValue(':date', $date);
-        $stmt->bindValue(':BookID', $lastBookID);
-        $stmt->bindValue(':userid', $userID);
-        // execute the insert statement
-        $stmt->execute();
-        */
+        //changeLog('2020-01-01 01:01:01', 1, 3);
+        changeLog('2020-01-01 01:01:01', 1, 3);
 
         // Commit changes here //
         $conn->commit();
@@ -73,6 +63,21 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         throw $ex;
     }
 }
+
+
+function changeLog($date, $lastBookID, $userID) {
+    global $conn;
+    /* --- Changelog Table --- */
+    // prepares statement with named placeholders
+    // INSERT INTO changelog (dateCreated, BookID, userID) VALUES ('2020-01-01 01:01:01', 1, 3)
+    $changelog = "INSERT INTO changelog (dateCreated, BookID, userID) VALUES (:datestamp, :BookID, :userid)";
+    $stmt = $conn->prepare($changelog);
+    $stmt->bindValue(':datestamp', $date, PDO::PARAM_STR);
+    $stmt->bindValue(':BookID', $lastBookID, PDO::PARAM_INT); 
+    $stmt->bindValue(':userid', $userID, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
 /* 
 mysql> SELECT EXISTS(SELECT * from ExistsRowDemo WHERE ExistId=104);
 */

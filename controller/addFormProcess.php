@@ -26,29 +26,29 @@ if (!empty([$_POST])) {
     $bookPlotSrc = !empty($_POST['bkPlotSrc']) ? inputFilter($_POST['bkPlotSrc']) : null;
 
     // Record the account who added this book
-    $userID = $_SESSION['userid'];
+   // $userID = $_SESSION['LoginID'];
 
     // Record the current date and time
     $date = date('Y-m-d H:i:s');
-    /*
     if ($_POST['action_type'] == 'add') {
         try {
-            $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = :surname AND Nationality = :nation AND BirthYear = :birthYr AND DeathYear = :deathYr");
-            $query = $conn->prepare("SELECT * FROM book WHERE BookTitle = :bkTitle AND OriginalTitle = :ogTitle AND YearofPublication = :yearOfPub AND Genre = :genre AND MillionsSold = :millSold AND LanguageWritten = :langWritten AND coverImagePath = :covImage");
+           /* $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = :surname AND Nationality = :nation AND BirthYear = :birthYr AND DeathYear = :deathYr");
+            $query = $conn->prepare("SELECT * FROM book WHERE BookTitle = :bkTitle AND OriginalTitle = :ogTitle AND YearofPublication = :yearOfPub AND Genre = :genre AND MillionsSold = :millSold AND LanguageWritten = :langWritten AND coverImagePath = :covImage"); */
             // funtion call
-            addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID);
-            echo "New Record Inserted";
+        $success = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, /*$userID*/);
+                echo "New Record Inserted";
+
             // this will be the page the user enters record successfully
-            header('Location: ../homepage.php');
+           // header('Location: ../homepage.php');
         } catch (PDOException $ex) {
             echo "Problem adding book " . $ex->getMessage();
             exit();
         }
     }
-    */
     // call the function
+    /*
     addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID);
-    echo "New Record Inserted";
+    echo "New Record Inserted";*/
 } else {
     echo "Record couldn't be inserted";
     $error_message = $e->getMessage();

@@ -4,7 +4,10 @@ session_start();
 $servername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
+
 $conn = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
+// Debug only comment out in production 
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // DEBUG
 
 // input via POST method
 if (!empty($_POST)) {
@@ -21,13 +24,13 @@ if (!empty($_POST)) {
         $_SESSION['LoginID'] = $row['LoginID'];
         $_SESSION["accessrights"] = $row["accessRights"];
         $_SESSION['login'] = 'yes';
-        $_SESSION['userid'] = $row['userID'];
-        $_SESSION['time_start_login'] = time('H:i:s');
+        $_SESSION['userID'] = $row['userID'];
+        // $_SESSION['time_start_login'] = time('H:i:s');
 
         echo "Welcome " . $_SESSION['AdminUser'];
 
         // This is the page the user gets sent to when they login
-        header('Location: ../homepage.php');
+        // header('Location: ../homepage.php');
     } else {
         // This is the page the user gets sent to when they fail to login
         echo "Login credentials are incorrect";
