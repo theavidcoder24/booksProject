@@ -30,6 +30,7 @@ if (!empty([$_POST])) {
 
     // Record the current date and time
     $date = date('Y-m-d H:i:s');
+    
     if ($_POST['action_type'] == 'add') {
         try {
            /* $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = :surname AND Nationality = :nation AND BirthYear = :birthYr AND DeathYear = :deathYr");

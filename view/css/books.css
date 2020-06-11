@@ -77,11 +77,12 @@ li a:hover {
 a {
     text-decoration: none;
 }
-
+/*
 img {
     height: 100%;
     width: 100%;
 }
+*/
 
 /* Form Styling */
 legend {

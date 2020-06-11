@@ -7,7 +7,7 @@ $dbpassword = "";
 
 $conn = new PDO("mysql:host=$servername;dbname=dbbooksproject", $dbusername, $dbpassword);
 // Debug only comment out in production 
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // DEBUG
+// $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // DEBUG
 
 // input via POST method
 if (!empty($_POST)) {

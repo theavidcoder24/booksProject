@@ -1,8 +1,8 @@
 <?php
 //session_start();
 require("../model/switchFunction.php");
-//require("../../model/connectionDB.php");
-//require("../../model/dbFunctions.php");
+require("../model/connectionDB.php");
+require("../model/dbFunctions.php");
 require("filterInput.php");
 date_default_timezone_set('Australia/Brisbane');
 
@@ -10,7 +10,7 @@ if (!empty([$_POST])) {
     // Input sanitation 
 
     // Book Table
-    $BookID = /*!empty($_POST['BookID']) ?*/ inputFilter($_POST['BookID']) /* : null*/;
+    /*  $BookID = /*!empty($_POST['BookID']) ?*/ //inputFilter($_POST['BookID']) /* : null*/;
     $bookTitle = inputFilter($_POST['bkTitle']);
     $originalTitle = inputFilter($_POST['ogTitle']);
     $yearOfPublication = inputFilter($_POST['yearOfPub']);
@@ -18,28 +18,29 @@ if (!empty([$_POST])) {
     $millionsSold = inputFilter($_POST['millSold']);
     $languageWritten = inputFilter($_POST['langWritten']);
     $coverImage = inputFilter($_POST['covImage']);
+    $BookID = inputFilter($_POST['BookID']);
 
     // Changelog Table
-    $changelogid = !empty($_POST['changelogid']) ? inputFilter($_POST['changelogid']) : null;
-    $dcreated = !empty($_POST['dcreated']) ? inputFilter($_POST['dcreated']) : null;
+    // $changelogid = !empty($_POST['changelogid']) ? inputFilter($_POST['changelogid']) : null;
+    //  $dcreated = !empty($_POST['dcreated']) ? inputFilter($_POST['dcreated']) : null;
 
     // Hidden action
-    $action_type = !empty($_POST['action_type']) ? inputFilter($_POST['action_type']) : null;
+    // $action_type = !empty($_POST['action_type']) ? inputFilter($_POST['action_type']) : null;
 
 
     // Record the account who added this book
-    $userID = $_SESSION['userID'];
+    // $userID = $_SESSION['userID'];
 
     // Record the current date and time
-    $date = date('Y-m-d H:i:s');
+    //  $date = date('Y-m-d H:i:s');
 
 
     if ($_POST['action_type'] == 'edit') {
         try {
             // funtion call
-            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID, $userID, $changelogid, $dcreated, $date);
+            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID/*, $userID, $dcreated, $date*/);
             echo "Edit Successful!!";
-           // header('location:../homepage.php');
+            // header('location:../homepage.php');
         } catch (PDOException $ex) {
             echo "Problem updating Book " . $ex->getMessage();
             exit();
