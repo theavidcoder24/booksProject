@@ -32,7 +32,7 @@ if (!empty([$_POST])) {
     // $userID = $_SESSION['userID'];
 
     // Record the current date and time
-    //  $date = date('Y-m-d H:i:s');
+    $date = date('Y-m-d H:i:s');
 
 
     if ($_POST['action_type'] == 'edit') {

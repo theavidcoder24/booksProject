@@ -7,6 +7,7 @@ if (!isset($_SESSION['AdminUser'])) {
     echo '<h2><a style=text-decoration:none; href="../../index.php">Login</a></h2>';
     exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,11 +97,14 @@ if (!isset($_SESSION['AdminUser'])) {
                         <label for="bkPlotSrc">Plot Source</label>
                         <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
                     </fieldset>
+                    <?php
+                    echo $_SESSION['userID'];
+                    ?>
 
                   <!--  <input type="hidden" name="userID" value="<?php //echo $_SESSION['userID']; ?>"> -->
 
                     <input type="hidden" name="action_type" value="add">
-                    <input type="submit" value="Submit"><br>
+                    <input type="submit" value="Submit">
                     <input type="button" onclick="location.href='?link=displayBooks';" value="Cancel" />
                 </form>
             </div>
