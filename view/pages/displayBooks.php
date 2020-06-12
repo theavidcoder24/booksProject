@@ -21,6 +21,7 @@ if (!isset($_SESSION['AdminUser'])) {
     <!-- Font Awesome Style -->
     <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
     <link rel="icon" href="../images/books-1673578_1280.png" type="image/gif" sizes="16x16">
+    <script src="../../model/script.js" defer></script>
     <title>Display Books</title>
 </head>
 
@@ -42,11 +43,14 @@ if (!isset($_SESSION['AdminUser'])) {
     </header>
     <nav>
         <ul>
-            <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
-            <li><a href="#">Display Books</a></li>
-            <li><a href="addBook.php">Add Book</a></li>
-            <li><a href="editBook.php">Edit Book</a></li>
-            <li><a href="deleteBook.php">Delete Book</a></li>
+            <div class="topnav" id="myTopnav">
+                <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
+                <li><a href="#">Display Books</a></li>
+                <li><a href="addBook.php">Add Book</a></li>
+                <li><a href="editBook.php">Edit Book</a></li>
+                <li><a href="deleteBook.php">Delete Book</a></li>
+                <li><a href="changelogHistory.php">Changelog History</a></li>
+            </div>
         </ul>
     </nav>
     <!-- Welcome user-->

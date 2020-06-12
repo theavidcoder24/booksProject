@@ -16,7 +16,6 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':birthYr', $birthYear);
         $stmt->bindValue(':deathYr', $deathYear);
         // Execute the insert statement
-        echo "Executing insert author";
         $stmt->execute();
 
         // Last inserted BookID
@@ -36,7 +35,6 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':covImage', $coverImage);
         $stmt->bindValue(':AuthorID', $lastAuthorID);
         // execute the insert statement
-        echo "Executing insert book";
         $stmt->execute();
 
         // Last inserted BookID
@@ -51,7 +49,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':bkPlotSrc', $bookPlotSrc);
         $stmt->bindValue(':BookID', $lastBookID);
         // execute the insert statement
-        echo "Executing insert bookplot";
+
         $stmt->execute();
 
         // Last inserted BookID & userID
@@ -75,7 +73,6 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         return $lastBookID;
     } catch (PDOException $ex) {
         echo "add book error";
-        throw $ex;
     }
 }
 
@@ -165,7 +162,7 @@ function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $milli
         //$stmt->bindValue('changelogid', $changelogid);
         $stmt->execute();
         */
-     
+
 
         // Commit changes here //
         $conn->commit();
@@ -215,6 +212,29 @@ function delete_product($productID)
     return $result;		
 }
 */
+/* ================================= Display all records from the changelog table ================================= */
+function displayChangelog()
+{
+    require("connectionDB.php");
+    global $conn;
+    try {
+        $stmt = $conn->prepare('SELECT * FROM changelog');
+        $stmt->execute();
+        $data = $stmt->fetchAll();
+        if ($stmt->rowCount() < 1) {
+            echo "Table empty?";
+        } else {
+            foreach ($data as $row) {
+                echo $row['dateCreated'] . '<br>';
+                echo $row['dateChanged'] . '<br>';
+                echo $row['BookID'] . '<br>';
+                echo $row['userID'] . '<br>';
+            }
+        }
+    } catch (PDOException $ex) {
+        throw $ex;
+    }
+}
 
 /* =============================================== New User =============================================== */
 function newUser($username, $password, $accessrights, $firstname, $lastname, $email)

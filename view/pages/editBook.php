@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../../controller/loginProcess.php');
+//require('../../controller/loginProcess.php');
 require('../../model/connectionDB.php');
 require('../../model/dbFunctions.php');
 
@@ -43,11 +43,14 @@ if (!isset($_SESSION['AdminUser'])) {
     </header>
     <nav>
         <ul>
-            <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
-            <li><a href="displayBooks.php">Display Books</a></li>
-            <li><a href="addBook.php">Add Book</a></li>
-            <li><a href="editBook.php">Edit Book</a></li>
-            <li><a href="deleteBook.php">Delete Book</a></li>
+            <div class="topnav" id="myTopnav">
+                <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
+                <li><a href="displayBooks.php">Display Books</a></li>
+                <li><a href="addBook.php">Add Book</a></li>
+                <li><a href="editBook.php">Edit Book</a></li>
+                <li><a href="deleteBook.php">Delete Book</a></li>
+                <li><a href="changelogHistory.php">Changelog History</a></li>
+            </div>
         </ul>
     </nav>
     <!-- Welcome user-->
@@ -55,13 +58,6 @@ if (!isset($_SESSION['AdminUser'])) {
     <main>
         <!-- Get table data -->
         <?php
-        /*    $sql = "SELECT * FROM ((book INNER JOIN bookplot ON book.BookID = bookplot.BookID) INNER JOIN changelog ON book.BookID = changelog.BookID) WHERE book.BookID = '{$_GET['BookID']}'";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $sql = $stmt->fetch(PDO::FETCH_ASSOC);
-        */
-
         $BookID = $_GET['BookID'];
         $sql = "SELECT * FROM book WHERE BookID = '$BookID'"; //{$_GET[$BookID]}
         $stmt = $conn->prepare($sql);
@@ -99,18 +95,6 @@ if (!isset($_SESSION['AdminUser'])) {
 
                     <label for="covImage">Cover Image</label>
                     <input type="text" name="covImage" value="<?php echo $result['coverImagePath']; ?>"><br>
-
-                    <!-- Changelog Info 
-                    <input type="hidden" name="changelogid" value="<?php //echo $result['changeLogID']; ?>">
-
-                    <input type="hidden" name="dcreated" value="<?php // echo $result['dateCreated']; ?>">
-
-                    <input type="hidden" name="dchanged" value="<?php //echo $result['dateChanged']; ?>">
-
-                    <input type="hidden" name="BookID" value="<?php //echo $result['BookID']; ?>">
-
-                    <input type="hidden" name="userID" value="<?php //echo $result['userID']; ?>">
-                    -->
                 </fieldset>
                 <input type="hidden" name="action_type" value="edit">
                 <input type="submit" value="Submit">

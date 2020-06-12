@@ -41,74 +41,71 @@ if (!isset($_SESSION['AdminUser'])) {
     </header>
     <nav>
         <ul>
-            <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
-            <li><a href="displayBooks.php">Display Books</a></li>
-            <li><a href="#" class="active">Add Book</a></li>
-            <li><a href="editBook.php">Edit Book</a></li>
-            <li><a href="deleteBook.php">Delete Book</a></li>
+            <div class="topnav" id="myTopnav">
+                <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
+                <li><a href="displayBooks.php">Display Books</a></li>
+                <li><a href="#" class="active">Add Book</a></li>
+                <li><a href="editBook.php">Edit Book</a></li>
+                <li><a href="deleteBook.php">Delete Book</a></li>
+                <li><a href="changelogHistory.php">Changelog History</a></li>
+            </div>
         </ul>
     </nav>
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main></main>
-        <div class="containerWrapper">
-            <div class="formBody">
-                <h2>Add Book:</h2>
-                <form action="../../controller/addFormProcess.php" method="POST">
-                    <fieldset class="bookFieldset">
-                        <!-- Author Table -->
-                        <legend>Author Details</legend>
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" maxlength="20" required><br>
-                        <label for="surname">Surname</label>
-                        <input type="text" name="surname" id="surname" required><br>
-                        <label for="nation">Nationality</label>
-                        <input type="text" name="nation" id="nation" required><br>
-                        <label for="birthYr">Birth Year</label>
-                        <input type="text" name="birthYr" id="birthYr" required><br>
-                        <label for="deathYr">Death Year</label>
-                        <input type="text" name="deathYr" id="deathYr" required><br>
-                    </fieldset>
+    <div class="containerWrapper">
+        <div class="formBody">
+            <h2>Add Book:</h2>
+            <form action="../../controller/addFormProcess.php" method="POST">
+                <fieldset class="bookFieldset">
+                    <!-- Author Table -->
+                    <legend>Author Details</legend>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" maxlength="20" required><br>
+                    <label for="surname">Surname</label>
+                    <input type="text" name="surname" id="surname" required><br>
+                    <label for="nation">Nationality</label>
+                    <input type="text" name="nation" id="nation" required><br>
+                    <label for="birthYr">Birth Year</label>
+                    <input type="text" name="birthYr" id="birthYr" required><br>
+                    <label for="deathYr">Death Year</label>
+                    <input type="text" name="deathYr" id="deathYr" required><br>
+                </fieldset>
 
-                    <!-- Book Table -->
-                    <fieldset class="bookFieldset">
-                        <legend>Book Details</legend>
-                        <label for="bkTitle">Book Title</label>
-                        <input type="text" name="bkTitle" required><br>
-                        <label for="ogTitle">Original Title</label>
-                        <input type="text" name="ogTitle"><br>
-                        <label for="yearOfPub">Year of Publication</label>
-                        <input type="text" name="yearOfPub" required><br>
-                        <label for="genre">Genre</label>
-                        <input type="text" name="genre" required><br>
-                        <label for="millSold">Millions Sold</label>
-                        <input type="text" name="millSold" required><br>
-                        <label for="langWritten">Language Written</label>
-                        <input type="text" name="langWritten"><br>
-                        <label for="covImage">Cover Image</label>
-                        <input type="text" name="covImage"><br>
-                    </fieldset>
+                <!-- Book Table -->
+                <fieldset class="bookFieldset">
+                    <legend>Book Details</legend>
+                    <label for="bkTitle">Book Title</label>
+                    <input type="text" name="bkTitle" required><br>
+                    <label for="ogTitle">Original Title</label>
+                    <input type="text" name="ogTitle"><br>
+                    <label for="yearOfPub">Year of Publication</label>
+                    <input type="text" name="yearOfPub" required><br>
+                    <label for="genre">Genre</label>
+                    <input type="text" name="genre" required><br>
+                    <label for="millSold">Millions Sold</label>
+                    <input type="text" name="millSold" required><br>
+                    <label for="langWritten">Language Written</label>
+                    <input type="text" name="langWritten"><br>
+                    <label for="covImage">Cover Image</label>
+                    <input type="text" name="covImage"><br>
+                </fieldset>
 
-                    <!-- Bookplot Table -->
-                    <fieldset class="bookFieldset">
-                        <legend>Book Plot</legend>
-                        <label for="bkPlot">Plot</label><br>
-                        <textarea name="bkPlot" id="bkPlot" cols="30" rows="10" required></textarea><br>
-                        <label for="bkPlotSrc">Plot Source</label>
-                        <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
-                    </fieldset>
-                    <?php
-                    echo $_SESSION['userID'];
-                    ?>
-
-                  <!--  <input type="hidden" name="userID" value="<?php //echo $_SESSION['userID']; ?>"> -->
-
-                    <input type="hidden" name="action_type" value="add">
-                    <input type="submit" value="Submit">
-                    <input type="button" onclick="location.href='?link=displayBooks';" value="Cancel" />
-                </form>
-            </div>
+                <!-- Bookplot Table -->
+                <fieldset class="bookFieldset">
+                    <legend>Book Plot</legend>
+                    <label for="bkPlot">Plot</label><br>
+                    <textarea name="bkPlot" id="bkPlot" cols="30" rows="10" required></textarea><br>
+                    <label for="bkPlotSrc">Plot Source</label>
+                    <input type="text" name="bkPlotSrc" id="bkPlotSrc" required>
+                </fieldset>
+                <input type="hidden" name="action_type" value="add">
+                <input type="submit" value="Submit">
+                <input type="button" onclick="location.href='?link=displayBooks';" value="Cancel" />
+            </form>
         </div>
+    </div>
     </main>
     <footer>
         <div class="copyright">

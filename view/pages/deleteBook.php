@@ -13,16 +13,33 @@ $BookID = $_GET['BookID'];
 $stmt = $conn->prepare("DELETE FROM book WHERE BookID = '$BookID'");
 $stmt->execute();
 echo "<h2>Record deleted successfully</h2>";
+header('Location:displayBooks.php');
 ?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Books Style -->
+    <link rel="stylesheet" href="../css/books.css">
+    <!-- Font Awesome Style -->
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
+    <link rel="icon" href="../images/books-1673578_1280.png" type="image/gif" sizes="16x16">
+    <title>Edit Book</title>
+</head>
 <div id="adminTitle">
-    <h1>Administration - Display Books</h1>
+    <h1>Administration - Delete Book</h1>
 </div>
 <!-- Welcome user-->
 <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
-<footer>
-    <div class="copyright">
-        <p>&copy; Copyright Mallorie Cini <script type="text/javascript">
-                document.write("2020 - " + new Date().getFullYear());
-            </script>
-    </div>
-</footer>
+<nav>
+    <ul>
+        <div class="topnav" id="myTopnav">
+            <li><a href="../../homepage.php" id="home"><i class="fas fa-home"></i></a></li>
+            <li><a href="displayBooks.php">Display Books</a></li>
+            <li><a href="addBook.php">Add Book</a></li>
+            <li><a href="editBook.php">Edit Book</a></li>
+            <li><a href="deleteBook.php">Delete Book</a></li>
+            <li><a href="changelogHistory.php">Changelog History</a></li>
+        </div>
+    </ul>
+</nav>

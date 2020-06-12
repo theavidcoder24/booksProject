@@ -40,11 +40,14 @@ if (!isset($_SESSION['AdminUser'])) {
     </header>
     <nav>
         <ul>
-            <li><a href="#" id="home" class="active"><i class="fas fa-home"></i></a></li>
-            <li><a href="view/pages/displayBooks.php">Display Books</a></li>
-            <li><a href="view/pages/addBook.php">Add Book</a></li>
-            <li><a href="view/pages/editBook.php">Edit Book</a></li>
-            <li><a href="view/pages/deleteBook.php">Delete Book</a></li>
+            <div class="topnav" id="myTopnav">
+                <li><a href="#" id="home" class="active"><i class="fas fa-home"></i></a></li>
+                <li><a href="view/pages/displayBooks.php">Display Books</a></li>
+                <li><a href="view/pages/addBook.php">Add Book</a></li>
+                <li><a href="view/pages/editBook.php">Edit Book</a></li>
+                <li><a href="view/pages/deleteBook.php">Delete Book</a></li>
+                <li><a href="view/pages/changelogHistory.php">Changelog History</a></li>
+            </div>
         </ul>
     </nav>
     <!-- Welcome user-->
