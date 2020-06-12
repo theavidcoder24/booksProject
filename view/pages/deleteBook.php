@@ -14,13 +14,11 @@ $stmt = $conn->prepare("DELETE FROM book WHERE BookID = '$BookID'");
 $stmt->execute();
 echo "<h2>Record deleted successfully</h2>";
 ?>
+<div id="adminTitle">
+    <h1>Administration - Display Books</h1>
+</div>
 <!-- Welcome user-->
 <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
-<!-- Get table data -->
-
-<main>
-   <!-- <h2>Delete Book: <?php // echo $result['BookTitle'] ?></h2> -->
-</main>
 <footer>
     <div class="copyright">
         <p>&copy; Copyright Mallorie Cini <script type="text/javascript">
