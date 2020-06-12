@@ -68,9 +68,9 @@ if (!isset($_SESSION['AdminUser'])) {
             } else {
                 foreach ($result as $row) {
                     if ($row['coverImagePath'] == null) {
-                        echo '<br><img id="defultImg" src="../images/defaultImage.png">';
+                        echo '<br><img id="defaultImg" src="../images/defaultImage.png">';
                     } else {
-                        echo '<img src="../images/' . $row['coverImagePath'] . '">';
+                        echo '<br><img id="defaultImg" src="../images/' . $row['coverImagePath'] . '">';
                     }
             ?>
                     <div class="container">
