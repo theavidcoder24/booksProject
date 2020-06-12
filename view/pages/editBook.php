@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('../../controller/loginProcess.php');
 require('../../model/connectionDB.php');
 require('../../model/dbFunctions.php');

@@ -26,6 +26,7 @@ if (!empty([$_POST])) {
     $bookPlot = !empty($_POST['bkPlot']) ? inputFilter($_POST['bkPlot']) : null;
     $bookPlotSrc = !empty($_POST['bkPlotSrc']) ? inputFilter($_POST['bkPlotSrc']) : null;
 
+
     // Record the account who added this book
     $userID = $_SESSION['userID'];
 
@@ -37,8 +38,10 @@ if (!empty([$_POST])) {
             /* $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = :surname AND Nationality = :nation AND BirthYear = :birthYr AND DeathYear = :deathYr");
             $query = $conn->prepare("SELECT * FROM book WHERE BookTitle = :bkTitle AND OriginalTitle = :ogTitle AND YearofPublication = :yearOfPub AND Genre = :genre AND MillionsSold = :millSold AND LanguageWritten = :langWritten AND coverImagePath = :covImage"); */
             // funtion call
-            $success = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID);
+            $BookID = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
+            changeLog($date, $date, $BookID, $userID);
             echo "New Record Inserted";
+            
 
             // this will be the page the user enters record successfully
             // header('Location: ../homepage.php');

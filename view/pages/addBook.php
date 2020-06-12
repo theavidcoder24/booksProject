@@ -1,5 +1,5 @@
 <?php
-require('../../controller/loginProcess.php');
+session_start();
 require('../../model/connectionDB.php');
 require('../../model/dbFunctions.php');
 if (!isset($_SESSION['AdminUser'])) {

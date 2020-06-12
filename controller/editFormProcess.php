@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 require("../model/switchFunction.php");
 require("../model/connectionDB.php");
 require("../model/dbFunctions.php");
@@ -29,7 +29,7 @@ if (!empty([$_POST])) {
 
 
     // Record the account who added this book
-    // $userID = $_SESSION['userID'];
+     $userID = $_SESSION['userID'];
 
     // Record the current date and time
     $date = date('Y-m-d H:i:s');
@@ -38,7 +38,8 @@ if (!empty([$_POST])) {
     if ($_POST['action_type'] == 'edit') {
         try {
             // funtion call
-            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID/*, $userID, $dcreated, $date*/);
+            editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $BookID);
+            changeLog($date, $date, $BookID, $userID);
             echo "Edit Successful!!";
             // header('location:../homepage.php');
         } catch (PDOException $ex) {

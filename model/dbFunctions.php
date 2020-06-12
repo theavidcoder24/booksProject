@@ -1,6 +1,6 @@
 <?php
 /* ====================================== Add a new row to the table ====================================== */
-function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID)
+function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc)
 {
     global $conn;
     try {
@@ -16,6 +16,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':birthYr', $birthYear);
         $stmt->bindValue(':deathYr', $deathYear);
         // Execute the insert statement
+        echo "Executing insert author";
         $stmt->execute();
 
         // Last inserted BookID
@@ -35,6 +36,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':covImage', $coverImage);
         $stmt->bindValue(':AuthorID', $lastAuthorID);
         // execute the insert statement
+        echo "Executing insert book";
         $stmt->execute();
 
         // Last inserted BookID
@@ -49,45 +51,59 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         $stmt->bindValue(':bkPlotSrc', $bookPlotSrc);
         $stmt->bindValue(':BookID', $lastBookID);
         // execute the insert statement
+        echo "Executing insert bookplot";
         $stmt->execute();
 
         // Last inserted BookID & userID
-        $lastBookID = $conn->lastInsertId();
+        //  $lastBookID = $conn->lastInsertId();
 
         // changeLog('2020-01-01 01:01:01', 1, 3);
         // changeLog($date, $lastBookID, $userID);
 
-        // Changelog Table
+        /* Changelog Table
         $stmt = $conn->prepare("INSERT INTO changelog(dateCreated, dateChanged, BookID, userID)
         VALUES (:dcreated, :dchanged, :BookID, userID)");
-        $stmt->bindValue(':dcreated', $date);
-        $stmt->bindValue(':dchanged', $date);
-        $stmt->bindValue(':BookID', $lastBookID);
-        $stmt->bindValue(':userID', $userID);
+        $stmt->bindValue(':dcreated', $date, PDO::PARAM_STR);
+        $stmt->bindValue(':dchanged', $date, PDO::PARAM_STR);
+        $stmt->bindValue(':BookID', $lastBookID, PDO::PARAM_INT);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
         $stmt->execute();
+        */
 
         // Commit changes here //
         $conn->commit();
+        return $lastBookID;
     } catch (PDOException $ex) {
+        echo "add book error";
         throw $ex;
     }
 }
 
-/*
-function changeLog($date, $lastBookID, $userID)
+
+function changeLog($dateCreated, $dateChanged, $BookID, $userID)
 {
+    //echo $BookID;
+    //echo "<br>";
+    //echo $userID;
     global $conn;
     /* --- Changelog Table --- */
-// prepares statement with named placeholders
-// INSERT INTO changelog (dateCreated, BookID, userID) VALUES ('2020-01-01 01:01:01', 1, 3)
-/*   $changelog = "INSERT INTO changelog (dateCreated, BookID, userID) VALUES (:datestamp, :BookID, :userID)";
-    $stmt = $conn->prepare($changelog);
-    $stmt->bindValue(':datestamp', $date, PDO::PARAM_STR);
-    $stmt->bindValue(':BookID', $lastBookID, PDO::PARAM_INT);
-    $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
-    $stmt->execute();
+    // prepares statement with named placeholders
+    try {
+        // $BookID = $conn->lastInsertId();
+        // $date = date('Y-m-d H:i:s');
+        // $userID=$_SESSION['userID];
+        $stmt = $conn->prepare("INSERT INTO changelog(dateCreated, dateChanged, BookID, userID) VALUES (:dateCreated, :dateChanged, :BookID, :userID)");
+        $stmt->bindValue(':dateCreated', $dateCreated);
+        $stmt->bindValue(':dateChanged', $dateChanged);
+        $stmt->bindValue(':BookID', $BookID);
+        $stmt->bindValue(':userID', $userID);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        echo "add log error";
+        throw $ex;
+    }
 }
-*/
+
 /* 
 mysql> SELECT EXISTS(SELECT * from ExistsRowDemo WHERE ExistId=104);
 */
@@ -149,9 +165,7 @@ function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $milli
         //$stmt->bindValue('changelogid', $changelogid);
         $stmt->execute();
         */
-        /*
-        changeLog('2020-01-01 01:01:01', $BookID, $userID);
-*/
+     
 
         // Commit changes here //
         $conn->commit();
