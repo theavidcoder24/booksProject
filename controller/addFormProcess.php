@@ -35,13 +35,11 @@ if (!empty([$_POST])) {
 
     if ($_POST['action_type'] == 'add') {
         try {
-            /* $query = $conn->prepare("SELECT * FROM author WHERE name = :name AND surname = :surname AND Nationality = :nation AND BirthYear = :birthYr AND DeathYear = :deathYr");
-            $query = $conn->prepare("SELECT * FROM book WHERE BookTitle = :bkTitle AND OriginalTitle = :ogTitle AND YearofPublication = :yearOfPub AND Genre = :genre AND MillionsSold = :millSold AND LanguageWritten = :langWritten AND coverImagePath = :covImage"); */
             // funtion call
             $BookID = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
             changeLog($date, $date, $BookID, $userID);
             echo "New Record Inserted";
-            
+
 
             // this will be the page the user enters record successfully
             // header('Location: ../homepage.php');
@@ -50,10 +48,6 @@ if (!empty([$_POST])) {
             exit();
         }
     }
-    // call the function
-    /*
-    addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $date, $userID);
-    echo "New Record Inserted";*/
 } else {
     echo "Record couldn't be inserted";
     $error_message = $e->getMessage();

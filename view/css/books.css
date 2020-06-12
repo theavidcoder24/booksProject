@@ -120,6 +120,11 @@ input[type=reset] {
     cursor: pointer;
 }
 
+article {
+    text-align: center;
+    border-top: black dotted 2px;
+}
+
 table,
 td,
 th {
@@ -151,7 +156,6 @@ footer {
     overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
 .topnav a {
     float: left;
     display: block;
@@ -197,10 +201,26 @@ a {
     box-sizing: border-box;
 }
 
+.dataRow {
+    display: flex;
+    justify-content: center;
+    padding: .5em;
+    flex-wrap: wrap;
+}
+
+.displaySection {
+    padding-bottom: .8em;
+}
+
+.dataSection {
+    text-align: center;
+}
+
 /* Default IMG Book Cover Styling */
 #defaultImg {
     height: 8em;
     width: 8em;
+    text-align: center;
 }
 
 /* Edit + Delete Button Links */
@@ -212,7 +232,7 @@ a {
     background-color: rgb(245, 44, 44);
 }
 
-.dataSection {
+.tableSection {
     padding-left: 1em;
     padding-right: 1em;
 }

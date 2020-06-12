@@ -68,7 +68,7 @@ if (!isset($_SESSION['AdminUser'])) {
                 echo "There are no books!";
             }
             ?>
-            <div class="dataSection">
+            <div class="tableSection">
                 <table id="logHistory">
                     <tr>
                         <th>Book Created Date: </th>
@@ -92,7 +92,13 @@ if (!isset($_SESSION['AdminUser'])) {
             </div>
         </div>
     </main>
-
+    <footer>
+        <div class="copyright">
+            <p>&copy; Copyright Mallorie Cini <script type="text/javascript">
+                    document.write("2020 - " + new Date().getFullYear());
+                </script>
+        </div>
+    </footer>
 </body>
 
 </html>

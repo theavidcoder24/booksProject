@@ -56,7 +56,7 @@ if (!isset($_SESSION['AdminUser'])) {
     <!-- Welcome user-->
     <p>Welcome <b><?php echo $_SESSION['AdminUser'] ?></b><br>You have successfully logged in</p><br>
     <main>
-        <div id="displayDatabase">
+        <div class="displayDatabase">
             <?php
             $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.AuthorID ORDER BY BookTitle";
             $stmt = $conn->prepare($query);
@@ -67,6 +67,7 @@ if (!isset($_SESSION['AdminUser'])) {
                 echo "There are no books!";
             } else {
                 foreach ($result as $row) {
+                    echo '<div class="dataRow">';
                     if ($row['coverImagePath'] == null) {
                         echo '<br><img id="defaultImg" src="../images/defaultImage.png">';
                     } else {
@@ -74,18 +75,20 @@ if (!isset($_SESSION['AdminUser'])) {
                     }
             ?>
                     <div class="container">
-                        <div class="dataSection">
+                        <div class="displaySection">
                             <figure>
-                                <img src="<?php echo $row['coverImagePath']; ?>">
+                                <figcaption>
+                                    <p class="data"><b>Author: </b><?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
+                                    <p class="data"><b>Book Title: </b><?php echo $row['BookTitle']; ?></p>
+                                    <p class="data"><b>Year of Publication: </b><?php echo $row['YearofPublication']; ?></p>
+                                    <p class="data"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p><br>
+                                    <a id="editLink" href="editBook.php?BookID=<?php echo $row["BookID"]; ?>">Edit</a>
+                                    <a id="delLink" onclick="return confirm('Are you sure you want to delete this entry?')" href="deleteBook.php?BookID=<?php echo $row["BookID"]; ?>">Delete</a>
+                                </figcaption>
                             </figure>
-                            <figcaption>
-                                <p class="data"><b>Author: </b><?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
-                                <p class="data"><b>Book Title: </b><?php echo $row['BookTitle']; ?></p>
-                                <p class="data"><b>Year of Publication: </b><?php echo $row['YearofPublication']; ?></p>
-                                <p class="data"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p><br>
-                                <a id="editLink" href="editBook.php?BookID=<?php echo $row["BookID"]; ?>">Edit</a>
-                                <a id="delLink" onclick="return confirm('Are you sure you want to delete this entry?')" href="deleteBook.php?BookID=<?php echo $row["BookID"]; ?>">Delete</a>
-                            </figcaption>
+                            <?php
+                            echo '</div>'
+                            ?>
                         </div>
                     </div>
         </div>
@@ -94,6 +97,13 @@ if (!isset($_SESSION['AdminUser'])) {
             }
 ?>
     </main>
+    <footer>
+        <div class="copyright">
+            <p>&copy; Copyright Mallorie Cini <script type="text/javascript">
+                    document.write("2020 - " + new Date().getFullYear());
+                </script>
+        </div>
+    </footer>
 </body>
 
 </html>

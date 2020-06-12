@@ -20,12 +20,8 @@ if (!empty([$_POST])) {
     $coverImage = inputFilter($_POST['covImage']);
     $BookID = inputFilter($_POST['BookID']);
 
-    // Hidden action
-    // $action_type = !empty($_POST['action_type']) ? inputFilter($_POST['action_type']) : null;
-
-
     // Record the account who added this book
-     $userID = $_SESSION['userID'];
+    $userID = $_SESSION['userID'];
 
     // Record the current date and time
     $date = date('Y-m-d H:i:s');

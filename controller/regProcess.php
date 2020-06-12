@@ -27,4 +27,3 @@ if (!empty([$_POST])) {
         $error_message = $e->getMessage();
     }
 }
-?>

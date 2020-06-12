@@ -77,7 +77,7 @@ if (!isset($_SESSION['AdminUser'])) {
         }
         ?>
         <!-- Display Data -->
-        <div id="displayDatabase">
+        <div class="displayDatabase">
             <?php
             $query = "SELECT * FROM author INNER JOIN book ON author.AuthorID = book.AuthorID";
             $stmt = $conn->prepare($query);
@@ -88,18 +88,10 @@ if (!isset($_SESSION['AdminUser'])) {
                 echo "There are no books!";
             } else {
                 foreach ($result as $row) {
-                    if ($row['coverImagePath'] == null) {
-                        echo '<br><img id="defultImg" src="view/images/defaultImage.png">';
-                    } else {
-                        echo '<img src="view/images/' . $row['coverImagePath'] . '">';
-                    }
             ?>
                     <div class="container">
                         <div class="dataSection">
-                            <figure>
-                                <img src="<?php echo $row['coverImagePath']; ?>">
-                            </figure>
-                            <figcaption>
+                            <article>
                                 <p class="input"><b>Book ID: </b><?php echo $row['BookID'] ?></p>
                                 <p class="input"><b>Author ID: </b><?php echo $row['AuthorID'] ?></p>
                                 <p class="input"><b>Author: </b><?php echo $row['Name'] . ' ' . $row['Surname']; ?></p>
@@ -108,7 +100,7 @@ if (!isset($_SESSION['AdminUser'])) {
                                 <p class="input"><b>Genre: </b><?php echo $row['Genre']; ?></p>
                                 <p class="input"><b>Copies Sold: </b><?php echo $row['MillionsSold']; ?></p>
                                 <p class="input"><b>Language Written: </b><?php echo $row['LanguageWritten']; ?></p><br>
-                            </figcaption>
+                            </article>
                         </div>
                     </div>
         </div>

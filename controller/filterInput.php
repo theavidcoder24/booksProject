@@ -7,4 +7,3 @@ function inputFilter($data) {
     $data = htmlentities($data);
     return $data;
 }
-?>

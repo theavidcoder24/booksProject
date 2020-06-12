@@ -55,19 +55,6 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Last inserted BookID & userID
         //  $lastBookID = $conn->lastInsertId();
 
-        // changeLog('2020-01-01 01:01:01', 1, 3);
-        // changeLog($date, $lastBookID, $userID);
-
-        /* Changelog Table
-        $stmt = $conn->prepare("INSERT INTO changelog(dateCreated, dateChanged, BookID, userID)
-        VALUES (:dcreated, :dchanged, :BookID, userID)");
-        $stmt->bindValue(':dcreated', $date, PDO::PARAM_STR);
-        $stmt->bindValue(':dchanged', $date, PDO::PARAM_STR);
-        $stmt->bindValue(':BookID', $lastBookID, PDO::PARAM_INT);
-        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
-        $stmt->execute();
-        */
-
         // Commit changes here //
         $conn->commit();
         return $lastBookID;
@@ -79,16 +66,10 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
 
 function changeLog($dateCreated, $dateChanged, $BookID, $userID)
 {
-    //echo $BookID;
-    //echo "<br>";
-    //echo $userID;
     global $conn;
     /* --- Changelog Table --- */
     // prepares statement with named placeholders
     try {
-        // $BookID = $conn->lastInsertId();
-        // $date = date('Y-m-d H:i:s');
-        // $userID=$_SESSION['userID];
         $stmt = $conn->prepare("INSERT INTO changelog(dateCreated, dateChanged, BookID, userID) VALUES (:dateCreated, :dateChanged, :BookID, :userID)");
         $stmt->bindValue(':dateCreated', $dateCreated);
         $stmt->bindValue(':dateChanged', $dateChanged);
@@ -100,10 +81,6 @@ function changeLog($dateCreated, $dateChanged, $BookID, $userID)
         throw $ex;
     }
 }
-
-/* 
-mysql> SELECT EXISTS(SELECT * from ExistsRowDemo WHERE ExistId=104);
-*/
 
 /* ====================================== Display all rows from the table ====================================== */
 function displayBooks()
@@ -151,18 +128,6 @@ function editBook($bookTitle, $originalTitle, $yearOfPublication, $genre, $milli
         //  $stmt->bindValue(':userid', $lastuserID);
         // Execute the update statement
         $stmt->execute();
-        /*
-        /* --- Changelog Table --- */ /*
-        $stmt = $conn->prepare("UPDATE changelog SET dateCreated = :datestamp, userID = :userid");
-        // Bind values
-        $stmt->bindValue(':datestamp', $date);
-        $stmt->bindValue(':dcreated', $dcreated);
-        $stmt->bindValue(':BookID', $BookID);
-        $stmt->bindValue(':userid', $userID);
-        //$stmt->bindValue('changelogid', $changelogid);
-        $stmt->execute();
-        */
-
 
         // Commit changes here //
         $conn->commit();
