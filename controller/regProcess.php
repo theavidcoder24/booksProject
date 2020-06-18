@@ -24,6 +24,5 @@ if (!empty([$_POST])) {
     } else {
         echo "Customer already exists";
         echo '<h2><a style=text-decoration:none; href="../index.php">Login</a></h2>';
-        $error_message = $e->getMessage();
     }
 }
