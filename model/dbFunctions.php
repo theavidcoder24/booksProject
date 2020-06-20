@@ -164,19 +164,6 @@ function deleteBook($BookID)
     }
 }
 
-/* 
-//create a function to delete an existing product
-function delete_product($productID)
-{
-    global $conn;
-    $sql = "DELETE FROM product WHERE productID = :productID";
-    $statement = $conn->prepare($sql);
-    $statement->bindValue(':productID', $productID);
-    $result = $statement->execute();
-    $statement->closeCursor();
-    return $result;		
-}
-*/
 /* ================================= Display all records from the changelog table ================================= */
 function displayChangelog()
 {

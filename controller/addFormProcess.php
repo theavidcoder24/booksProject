@@ -35,14 +35,29 @@ if (!empty([$_POST])) {
 
     if ($_POST['action_type'] == 'add') {
         try {
-            // funtion call
-            $BookID = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
-            changeLog($date, $date, $BookID, $userID);
-            echo "New Record Inserted";
+            /* */
+            $stmt = $conn->prepare("SELECT name, surname, AuthorID FROM author WHERE name = :name AND surname = :surname");
+            // bind values
+            $stmt->bindValue(':name', $authName);
+            $stmt->bindValue(':surname', $authSur);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            // If rows aren't found
+            if ($stmt->rowCount() < 1) {
 
+                $stmt = $conn->prepare("SELECT userID FROM users WHERE loginID = :userID");
+                
+                // funtion call
+                $BookID = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
+                changeLog($date, $date, $BookID, $userID);
+                echo "New Record Inserted";
 
-            // this will be the page the user enters record successfully
-            // header('Location: ../homepage.php');
+                // this will be the page the user enters record successfully
+                // header('Location: ../homepage.php');
+            } else {
+                addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
+                echo "Book added";
+            }
         } catch (PDOException $ex) {
             echo "Problem adding book " . $ex->getMessage();
             exit();
