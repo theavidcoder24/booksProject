@@ -18,7 +18,7 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
         // Execute the insert statement
         $stmt->execute();
 
-        // Last inserted BookID
+        // Last inserted Author
         $lastAuthorID = $conn->lastInsertId();
 
         /* --- Book Table --- */
@@ -63,7 +63,6 @@ function addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $boo
     }
 }
 
-
 function changeLog($dateCreated, $dateChanged, $BookID, $userID)
 {
     global $conn;
@@ -82,11 +81,14 @@ function changeLog($dateCreated, $dateChanged, $BookID, $userID)
     }
 }
 
-function addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc)
+function addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $AuthorID)
 {
-
     global $conn;
     try {
+        $conn->beginTransaction();
+        // Last inserted Author
+       // $lastAuthorID = $conn->lastInsertId();
+
         /* --- Book Table --- */
         // prepares statement with named placeholders
         $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath, AuthorID)
@@ -99,6 +101,7 @@ function addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $g
         $stmt->bindValue(':millSold', $millionsSold);
         $stmt->bindValue(':langWritten', $languageWritten);
         $stmt->bindValue(':covImage', $coverImage);
+        $stmt->bindValue(':AuthorID', $AuthorID);
         // execute the insert statement
         $stmt->execute();
 
@@ -114,16 +117,12 @@ function addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $g
         $stmt->bindValue(':bkPlotSrc', $bookPlotSrc);
         $stmt->bindValue(':BookID', $lastBookID);
         // execute the insert statement
-
         $stmt->execute();
-
-        // Last inserted BookID & userID
-        //  $lastBookID = $conn->lastInsertId();
 
         // Commit changes here //
         $conn->commit();
     } catch (PDOException $ex) {
-        echo "Book error!";
+        throw $ex;
     }
 }
 

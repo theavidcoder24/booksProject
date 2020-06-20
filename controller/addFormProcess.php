@@ -34,38 +34,31 @@ if (!empty([$_POST])) {
     $date = date('Y-m-d H:i:s');
 
     if ($_POST['action_type'] == 'add') {
-        try {
-            /* */
-            $stmt = $conn->prepare("SELECT name, surname, AuthorID FROM author WHERE name = :name AND surname = :surname");
-            // bind values
-            $stmt->bindValue(':name', $authName);
-            $stmt->bindValue(':surname', $authSur);
-            $stmt->execute();
-            $row = $stmt->fetch();
-            // If rows aren't found
-            if ($stmt->rowCount() < 1) {
+        /* */
+        $stmt = $conn->prepare("SELECT name, surname, AuthorID FROM author WHERE name = :name AND surname = :surname");
+        // bind values
+        $stmt->bindValue(':name', $authName);
+        $stmt->bindValue(':surname', $authSur);
+        $stmt->execute();
+        $row = $stmt->fetch();
 
-                $stmt = $conn->prepare("SELECT userID FROM users WHERE loginID = :userID");
+        // If rows aren't found
+        if ($stmt->rowCount() < 1) {
 
-                // funtion call
-                $BookID = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
-                changeLog($date, $date, $BookID, $userID);
-                echo "New Record Inserted";
+            //   $stmt = $conn->prepare("SELECT userID FROM users WHERE loginID = :userID");
 
-                // this will be the page the user enters record successfully
-                // header('Location: ../homepage.php');
-            } else {
-                $lkAuthorID = $row['AuthorID'];
-                addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $lkAuthorID);
-                changeLog($date, $date, $BookID, $userID);
-                echo "Book added";
-            }
-        } catch (PDOException $ex) {
-            echo "Problem adding book " . $ex->getMessage();
-            exit();
+            // funtion call
+            addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
+           // changeLog($date, $date, $BookID, $userID);
+            echo "New Record Inserted";
+
+            // this will be the page the user enters record successfully
+            // header('Location: ../homepage.php');
+        } else {
+            $lkAuthorID = $row['AuthorID'];
+            addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $lkAuthorID);
+            // changeLog($date, $date, $BookID, $userID);
+            echo "Book added";
         }
     }
-} else {
-    echo "Record couldn't be inserted";
-    $error_message = $e->getMessage();
 }
