@@ -82,6 +82,52 @@ function changeLog($dateCreated, $dateChanged, $BookID, $userID)
     }
 }
 
+function addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc)
+{
+
+    global $conn;
+    try {
+        /* --- Book Table --- */
+        // prepares statement with named placeholders
+        $stmt = $conn->prepare("INSERT INTO book(BookTitle, OriginalTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, coverImagePath, AuthorID)
+        VALUES (:bkTitle, :ogTitle, :yearOfPub, :genre, :millSold, :langWritten, :covImage, :AuthorID)");
+        // bind values
+        $stmt->bindValue(':bkTitle', $bookTitle);
+        $stmt->bindValue(':ogTitle', $originalTitle);
+        $stmt->bindValue(':yearOfPub', $yearOfPublication);
+        $stmt->bindValue(':genre', $genre);
+        $stmt->bindValue(':millSold', $millionsSold);
+        $stmt->bindValue(':langWritten', $languageWritten);
+        $stmt->bindValue(':covImage', $coverImage);
+        // execute the insert statement
+        $stmt->execute();
+
+        // Last inserted BookID
+        $lastBookID = $conn->lastInsertId();
+
+        /* --- Book Plot Table --- */
+        // prepares statement with named placeholders
+        $stmt = $conn->prepare("INSERT INTO bookplot(Plot, PlotSource, BookID)
+               VALUES (:bkPlot, :bkPlotSrc, :BookID)");
+        // bind values
+        $stmt->bindValue(':bkPlot', $bookPlot);
+        $stmt->bindValue(':bkPlotSrc', $bookPlotSrc);
+        $stmt->bindValue(':BookID', $lastBookID);
+        // execute the insert statement
+
+        $stmt->execute();
+
+        // Last inserted BookID & userID
+        //  $lastBookID = $conn->lastInsertId();
+
+        // Commit changes here //
+        $conn->commit();
+    } catch (PDOException $ex) {
+        echo "Book error!";
+    }
+}
+
+
 /* ====================================== Display all rows from the table ====================================== */
 function displayBooks()
 {

@@ -46,7 +46,7 @@ if (!empty([$_POST])) {
             if ($stmt->rowCount() < 1) {
 
                 $stmt = $conn->prepare("SELECT userID FROM users WHERE loginID = :userID");
-                
+
                 // funtion call
                 $BookID = addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
                 changeLog($date, $date, $BookID, $userID);
