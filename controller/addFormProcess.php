@@ -55,7 +55,9 @@ if (!empty([$_POST])) {
                 // this will be the page the user enters record successfully
                 // header('Location: ../homepage.php');
             } else {
-                addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
+                $lkAuthorID = $row['AuthorID'];
+                addBookWithoutAuthor($bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc, $lkAuthorID);
+                changeLog($date, $date, $BookID, $userID);
                 echo "Book added";
             }
         } catch (PDOException $ex) {
