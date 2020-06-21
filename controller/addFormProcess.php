@@ -49,7 +49,7 @@ if (!empty([$_POST])) {
 
             // funtion call
             addBook($authName, $authSur, $nationality, $birthYear, $deathYear, $bookTitle, $originalTitle, $yearOfPublication, $genre, $millionsSold, $languageWritten, $coverImage, $bookPlot, $bookPlotSrc);
-           // changeLog($date, $date, $BookID, $userID);
+            // changeLog($date, $date, $BookID, $userID);
             echo "New Record Inserted";
 
             // this will be the page the user enters record successfully
