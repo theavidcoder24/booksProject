@@ -43,8 +43,6 @@ Install the client and api folders into a web server like MAMP or WAMP. The fold
 
 # CRUD Matrix
 
-## Web Application
-
 |               | CREATE | READ | UPDATE | DELETE | SESSION |
 | ------------- | ------ | ---- | ------ | ------ | ------- |
 | Create Book   | \*     |      |        |        |         |
